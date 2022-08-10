@@ -1,0 +1,25 @@
+.receipt-main {
+    background: #ffffff none repeat scroll 0 0;
+    border-bottom: 12px solid #2F557F;
+    border-top: 12px solid #2F557F;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 40px 30px !important;
+    position: relative;
+    box-shadow: 0 1px 21px #2F557F;
+}
+
+.receipt-main::after {
+    background: #26A69A none repeat scroll 0 0;
+    content: "";
+    height: 5px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: -13px;
+}
+
+.receipt-main td p:last-child {
+    margin: 0;
+    padding: 0;
+}
