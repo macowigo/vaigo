@@ -19,6 +19,9 @@ Route::get('/admin/dashboard',function(){
 })->middleware(['auth'])->name('admindshboard');
 
 //center
+Route::post('orders/create',[OrdersController::class,'calculatecost'],function(){
+    return view('centers.create');
+})->name('calculate');
 Route::get('/center/dashboard',function(){
     return view('centers.dashboard');
 })->middleware(['auth'])->name('centerdashboard');

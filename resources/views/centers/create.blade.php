@@ -16,8 +16,11 @@
    <script>
     
 function desinationlocation(){
+    var options = {
+    componentRestrictions: {country: "TZ"}
+ };
     var input=document.getElementById('fromlocation');
-    var fromlocation=new google.maps.places.Autocomplete(input);
+    var fromlocation=new google.maps.places.Autocomplete(input,options);
     google.maps.event.addListener(fromlocation, 'place_changed', function () {
         var place = fromlocation.getPlace();
         document.getElementById('fromLat').value = place.geometry.location.lat();
@@ -25,8 +28,11 @@ function desinationlocation(){
     });
 }
     function deliverylocation() {
-    var input = document.getElementById('delvlocation');
-    var autocomplete = new google.maps.places.Autocomplete(input);
+        var options = {
+    componentRestrictions: {country: "TZ"}
+      };
+    var input = document.getElementById('deliverylocation');
+    var autocomplete = new google.maps.places.Autocomplete(input,options);
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var place = autocomplete.getPlace();
         document.getElementById('delvLat').value = place.geometry.location.lat();
@@ -42,7 +48,7 @@ function getDistance()
      var distanceService = new google.maps.DistanceMatrixService();
      distanceService.getDistanceMatrix({
         origins: [$("#fromlocation").val()],
-        destinations: [$("#delvlocation").val()],
+        destinations: [$("#deliverylocation").val()],
         travelMode: google.maps.TravelMode.WALKING,
         unitSystem: google.maps.UnitSystem.METRIC,
         durationInTraffic: true,
@@ -59,6 +65,29 @@ function getDistance()
         }
     });
   }
+  jQuery(document).ready(function(){
+            jQuery('#ajaxSubmit').click(function(e){
+               e.preventDefault();
+               $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                  }
+              });
+               jQuery.ajax({
+                  url: "{{ url('centerorder/calculate') }}",
+                  method: 'post',
+                  data: {
+                     name: jQuery('#name').val(),
+                     type: jQuery('#type').val(),
+                     price: jQuery('#price').val()
+                  },
+                  success: function(result){
+                     jQuery('.alert').show();
+                     jQuery('.alert').html(result.success);
+                  }});
+               });
+            });
+      
    </script>
 
 </head>
@@ -88,7 +117,7 @@ function getDistance()
                             <h6 class="red-text">{{ $message }}</h6>
                             </div>
                             @endif
-                            <form method="POST" action="{{route('orders.store')}}">
+                            <form method="" action="">
                                 @csrf
                                 <div class=" row">
                                     <div class="input-field col s12 m12 l6">
@@ -125,8 +154,8 @@ function getDistance()
                                         </div>
                                         <div class="input-field col s12 m12 l6">
                                             <i class="material-icons prefix">location_on</i>
-                                            <input id="delvlocation" name="delvlocation" type="text" class="validate" >
-                                            <label for="delvlocation">Delivery location</label>
+                                            <input id="deliverylocation" name="deliverylocation" type="text" class="validate" >
+                                            <label for="deliverylocation">Delivery location</label>
                                             <input type="hidden" id="delvLat" name="delvLat" />
                                             <input type="hidden" id="delvLng" name="delvLng" />
                                             <span class="helper-text" data-error="please enter valid location" data-success="right"></span>
@@ -166,32 +195,38 @@ function getDistance()
                                     </div>
                                     <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">subtitles</i>
-                                        <input id="details" name="details" type="text" class="validate" required>
+                                        <input id="details" name="details" type="text" class="validate" >
                                         <label for="details">Order Details</label>
                                         <span class="helper-text" data-error="please enter valid order details" data-success="right"></span>
                                     </div>
                                     <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">payment</i>
-                                        <input id="paymentype" name="paymentype" type="text" class="validate" required>
+                                        <input id="paymentype" name="paymentype" type="text" class="validate" >
                                         <label for="paymentype">Payment Type</label>
                                         <span class="helper-text" data-error="please enter valid payment method" data-success="right"></span>
                                     </div>
                                     <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">account_circle</i>
-                                        <input id="receivernames" name="receivernames" type="text" class="validate" required>
+                                        <input id="receivernames" name="receivernames" type="text" class="validate" >
                                         <label for="receivernames">Receiver names</label>
                                         <span class="helper-text" data-error="please enter valid names" data-success="right"></span>
                                     </div>
                                     <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">phone</i>
                                         <input id="receiverphone" name="receiverphone" type="text" 
-                                       pattern="[0]{1}[1-9]{1}[0-9]{8}" class="validate" required>
+                                       pattern="[0]{1}[1-9]{1}[0-9]{8}" class="validate" >
                                         <label for="receiverphone">Receive Phone Number</label>
                                         <span class="helper-text" data-error="please enter valid phone number" data-success="right"></span>
                                     </div>
-                                    <input class="btn right blue" type="submit" value="Create">
+                                    <input class="btn right blue" type="submit" formmethod="POST" formaction="{{route('orders.store')}}" value="Create">
+                                    <button class="btn left blue" formaction="{{route('calculate')}}"  formmethod="POST" id="">GET COST</button>
                                 </div>
                             </form>
+                            @if ($message = Session::get('cost'))
+                            <div class="blue-text">
+                            <p class="blue-text">{{ $message }}</p>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -213,6 +248,10 @@ function getDistance()
        <!-- Initialization script -->
        <script src="../JS/admin-materialize.min.js"></script>
        <script src='../JS/preloader.js'></script>
+       <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+               integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+               crossorigin="anonymous">
+      </script>
 
 </body>
 </html>

@@ -29,7 +29,7 @@
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
                                <i class="material-icons">home</i>
-                                Domestic Orders</h6>
+                                Domestic Orders: {{$domestic}}</h6>
                                 @if ($domesticorders->isEmpty())
                                 <span class="red-text">Sorry there is no Domestic Order Found</span>
                                 @else
@@ -42,27 +42,27 @@
                                 <table id="datatable" class="responsive-table">
                                     <thead>
                                         <tr>
-                                        <th>Order#</th>
                                         <th>Details</th>
                                         <th>Value</th>
                                         <th>Transport</th>
                                         <th>Receiver</th>
                                         <th>From</th>
                                         <th>To</th>
+                                        <th>CreatedTime</th>
                                         <th>DeliveryTime</th>
                                         <th>Status</th>
                                         </tr>
                                     </thead>
                                     @foreach ($domesticorders as $values )
                                     <tr>
-                                        <td>{{$values->oderid}}</td>
                                         <td>{{$values->ord_details}}</td>
                                         <td>{{number_format($values->value)}}</td>
                                         <td>{{$values->trans}}</td>
                                         <td>{{$values->delv_names.', '.$values->delv_phone}}</td>
                                         <td>{{$values->from_location}}</td>
                                         <td>{{$values->delv_location}}</td>
-                                        <td>{{$values->delivery_time}}</td>
+                                        <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
+                                        <td>{{date('M d, Y  H:i:s',strtotime($values->delivery_time))}}</td>
                                         <td>{{$values->oder_status}}</td>
                                     </tr>
                                     @endforeach

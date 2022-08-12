@@ -40,7 +40,7 @@
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
-                        <span><i class="material-icons">home</i> Domestic Orders:</span>
+                        <span><i class="material-icons">home</i> Domestic Orders: {{ $domestic }}</span>
                         <span ></span>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
-                        <span><i class="material-icons">apartment</i> Regional Orders:</span>
+                        <span><i class="material-icons">apartment</i> Regional Orders: {{ $regional }}</span>
                         <span ></span>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
-                        <span><i class="material-icons">language</i> International Orders:</span>
+                        <span><i class="material-icons">language</i> International Orders: {{ $international}}</</span>
                         <span ></span>
                         </div>
                     </div>
@@ -81,23 +81,27 @@
           <div class="card-stacked">
           <div class="card-metrics-static">
           <div class="card-content">
-            <h6 class="blue-text centered-text"><i class="material-icons">leaderboard</i> Heading</h6>
+            <h6 class="blue-text centered-text"><i class="material-icons">today</i> Today Orders</h6>
             <ul class="collection">
 
     <li class="collection-item avatar">
       <i class="material-icons circle blue">home</i>
-      <span class="title blue-text">Something to show</span>
-      <p class="blue-text">
-      
-      <a href="leaders_branch" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
+      <span class="title blue-text">Today Domestic Orders</span>
+      <p class="blue-text">{{ $domestictoday}}</p>
+      <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
     </li>
     <li class="collection-item avatar">
-      <i class="material-icons circle blue">house</i>
-      <span class="title blue-text">Something to show</span>
-      <p class="blue-text"></p>
-     
-      <a href="leaders_zone" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
+      <i class="material-icons circle blue">apartment</i>
+      <span class="title blue-text">Today Regional Orders</span>
+      <p class="blue-text">{{ $regionaltoday}}</p>
+      <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
     </li>
+    <li class="collection-item avatar">
+        <i class="material-icons circle blue">language</i>
+        <span class="title blue-text">Today International Orders</span>
+        <p class="blue-text">{{ $internationaltoday}}</p>
+        <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
+      </li>
          </ul>
             </div>
           </div>
