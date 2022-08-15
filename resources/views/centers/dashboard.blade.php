@@ -9,7 +9,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
     <title>VAIGO-Dashboard</title>
-    <link rel="shortcut icon" href="../Images/PCM.png">
+    <link rel="shortcut icon" href="../Images/vaigo.png">
     <!-- Materialize-->
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <!-- Material Icons-->

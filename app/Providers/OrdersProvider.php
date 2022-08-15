@@ -28,7 +28,7 @@ class OrdersProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('*', function ($centers) {
+        View::composer('centers.*', function ($centers) {
             $usercenter=Auth::user()->centerid;
             $today=date('Y-m-d');
             $domesticcout=Oders::WHERE([['order_type','domestic'],['center',$usercenter]])->count();

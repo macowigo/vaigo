@@ -1,7 +1,7 @@
 <header>
     <ul id="sidenav-left" class="sidenav">
             <li><a href="login" class="logo-container blue-text">V A I G O</a>
-        <img src="../Images/PCM.png" class="logo-container "></li>
+        <img src="../Images/vaigo.png" class="logo-container "></li>
             <li class="no-padding">
               <li>
                 <a href="login" class="waves-effect  ">Login

@@ -8,7 +8,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
     <title>VAIGO-DomesticOrders</title>
-    <link rel="shortcut icon" href="../Images/PCM.png">
+    <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../datatable/style.css"/>
@@ -59,8 +59,9 @@
                                         <td>{{number_format($values->value)}}</td>
                                         <td>{{$values->trans}}</td>
                                         <td>{{$values->delv_names.', '.$values->delv_phone}}</td>
-                                        <td>{{$values->from_location}}</td>
-                                        <td>{{$values->delv_location}}</td>
+                                        <td>{{str_ireplace('Tanzania','',$values->from_location)}}</td>
+                                        <td>{{str_ireplace('Tanzania','',$values->delv_location)}}</td>
+                                        {{-- <td>{{substr($values->from_location,0,strpos($values->from_location,'Tanzania')) }}</td> --}}
                                         <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
                                         <td>{{date('M d, Y  H:i:s',strtotime($values->delivery_time))}}</td>
                                         <td>{{$values->oder_status}}</td>

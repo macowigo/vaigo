@@ -8,7 +8,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
     <title>VAIGO-CreateOrder</title>
-    <link rel="shortcut icon" href="../Images/PCM.png">
+    <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFnY0qEUXZW-efcSTWmQ2Ga7te_pNsA4o&libraries=places"></script>
@@ -66,7 +66,7 @@ function getDistance()
     });
   }
   jQuery(document).ready(function(){
-            jQuery('#ajaxSubmit').click(function(e){
+            jQuery('#domesticbutton').click(function(e){
                e.preventDefault();
                $.ajaxSetup({
                   headers: {
@@ -87,6 +87,18 @@ function getDistance()
                   }});
                });
             });
+
+            //find total
+            function findTotal(){
+    var arr = document.getElementsByName('value');
+    var tot=0;
+    for(var i=0;i<arr.length;i++){
+        if(parseFloat(arr[i].value))
+            tot =parseFloat(arr[i].value)/10;
+    }
+    document.getElementById('ordercost').value = tot;
+}
+
       
    </script>
 
@@ -138,7 +150,7 @@ function getDistance()
                                                 <option value="" disabled selected>Please select Transportation Type</option>
                                                 <option value="motocyle">Motocyle</option>
                                                 <option value="kirikuu">Kirikuu</option>
-                                                <option value="kenter">Kenter</option>
+                                                {{-- <option value="kenter">Kenter</option> --}}
                                             </select>
                                             <label for="transport">Transportation Type</label>
                                             <span class="helper-text" data-error="please enter your password" data-success="right"></span>
@@ -188,8 +200,14 @@ function getDistance()
                                         </div>
                                         <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">money</i>
-                                        <input id="value" name="value" type="number" class="validate" >
+                                        <input id="value" name="value" type="number" class="validate" onblur="findTotal()" >
                                         <label for="value">Order value</label>
+                                        <span class="helper-text" data-error="please enter valid order value" data-success="right"></span>
+                                       </div>
+                                       <div class="input-field col s12 m12 l6">
+                                        <i class="material-icons prefix">money</i>
+                                        <input id="ordercost" name="ordercost" type="number" class="validate" >
+                                        <label for="ordercost">Transport Cost</label>
                                         <span class="helper-text" data-error="please enter valid order value" data-success="right"></span>
                                     </div>
                                     </div>
@@ -219,7 +237,10 @@ function getDistance()
                                         <span class="helper-text" data-error="please enter valid phone number" data-success="right"></span>
                                     </div>
                                     <input class="btn right blue" type="submit" formmethod="POST" formaction="{{route('orders.store')}}" value="Create">
-                                    <button class="btn left blue" formaction="{{route('calculate')}}"  formmethod="POST" id="">GET COST</button>
+                                    <div></div>
+                                    <button class="btn left blue" formaction="{{route('calculate')}}" 
+                                     formmethod="POST" id="domesticbutton" style="display:none ;">GET COST
+                                    </button>
                                 </div>
                             </form>
                             @if ($message = Session::get('cost'))

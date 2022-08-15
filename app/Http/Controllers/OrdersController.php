@@ -49,6 +49,7 @@ class OrdersController extends Controller
       $request->validate([
         'fromlocation' => 'required',
         'deliverylocation' => 'required',
+        'transport' => 'required',
      
         ]);
          $lat1=$request->fromLat;
@@ -68,9 +69,18 @@ class OrdersController extends Controller
           $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
           $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
           $distance = substr($dist, 0, strpos($dist, "km"));
-          $domesticcost2 = ceil(((25*$distance)+(60*$time)+700) / 500) * 500;
+          if($request->transport=='motocyle'){
+            $domcalculated = ceil(((25*$distance)+(60*$time)+700) / 500) * 500;
+          }
+          elseif($request->transport=='kirikuu'){
+            $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
+          }
+          else{
+            $domcalculated = ceil(((25*$distance)+(60*$time)+700) / 500) * 500;
+          }
+          
           return redirect('/orders/create')
-          ->with('cost','Domestic cost is: '.number_format($domesticcost2) .' Tshs From:  '.$request->fromlocation.' to: '.$request->deliverylocation );
+          ->with('cost','Domestic cost is: '.number_format($domcalculated) .' Tshs From:  '.$request->fromlocation.' to: '.$request->deliverylocation );
           //return redirec()twith('Cost is: '.$domesticcost2.' Tshs') ;
           
 
@@ -106,9 +116,16 @@ class OrdersController extends Controller
           $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
           $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
           $distance = substr($dist, 0, strpos($dist, "km"));
+          if($request->transport=='motocyle'){
+            $domesticcost = ceil(((25*$distance)+(60*$time)+700) / 500) * 500;
+          }
+          elseif($request->transport=='kirikuu'){
+            $domesticcost = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
+          }
+          else{
+            $domesticcost = ceil(((25*$distance)+(60*$time)+700) / 500) * 500;
+          }
           // $minutes = substr($time, 0, strpos($time, "mins"));
-          //$minutes=round(($time/60), 0);
-          $domesticcost = ceil(((25*$distance)+(60*$time)+700) / 500) * 500;
           $deliverytime = date("Y-m-d H:i:s",strtotime(date("Y-m-d H:i:s")." + $time minutes"));
           // return array('distance' => $dist, 'time' => $time,'deliverytime'=>$deliverytime);
 

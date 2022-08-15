@@ -8,7 +8,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
     <title>VAIGO-Login</title>
-    <link rel="shortcut icon" href="../Images/PCM.png">
+    <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="../CSS/icon.css" rel="stylesheet">
@@ -23,7 +23,7 @@
             <div class="row">
                 <div class=" col s12 ">
                 <div class="receipt-main card-content" >
-<img src="../Images/PCM.png" class="image-center">
+
 <h6 class="brand-logo blue-text centered-text"> VAIGO LOGIN </h6>
 <br>
 <br>
@@ -45,10 +45,10 @@
 
             <span class="helper-text" data-error="please enter your password" data-success="right"></span>
         </div>
-
+{{-- 
         <a href="forgot_pass">Forgot Password?</a>
         <br><br>
-        <a href="{{route('register')}}">Dont Have Account? Register</a>
+        <a href="{{route('register')}}">Dont Have Account? Register</a> --}}
             <input class="btn right blue" type="submit" value="Log In">
     </form>
 

@@ -5,7 +5,7 @@
             <ul id="nav-mobile" class="right">
                 <li>
                     <a href="#!" data-target="chat-dropdown" class="dropdown-trigger waves-effect">
-                         <img class="user-image" src="../Uploads/PCM.png" alt="">
+                         <img class="user-image" src="../Uploads/vaigo.png" alt="">
                      </a>
                </li>
             </ul><a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i class="material-icons white-text">menu</i></a>
@@ -14,7 +14,7 @@
 </div>
 <ul id="sidenav-left" class="sidenav sidenav-fixed">
 <li><a href="dashboard" class="logo-container blue-text">V A I G O</a>
-<img src="../Images/PCM.png" class="logo-container ">
+<img src="../Images/vaigo.png" class="logo-container ">
 </li>
     <li class="no-padding">
 
@@ -32,9 +32,14 @@
                 </div>
             </li>      
             <li>
-                <a href="{{route('logout')}}" class="waves-effect red-text">logout
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a :href="route('logout')" class="waves-effect red-text"
+                    onclick="event.preventDefault();this.closest('form').submit();">
                     <i class="material-icons red-text">logout</i>
-              </a>
+                    LogOut
+                    </a>
+                </form>
             </li>
         </ul>
     </li>

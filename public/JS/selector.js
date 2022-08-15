@@ -1,15 +1,17 @@
 $('#ordertype').on('change', function() {
     if (this.value == 'domestic') {
         $("#domestic").show();
+        $("#domesticbutton").show();
         $("#regional").hide();
-
     }
     if (this.value == 'regional') {
         $("#domestic").hide();
+        $("#domesticbutton").hide();
         $("#regional").show();
     }
     if (this.value == 'international') {
         $("#domestic").hide();
+        $("#domesticbutton").hide();
         $("#regional").show();
     }
 });

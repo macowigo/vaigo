@@ -39,9 +39,7 @@ Route::get('/centerorder/international',[OrdersController::class,'international'
 })->middleware(['auth'])->name('internationalorder');
 
 
-Route::get('/logout',function(){
-    return view('admin.logout');
-})->name('logout');
+
 
 Route::get('/map',function(){
     return view('admin.map');
