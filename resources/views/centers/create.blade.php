@@ -149,7 +149,7 @@ function getDistance()
                                             <select id="transport" name="transport"class="validate" >
                                                 <option value="" disabled selected>Please select Transportation Type</option>
                                                 <option value="motocyle">Motocyle</option>
-                                                <option value="kirikuu">Kirikuu</option>
+                                                <option value="carry">Carry</option>
                                                 {{-- <option value="kenter">Kenter</option> --}}
                                             </select>
                                             <label for="transport">Transportation Type</label>

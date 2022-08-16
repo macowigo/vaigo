@@ -119,7 +119,7 @@ class OrdersController extends Controller
           if($request->transport=='motocyle'){
             $domesticcost = ceil(((25*$distance)+(60*$time)+700) / 500) * 500;
           }
-          elseif($request->transport=='kirikuu'){
+          elseif($request->transport=='carry'){
             $domesticcost = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
           }
           else{
@@ -147,6 +147,7 @@ class OrdersController extends Controller
           $orderdata->py_type=$request->paymentype;
           $orderdata->value=$domesticcost;
           $orderdata->ord_details=$request->details;
+          $orderdata->created_time=date('Y-m-d H:i:s');
           $orderdata->delivery_time=$deliverytime;
           $orderdata->oder_status='created';
          $orderdata->save();
