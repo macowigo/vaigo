@@ -33,7 +33,7 @@
         @csrf
         <div class="input-field">
         <i class="material-icons prefix">account_circle</i>
-            <input id="email" name="email" type="email" class="validate"  required>
+            <input id="email" name="email" type="text" class="validate"  required>
             <label for="email" >Username</label>
             <span class="helper-text" data-error="Please enter Valid email Address" data-success="right"></span>
         </div>

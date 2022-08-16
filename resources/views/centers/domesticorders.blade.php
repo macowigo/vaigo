@@ -59,8 +59,8 @@
                                         <td>{{number_format($values->value)}}</td>
                                         <td>{{$values->trans}}</td>
                                         <td>{{$values->delv_names.', '.$values->delv_phone}}</td>
-                                        <td>{{str_ireplace('Tanzania','',$values->from_location)}}</td>
-                                        <td>{{str_ireplace('Tanzania','',$values->delv_location)}}</td>
+                                        <td>{{str_ireplace('Dar es Salaam, Tanzania','',$values->from_location)}}</td>
+                                        <td>{{str_ireplace('Dar es Salaam, Tanzania','',$values->delv_location)}}</td>
                                         {{-- <td>{{substr($values->from_location,0,strpos($values->from_location,'Tanzania')) }}</td> --}}
                                         <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
                                         <td>{{date('M d, Y  H:i:s',strtotime($values->delivery_time))}}</td>

@@ -189,4 +189,11 @@ class OrdersController extends Controller
 
     }
 
+    public function destroy(Oders $oders)
+{
+$oders->delete();
+return redirect()->route('orders.index')
+->with('success','Delete to be implimented');
+}
+
 }

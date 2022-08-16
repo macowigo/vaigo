@@ -51,6 +51,7 @@
                                     <th>Desination</th>
                                     <th>PercelSize</th>
                                     <th>Status</th>
+                                    <th>Actions</th>
                                     </tr>
                                 </thead>
                                 @foreach ($orders as $ordervalues )
@@ -64,6 +65,17 @@
                                     <td>{{$ordervalues->desination}}</td>
                                     <td>{{$ordervalues->parcel_size}}</td>
                                     <td>{{$ordervalues->oder_status}}</td>
+                                    <td>
+                                        <form action="{{ route('orders.destroy',$ordervalues->oderid) }}" method="Post">
+                                            {{-- <a class="btn btn-primary" href="{{ route('companies.edit',$ordervalues->oderid) }}">Edit</a> --}}
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-floating red btn-small"
+                                            title="click to delete" onclick="return confirm('Are you sure to delete this order?')">
+                                            <i class="material-icons">delete</i>
+                                        </button>
+                                            </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </table>
