@@ -177,7 +177,17 @@ function getDistance()
                                             <input id="ordervalue" name="ordervalue" type="number" class="validate" >
                                             <label for="ordervalue">Order value</label>
                                             <span class="helper-text" data-error="please enter valid order value" data-success="right"></span>
-                                           </div>
+                                         </div>
+                                         <div class="input-field col s12 m12 l6">
+                                            <i class="material-icons prefix">schedule</i>
+                                            <select id="deliverytype" name="deliverytype"  class="validate">
+                                                <option value="" disabled selected>Please select Delivery Type</option>
+                                                <option value="express">Express Delivery</option>
+                                                <option value="standard">Standard Delivery</option>
+                                            </select>
+                                            <label for="deliverytype">Payment Type</label>
+                                            <span class="helper-text" data-error="please enter valid delivery method" data-success="right"></span>
+                                        </div>
                                         {{-- <div class="input-field col s12 m12 l6">
                                             <i class="material-icons prefix">schedule</i>
                                             <input id="delvltime" name="delvltime" type="text" class="timepicker" >

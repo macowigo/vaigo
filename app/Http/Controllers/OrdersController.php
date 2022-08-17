@@ -50,7 +50,8 @@ class OrdersController extends Controller
         'fromlocation' => 'required',
         'deliverylocation' => 'required',
         'transport' => 'required',
-        'ordervalue'=>'required'
+        'ordervalue'=>'required',
+        'deliverytype'=>'required'
      
         ]);
          $lat1=$request->fromLat;
@@ -71,14 +72,25 @@ class OrdersController extends Controller
           $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
           $distance = substr($dist, 0, strpos($dist, "km"));
           if($request->transport=='motocyle'){
-            if($request->ordervalue > 0  && $request->ordervalue < 99999){
-              $domcalculated = ceil(((300*$distance)+(70*$time)+800+500) / 500) * 500;
+            if($request->ordervalue > 0  && $request->ordervalue < 99999 && $request->deliverytype=='standard'){
+              $domcalculated = (0.4* ceil(((300*$distance)+(70*$time)+1300) / 500)) * 500;
+              //800+500
             }
-            if($request->ordervalue > 100000   && $request->ordervalue < 999999){
-              $domcalculated = ceil(((300*$distance)+(70*$time)+800+500) / 1000) * 500;
+            if($request->ordervalue > 100000   && $request->ordervalue < 999999 && $request->deliverytype=='standard'){
+              $domcalculated = (0.4 * ceil(((300*$distance)+(70*$time)+18000) / 1000)) * 500;
+              //800+1000
             }
-            if($request->ordervalue > 1000000  && $request->ordervalue < 5000000){
-              $domcalculated = ceil(((300*$distance)+(70*$time)+800+500) / 1000) * 500;
+            if($request->ordervalue > 1000000  && $request->ordervalue < 5000000 && $request->deliverytype=='standard'){
+              $domcalculated = (0.4 * ceil(((300*$distance)+(70*$time)+18000) / 1000)) * 500;
+            }
+            if($request->ordervalue > 0  && $request->ordervalue < 99999 && $request->deliverytype=='express'){
+              $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
+            }
+            if($request->ordervalue > 100000   && $request->ordervalue < 999999 && $request->deliverytype=='express'){
+              $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 1000) * 500;
+            }
+            if($request->ordervalue > 1000000  && $request->ordervalue < 5000000 && $request->deliverytype=='express'){
+              $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 1000) * 500;
             }
             
           }
