@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('order_type');
             $table->string('trans')->nullable();
             $table->string('delv_location');
-            $table->string('delv_names');
+            $table->string('delv_names')->nullable();
             $table->string('delv_phone');
             $table->string('py_type');
             $table->integer('value');
+            $table->integer('item_value')->nullable();
             $table->string('ord_details');
             $table->timestamp('created_time')->useCurrent();
             $table->timestamp('delivery_time')->useCurrent();

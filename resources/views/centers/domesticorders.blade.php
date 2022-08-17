@@ -43,12 +43,12 @@
                                     <thead>
                                         <tr>
                                         <th>Details</th>
-                                        <th>Value</th>
+                                        <th>OrderValues</th>
                                         <th>Transport</th>
                                         <th>Receiver</th>
                                         <th>From</th>
                                         <th>To</th>
-                                        <th>CreatedTime</th>
+                                        <th>Created</th>
                                         <th>DeliveryTime</th>
                                         <th>Status</th>
                                         </tr>
@@ -56,9 +56,9 @@
                                     @foreach ($domesticorders as $values )
                                     <tr>
                                         <td>{{$values->ord_details}}</td>
-                                        <td>{{number_format($values->value)}}</td>
+                                        <td>{{'Order Value:'.number_format($values->item_value).' Delivery Fee:'.number_format($values->value)}}</td>
                                         <td>{{$values->trans}}</td>
-                                        <td>{{$values->delv_names.', '.$values->delv_phone}}</td>
+                                        <td>{{$values->delv_names.' '.$values->delv_phone}}</td>
                                         <td>{{str_ireplace('Dar es Salaam, Tanzania','',$values->from_location)}}</td>
                                         <td>{{str_ireplace('Dar es Salaam, Tanzania','',$values->delv_location)}}</td>
                                         {{-- <td>{{substr($values->from_location,0,strpos($values->from_location,'Tanzania')) }}</td> --}}

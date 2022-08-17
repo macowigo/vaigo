@@ -172,6 +172,12 @@ function getDistance()
                                             <input type="hidden" id="delvLng" name="delvLng" />
                                             <span class="helper-text" data-error="please enter valid location" data-success="right"></span>
                                         </div>
+                                        <div class="input-field col s12 m12 l6">
+                                            <i class="material-icons prefix">money</i>
+                                            <input id="ordervalue" name="ordervalue" type="number" class="validate" >
+                                            <label for="ordervalue">Order value</label>
+                                            <span class="helper-text" data-error="please enter valid order value" data-success="right"></span>
+                                           </div>
                                         {{-- <div class="input-field col s12 m12 l6">
                                             <i class="material-icons prefix">schedule</i>
                                             <input id="delvltime" name="delvltime" type="text" class="timepicker" >
@@ -219,7 +225,13 @@ function getDistance()
                                     </div>
                                     <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">payment</i>
-                                        <input id="paymentype" name="paymentype" type="text" class="validate" >
+                                        <select id="paymentype" name="paymentype"  class="validate">
+                                            <option value="" disabled selected>Please select Payment Type</option>
+                                            <option value="Order Fully Paid">Order Fully Paid</option>
+                                            <option value="Customer Pay Full">Customer Pay Full</option>
+                                            <option value="Customer Pay Order">Customer Pay Order</option>
+                                            <option value="Customer Pay Delivery">Customer Pay Delivery</option>
+                                        </select>
                                         <label for="paymentype">Payment Type</label>
                                         <span class="helper-text" data-error="please enter valid payment method" data-success="right"></span>
                                     </div>

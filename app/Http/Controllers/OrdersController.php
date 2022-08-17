@@ -50,6 +50,7 @@ class OrdersController extends Controller
         'fromlocation' => 'required',
         'deliverylocation' => 'required',
         'transport' => 'required',
+        'ordervalue'=>'required'
      
         ]);
          $lat1=$request->fromLat;
@@ -70,7 +71,16 @@ class OrdersController extends Controller
           $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
           $distance = substr($dist, 0, strpos($dist, "km"));
           if($request->transport=='motocyle'){
-            $domcalculated = ceil(((25*$distance)+(60*$time)+700) / 500) * 500;
+            if($request->ordervalue > 0  && $request->ordervalue < 99999){
+              $domcalculated = ceil(((300*$distance)+(70*$time)+800+500) / 500) * 500;
+            }
+            if($request->ordervalue > 100000   && $request->ordervalue < 999999){
+              $domcalculated = ceil(((300*$distance)+(70*$time)+800+500) / 1000) * 500;
+            }
+            if($request->ordervalue > 1000000  && $request->ordervalue < 5000000){
+              $domcalculated = ceil(((300*$distance)+(70*$time)+800+500) / 1000) * 500;
+            }
+            
           }
           elseif($request->transport=='kirikuu'){
             $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
@@ -96,8 +106,8 @@ class OrdersController extends Controller
           'deliverylocation' => 'required',
           'details' => 'required',
           'paymentype' => 'required',
-          'receivernames' => 'required',
           'receiverphone' => 'required',
+          'ordervalue'=>'required'
           ]);
           $lat1=$request->fromLat;
           $long1=$request->fromLng;
@@ -117,7 +127,15 @@ class OrdersController extends Controller
           $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
           $distance = substr($dist, 0, strpos($dist, "km"));
           if($request->transport=='motocyle'){
-            $domesticcost = ceil(((25*$distance)+(60*$time)+700) / 500) * 500;
+            if($request->ordervalue > 0  && $request->ordervalue < 99999){
+              $domesticcost = ceil(((300*$distance)+(70*$time)+800+500) / 500) * 500;
+            }
+            if($request->ordervalue > 100000   && $request->ordervalue < 999999){
+              $domesticcost = ceil(((300*$distance)+(70*$time)+800+500) / 500) * 500;
+            }
+            if($request->ordervalue > 1000000  && $request->ordervalue < 5000000){
+              $domesticcost = ceil(((300*$distance)+(70*$time)+800+500) / 500) * 500;
+            }
           }
           elseif($request->transport=='carry'){
             $domesticcost = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
@@ -146,6 +164,7 @@ class OrdersController extends Controller
           $orderdata->delv_phone=$request->receiverphone;
           $orderdata->py_type=$request->paymentype;
           $orderdata->value=$domesticcost;
+          $orderdata->item_value=$request->ordervalue;
           $orderdata->ord_details=$request->details;
           $orderdata->created_time=date('Y-m-d H:i:s');
           $orderdata->delivery_time=$deliverytime;
@@ -154,6 +173,7 @@ class OrdersController extends Controller
          return redirect()->route('domesticorder')
   ->with('success','Order has been created successfully.');
       }
+      //end domestic order
       else{
         $request->validate([
           'ordertype' => 'required',
