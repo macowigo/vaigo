@@ -66,13 +66,13 @@ class VendorOrders extends Controller
        
               $orderdata= new Oders();
               $orderdata->oderid=random_int(1000,9999999);
-             // $orderdata->center=Auth::User()->centerid;
+              $orderdata->center=78900;
              // $orderdata->customer=$request->customer;
               $orderdata->order_type='domestic';
               $orderdata->trans=$request->transport;
               //$orderdata->from_location=$request->fromlocation;
               $orderdata->delv_location=$request->deliverylocation;
-              $orderdata->delv_names=$request->receivernames;
+             // $orderdata->delv_names=$request->receivernames;
               $orderdata->delv_phone=$request->receiverphone;
               $orderdata->py_type=$request->paymentype;
               $orderdata->value=$request->deliveryFee;
@@ -80,7 +80,7 @@ class VendorOrders extends Controller
               $orderdata->ord_details=$request->details;
               $orderdata->created_time=date('Y-m-d H:i:s');
               $orderdata->delivery_type=$request->deliverytype;
-              $orderdata->oder_status='created';
+              $orderdata->oder_status='ordered';
               $orderdata->save();
               return["status" => true] ;
           

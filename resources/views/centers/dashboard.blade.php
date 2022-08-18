@@ -34,13 +34,13 @@
     <div class="masonry row">
         <div class="col s12">  
         <h4 class="blue-text" >Dashboard</h4>
-        <a href="{{route('domesticorder')}}">
+        <a href="{{route('domesticnew')}}">
          <div class="col s12 m6 l4">
          <div class="card">
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
-                        <span><i class="material-icons">home</i> Domestic Orders: {{ $domestic }}</span>
+                        <span><i class="material-icons">open_in_new</i> Domestic New Orders: {{ $domesticnew }}</span>
                         <span ></span>
                         </div>
                     </div>
@@ -48,6 +48,20 @@
             </div>
          </div>
          </a>
+         <a href="{{route('domesticorder')}}">
+            <div class="col s12 m6 l4">
+            <div class="card">
+                   <div class="card-stacked">
+                       <div class=" card-metrics-static">
+                           <div class="card-content">
+                           <span><i class="material-icons">home</i> Domestic Orders: {{ $domestic }}</span>
+                           <span ></span>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+            </div>
+            </a>
          <a href="{{route('regionalorder')}}">
          <div class="col s12 m6 l4">
          <div class="card">

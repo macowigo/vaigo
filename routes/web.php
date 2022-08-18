@@ -29,6 +29,9 @@ Route::resource('orders',OrdersController::class)->middleware(['auth']);
 Route::get('/centerorder/domestic',[OrdersController::class,'domestic'],function(){
     return view('centers.domesticorders');
 })->middleware(['auth'])->name('domesticorder');
+//domestic new order
+Route::get('/center/domestic_neworders',[OrdersController::class,'domesticneworder']
+)->middleware(['auth'])->name('domesticnew');
 
 Route::get('/centerorder/regional',[OrdersController::class,'regional'],function(){
     return view('centers.regional');

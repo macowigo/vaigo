@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Oders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
@@ -22,6 +23,23 @@ class OrdersController extends Controller
       with( $domesticCount);
     return view('centers.domesticorders',$domesticdata);
    }
+   //domestic new
+   public function domesticneworder(){
+    $usercenter=Auth::User()->centerid;
+    $domesticdata['domesticorders']= Oders::WHERE([
+      ['order_type','domestic'],
+      ['center',$usercenter],
+      ['oder_status','ordered']
+      ])->get();
+    return view('centers.domesticnew',$domesticdata);
+   }
+
+   public function update( $id)
+{
+  $update = DB::table('oders')->where('oderid', $id)->update(['oder_status'=>'created']);
+return redirect()->route('domesticnew')
+->with('success','Company Has Been updated successfully');
+}
    public function regional(){
     $usercenter=Auth::User()->centerid;
     $regionaldata['regionalorder']=Oders::WHERE([
@@ -238,12 +256,10 @@ class OrdersController extends Controller
 
 
     }
-
-    public function destroy(Oders $oders)
-{
-$oders->delete();
-return redirect()->route('orders.index')
-->with('success','Delete to be implimented');
+//delete order
+    public function destroy($orderid){
+    $deleted = DB::table('oders')->WHERE('oderid',$orderid)->delete();
+     return redirect()->route('orders.index')->with('success','Order Succesfully Deleted');
 }
 
 }
