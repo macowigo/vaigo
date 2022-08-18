@@ -27,7 +27,7 @@ return new class extends Migration
             $table->integer('item_value')->nullable();
             $table->string('ord_details');
             $table->timestamp('created_time')->useCurrent();
-            $table->timestamp('delivery_time')->useCurrent();
+            $table->string('delivery_type')->nullable();
             $table->string('pick_up');
             $table->string('desination');
             $table->string('parcel_size');

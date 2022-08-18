@@ -148,7 +148,7 @@ function getDistance()
                                             <i class="material-icons prefix">subtitles</i>
                                             <select id="transport" name="transport"class="validate" >
                                                 <option value="" disabled selected>Please select Transportation Type</option>
-                                                <option value="motocyle">Motocyle</option>
+                                                <option value="motocycle">Motocyle</option>
                                                 <option value="carry">Carry</option>
                                                 {{-- <option value="kenter">Kenter</option> --}}
                                             </select>

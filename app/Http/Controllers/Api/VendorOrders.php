@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -25,20 +23,20 @@ class VendorOrders extends Controller
           $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
           $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
           $distance = substr($dist, 0, strpos($dist, "km"));
-          if($request->tarnsport=="carry"){
+          if($request->transport=="carry"){
             $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
             return ['price' => $domcalculated];
           }
-          elseif($request->tarnsport=="motocycle"){
+          elseif($request->transport=="motocycle"){
             if($request->deliverytype=='standard'){
                 if($request->ordervalue > 0  && $request->ordervalue < 99999){
-                    $domcalculated = (0.4* ceil(((300*$distance)+(70*$time)+1300) / 500)) * 500;
+                    $domcalculated =ceil(((300*$distance)+(70*$time)+1300)*0.4 / 500) * 500;
                 }
                 elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
-                    $domcalculated = (0.4 * ceil(((300*$distance)+(70*$time)+18000) / 500)) * 500;
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
                 }
                 else{
-                    $domcalculated = (0.4 * ceil(((300*$distance)+(70*$time)+18000) / 500)) * 500;
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
                 }
              }
              elseif($request->deliverytype=='express'){
@@ -46,10 +44,10 @@ class VendorOrders extends Controller
                     $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
                 }
                 elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+18000) / 500) * 500;
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
                 }
                 else{
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+18000) / 500) * 500;
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
                 }
              }
              else{
@@ -59,7 +57,6 @@ class VendorOrders extends Controller
           }
           else{
             return ['price' => 'sorry error occurs'];
-            //return ['price' => $domcalculated];
           }
           return ['price' => $domcalculated];
     }

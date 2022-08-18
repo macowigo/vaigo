@@ -44,7 +44,7 @@ class OrdersController extends Controller
     public function create(){
         return view('centers.create');
     }
-  
+  //calculate cost
     public function calculatecost(Request $request){
       $request->validate([
         'fromlocation' => 'required',
@@ -54,10 +54,10 @@ class OrdersController extends Controller
         'deliverytype'=>'required'
      
         ]);
-         $lat1=$request->fromLat;
-          $long1=$request->fromLng;
-          $lat2=$request->delvLat;
-          $long2=$request->delvLng;
+        $lat1=$request->fromLat;
+        $long1=$request->fromLng;
+        $lat2=$request->delvLat;
+        $long2=$request->delvLng;
           $apiurl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$lat1.",".$long1."&destinations=".$lat2.",".$long2."&mode=driving&key=AIzaSyCFnY0qEUXZW-efcSTWmQ2Ga7te_pNsA4o";
           $receiveddata = curl_init();
           curl_setopt($receiveddata, CURLOPT_URL, $apiurl);
@@ -71,46 +71,49 @@ class OrdersController extends Controller
           $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
           $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
           $distance = substr($dist, 0, strpos($dist, "km"));
-          if($request->transport=='motocyle'){
-            if($request->ordervalue > 0  && $request->ordervalue < 99999 && $request->deliverytype=='standard'){
-              $domcalculated = (0.4* ceil(((300*$distance)+(70*$time)+1300) / 500)) * 500;
-              //800+500
-            }
-            if($request->ordervalue > 99999   && $request->ordervalue < 999999 && $request->deliverytype=='standard'){
-              $domcalculated = (0.4 * ceil(((300*$distance)+(70*$time)+18000) / 500)) * 500;
-              //800+1000
-            }
-            if($request->ordervalue > 999999  && $request->ordervalue < 5000000 && $request->deliverytype=='standard'){
-              $domcalculated = (0.4 * ceil(((300*$distance)+(70*$time)+18000) / 500)) * 500;
-            }
-            if($request->ordervalue > 0  && $request->ordervalue < 99999 && $request->deliverytype=='express'){
-              $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
-            }
-            if($request->ordervalue > 99999   && $request->ordervalue < 999999 && $request->deliverytype=='express'){
-              $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
-            }
-            if($request->ordervalue > 999999  && $request->ordervalue < 5000000 && $request->deliverytype=='express'){
-              $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
-            }
+          if($request->transport=="carry"){
+            $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
+            return redirect('/orders/create')
+          ->with('cost','Domestic cost For carry is: '.number_format($domcalculated) .' Tshs From:
+              '.$request->fromlocation.' to: '.$request->deliverylocation );
+          }
+          elseif($request->transport=="motocycle"){
+            if($request->deliverytype=='standard'){
+                if($request->ordervalue > 0  && $request->ordervalue < 99999){
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1300) *0.4 / 500) * 500;
+                }
+                elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
+                }
+                else{
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
+                }
+             }
+             elseif($request->deliverytype=='express'){
+                if($request->ordervalue > 0  && $request->ordervalue < 99999){
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
+                }
+                elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
+                }
+                else{
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
+                }
+             }
+             else{
+              return redirect('/orders/create')->with('cost','Sorry Select Transportation type first');
+             }
             
           }
-          elseif($request->transport=='carry'){
-            $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
-          }
           else{
-            return redirect('/orders/create')
-            ->with('cost','Sorry errors occurs' );
+            return redirect('/orders/create')->with('cost','Sorry Error Occurs');
           }
-          
-          //return ['price' => $domcalculated];
           return redirect('/orders/create')
-          ->with('cost','Domestic cost is: '.number_format($domcalculated) .' Tshs From:  '.$request->fromlocation.' to: '.$request->deliverylocation );
-          //return redirec()twith('Cost is: '.$domesticcost2.' Tshs') ;
-          
-
-          //return array('distance' => $dist, 'time' => $time.' minutes','cost'=>$domesticcost);
-          
+          ->with('cost','Domestic cost for Motocycle is: '.number_format($domcalculated) .' Tshs From:  '
+          .$request->fromlocation.' to: '.$request->deliverylocation );
     }
+
+    //store data to database
     public function store(Request $request){
       if($request->ordertype=="domestic"){
         $request->validate([
@@ -121,7 +124,8 @@ class OrdersController extends Controller
           'details' => 'required',
           'paymentype' => 'required',
           'receiverphone' => 'required',
-          'ordervalue'=>'required'
+          'ordervalue'=>'required',
+          'deliverytype'=>'required',
           ]);
           $lat1=$request->fromLat;
           $long1=$request->fromLng;
@@ -140,25 +144,37 @@ class OrdersController extends Controller
           $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
           $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
           $distance = substr($dist, 0, strpos($dist, "km"));
-          if($request->transport=='motocyle'){
-            if($request->ordervalue > 0  && $request->ordervalue < 99999){
-              $domesticcost = ceil(((300*$distance)+(70*$time)+800+500) / 500) * 500;
-            }
-            if($request->ordervalue > 100000   && $request->ordervalue < 999999){
-              $domesticcost = ceil(((300*$distance)+(70*$time)+800+500) / 500) * 500;
-            }
-            if($request->ordervalue > 1000000  && $request->ordervalue < 5000000){
-              $domesticcost = ceil(((300*$distance)+(70*$time)+800+500) / 500) * 500;
-            }
+          if($request->transport=="carry"){
+            $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
           }
-          elseif($request->transport=='carry'){
-            $domesticcost = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
+          elseif($request->transport=="motocycle"){
+            if($request->deliverytype=='standard'){
+                if($request->ordervalue > 0  && $request->ordervalue < 99999){
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1300) * 0.4 / 500) * 500;
+                }
+                elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) *0.4 / 500) * 500;
+                }
+                else{
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
+                }
+             }
+             elseif($request->deliverytype=='express'){
+                if($request->ordervalue > 0  && $request->ordervalue < 99999){
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
+                }
+                elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
+                }
+                else{
+                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
+                }
+             }
+
           }
           else{
-            $domesticcost = ceil(((25*$distance)+(60*$time)+700) / 500) * 500;
+            return redirect('/orders/create')->with('failed','Sorry Error Occurs');
           }
-          // $minutes = substr($time, 0, strpos($time, "mins"));
-          $deliverytime = date("Y-m-d H:i:s",strtotime(date("Y-m-d H:i:s")." + $time minutes"));
           // return array('distance' => $dist, 'time' => $time,'deliverytime'=>$deliverytime);
 
           $orderdata= new Oders;
@@ -177,11 +193,11 @@ class OrdersController extends Controller
           $orderdata->delv_names=$request->receivernames;
           $orderdata->delv_phone=$request->receiverphone;
           $orderdata->py_type=$request->paymentype;
-          $orderdata->value=$domesticcost;
+          $orderdata->value=$domcalculated;
           $orderdata->item_value=$request->ordervalue;
           $orderdata->ord_details=$request->details;
           $orderdata->created_time=date('Y-m-d H:i:s');
-          $orderdata->delivery_time=$deliverytime;
+          $orderdata->delivery_type=$request->deliverytype;
           $orderdata->oder_status='created';
          $orderdata->save();
          return redirect()->route('domesticorder')
