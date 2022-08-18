@@ -76,21 +76,21 @@ class OrdersController extends Controller
               $domcalculated = (0.4* ceil(((300*$distance)+(70*$time)+1300) / 500)) * 500;
               //800+500
             }
-            if($request->ordervalue > 100000   && $request->ordervalue < 999999 && $request->deliverytype=='standard'){
-              $domcalculated = (0.4 * ceil(((300*$distance)+(70*$time)+18000) / 1000)) * 500;
+            if($request->ordervalue > 99999   && $request->ordervalue < 999999 && $request->deliverytype=='standard'){
+              $domcalculated = (0.4 * ceil(((300*$distance)+(70*$time)+18000) / 500)) * 500;
               //800+1000
             }
-            if($request->ordervalue > 1000000  && $request->ordervalue < 5000000 && $request->deliverytype=='standard'){
-              $domcalculated = (0.4 * ceil(((300*$distance)+(70*$time)+18000) / 1000)) * 500;
+            if($request->ordervalue > 999999  && $request->ordervalue < 5000000 && $request->deliverytype=='standard'){
+              $domcalculated = (0.4 * ceil(((300*$distance)+(70*$time)+18000) / 500)) * 500;
             }
             if($request->ordervalue > 0  && $request->ordervalue < 99999 && $request->deliverytype=='express'){
               $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
             }
-            if($request->ordervalue > 100000   && $request->ordervalue < 999999 && $request->deliverytype=='express'){
-              $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 1000) * 500;
+            if($request->ordervalue > 99999   && $request->ordervalue < 999999 && $request->deliverytype=='express'){
+              $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
             }
-            if($request->ordervalue > 1000000  && $request->ordervalue < 5000000 && $request->deliverytype=='express'){
-              $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 1000) * 500;
+            if($request->ordervalue > 999999  && $request->ordervalue < 5000000 && $request->deliverytype=='express'){
+              $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
             }
             
           }
@@ -98,9 +98,10 @@ class OrdersController extends Controller
             $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
           }
           else{
-            $domcalculated = ceil(((25*$distance)+(60*$time)+700) / 500) * 500;
+            return['Sorry error occur try again'];
           }
           
+          //return ['price' => $domcalculated];
           return redirect('/orders/create')
           ->with('cost','Domestic cost is: '.number_format($domcalculated) .' Tshs From:  '.$request->fromlocation.' to: '.$request->deliverylocation );
           //return redirec()twith('Cost is: '.$domesticcost2.' Tshs') ;
