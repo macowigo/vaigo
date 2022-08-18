@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
+use App\Models\Oders;
 use Illuminate\Http\Request;
 
 class VendorOrders extends Controller
@@ -59,5 +60,29 @@ class VendorOrders extends Controller
             return ['price' => 'sorry error occurs'];
           }
           return ['price' => $domcalculated];
+    }
+
+    function store(Request $request){
+       
+              $orderdata= new Oders();
+              $orderdata->oderid=random_int(1000,9999999);
+             // $orderdata->center=Auth::User()->centerid;
+             // $orderdata->customer=$request->customer;
+              $orderdata->order_type='domestic';
+              $orderdata->trans=$request->transport;
+              //$orderdata->from_location=$request->fromlocation;
+              $orderdata->delv_location=$request->deliverylocation;
+              $orderdata->delv_names=$request->receivernames;
+              $orderdata->delv_phone=$request->receiverphone;
+              $orderdata->py_type=$request->paymentype;
+              $orderdata->value=$request->deliveryFee;
+              $orderdata->item_value=$request->ordervalue;
+              $orderdata->ord_details=$request->details;
+              $orderdata->created_time=date('Y-m-d H:i:s');
+              $orderdata->delivery_type=$request->deliverytype;
+              $orderdata->oder_status='created';
+              $orderdata->save();
+              return["status" => true] ;
+          
     }
 }
