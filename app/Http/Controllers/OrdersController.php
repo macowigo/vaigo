@@ -94,11 +94,12 @@ class OrdersController extends Controller
             }
             
           }
-          elseif($request->transport=='kirikuu'){
+          elseif($request->transport=='carry'){
             $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
           }
           else{
-            return['Sorry error occur try again'];
+            return redirect('/orders/create')
+            ->with('cost','Sorry errors occurs' );
           }
           
           //return ['price' => $domcalculated];
