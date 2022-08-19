@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CentersController;
 use App\Http\Controllers\Auth\RedirectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrdersController;
@@ -17,7 +18,12 @@ Route::get('/dashboard', function () {
 Route::get('/admin/dashboard',function(){
     return view('admin.dashboard');
 })->middleware(['auth'])->name('admindshboard');
-
+Route::get('/admin/addcenter',[CentersController::class,'addcenterview'])->middleware(['auth'])->name('addcenter');
+Route::post('registercenter',[CentersController::class,'savecenters'])->middleware(['auth'])->name('registercenter');
+Route::get('/admin/centers',[CentersController::class,'centerslist'])->middleware(['auth'])->name('centerlist');
+Route::get('/admin/centers_manage',[CentersController::class,'centersmanage'])->middleware(['auth'])->name('centemanage');
+Route::delete('/admin/centers_manage/{centerid}',[CentersController::class,'deletecenter'])->middleware(['auth'])->name('deletecenter');
+Route::get('/centers_edit/{centerid}',[CentersController::class,'returncenter'])->middleware(['auth'])->name('editcenter');
 //center
 Route::post('orders/create',[OrdersController::class,'calculatecost'],function(){
     return view('centers.create');

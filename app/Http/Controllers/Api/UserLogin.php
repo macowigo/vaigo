@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class UserLogin extends Controller
 {
     function login(Request $request){
-        $credential=$request->all();
-        if(Auth::attempt($credential)){
-            $request->session()->regenerate();
+        $email=$request->email;
+        $password=$request->password;
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
             return ['attemp'=>'good'];
         }
         return['attemp'=>'invalid credentials'];

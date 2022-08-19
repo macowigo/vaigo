@@ -65,31 +65,10 @@ function getDistance()
         }
     });
   }
-  jQuery(document).ready(function(){
-            jQuery('#domesticbutton').click(function(e){
-               e.preventDefault();
-               $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                  }
-              });
-               jQuery.ajax({
-                  url: "{{ url('centerorder/calculate') }}",
-                  method: 'post',
-                  data: {
-                     name: jQuery('#name').val(),
-                     type: jQuery('#type').val(),
-                     price: jQuery('#price').val()
-                  },
-                  success: function(result){
-                     jQuery('.alert').show();
-                     jQuery('.alert').html(result.success);
-                  }});
-               });
-            });
+
 
             //find total
-            function findTotal(){
+  function findTotal(){
     var arr = document.getElementsByName('value');
     var tot=0;
     for(var i=0;i<arr.length;i++){
