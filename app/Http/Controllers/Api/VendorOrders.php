@@ -24,7 +24,7 @@ class VendorOrders extends Controller
           $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
           $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
           if(empty($dist) || empty($time)){
-            return['status'=>false,'price'=>0];
+            return['status'=>true,'price'=>0];
          }
          else{
             $distance = substr($dist, 0, strpos($dist, "km"));
