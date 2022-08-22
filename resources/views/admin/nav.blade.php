@@ -28,6 +28,15 @@
                     </ul>
                 </div>
             </li>
+            <li class="bold waves-effect"><a class="collapsible-header">Vendors<i class="material-icons">group</i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{{ route('vendorform') }}" class="waves-effect">Register Vendor<i class="material-icons">person_add</i></a></li>
+                        <li><a href="{{route('vendors')}}" class="waves-effect">View Vendors<i class="material-icons">list</i></a></li>
+                        <li><a href="{{route('vendorsmanage')}}" class="waves-effect">Manage Vendors<i class="material-icons">construction</i></a></li>
+                    </ul>
+                </div>
+            </li>
             <li class="bold waves-effect"><a class="collapsible-header">Orders<i class="material-icons">subtitles</i></a>
                 <div class="collapsible-body">
                     <ul>

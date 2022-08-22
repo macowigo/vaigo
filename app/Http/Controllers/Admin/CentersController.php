@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Centers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -52,5 +51,23 @@ class CentersController extends Controller
     public function returncenter($centerid){
         $centerlist['centerlist']=DB::table('centers')->SELECT('*')->WHERE('centerid',$centerid)->get();
         return view('admin.centeredit',$centerlist);
+    }
+
+    public function updatecenter(Request $request, $centerid){
+        $request->validate([
+            'centername'=>'required',
+            'centerlocation'=>'required'
+        ]);
+        $upadatecenter=DB::table('centers')->WHERE('centerid',$centerid)->update(
+            ['centername'=>$request->centername],
+            ['centerlocation'=>$request->centerlocation]
+        );
+        if($upadatecenter){
+            return redirect()->route('centemanage')->with('success','Center updated successfully');
+        }
+        else
+        {
+            return redirect()->route('centemanage')->with('success','Sorry updates failed');
+        }
     }
 }

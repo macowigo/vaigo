@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
-    <title>VAIGO-Centers</title>
+    <title>VAIGO-Vendors</title>
     <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,15 +28,16 @@
                         <div class="card material-table">
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
-                               <i class="material-icons">adjust</i> Manage Centers
+                               <i class="material-icons">group</i>
+                                Vendors List
                             </h6>
-                            @if ($message = Session::get('success'))
-                            <div class="red-text">
-                            <h6 class="blue-text">{{ $message }}</h6>
-                            </div>
+                            {{-- Register success notification --}}
+                            @if ($message=Session::get('succes'))
+                            <h6 class="blue-text">{{$message}}</h6>
                             @endif
-                                @if ($centerlist->isEmpty())
-                                <span class="red-text">Sorry there is no Center Record Found</span>
+                            {{-- check if vendor exist --}}
+                                @if ($vendorlist->isEmpty())
+                                <span class="red-text">Sorry there is no any Vendor list Found</span>
                                 @else
                                 <div class="table-header">
                                     <div class="actions">
@@ -47,29 +48,18 @@
                                 <table id="datatable" class="responsive-table">
                                     <thead>
                                         <tr>
-                                        <th>Center Name</th>
-                                        <th>Center Location</th>
-                                        <th>Actions</th>
+                                        <th>VendorName</th>
+                                        <th>VendorPhone</th>
+                                        <th>VendorLocation</th>
+                                        <th>VendorCenter</th>
                                         </tr>
                                     </thead>
-                                    @foreach ($centerlist as $values )
+                                    @foreach ($vendorlist as $vendor )
                                     <tr>
-                                        <td>{{$values->centername}}</td>
-                                        <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->centerlocation)}}</td>
-                                        <td>
-                                            <form action="{{ route('deletecenter',$values->centerid) }}" method="Post">
-                                                <a class="btn-floating blue btn-small"   title="click to edit"
-                                                href="{{ route('editcenter',$values->centerid) }}">
-                                                <i class="material-icons">edit</i>
-                                                </a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn-floating red btn-small"
-                                                title="click to delete" onclick="return confirm('Are you sure to delete this center?')">
-                                                <i class="material-icons">delete</i>
-                                            </button>
-                                                </form>
-                                        </td>
+                                        <td>{{$vendor->name}}</td>
+                                        <td>{{$vendor->phone}}</td>
+                                        <td>{{$vendor->vendor_location}}</td>
+                                        <td>{{$vendor->centername}}</td>
                                     </tr>
                                     @endforeach
                                 </table>
@@ -99,5 +89,8 @@
        <script src='../datatable/jquery.js'></script>
        <script src='../datatable/datatable.js'></script>
        <script src="../datatable/script.js"></script>
+       <script src='../datatable/buttonhtml5.js'></script>
+       <script src='../datatable/buttonprint.js'></script>
+       <script src='../datatable/datatablebuttons.js'></script>
 </body>
 </html>

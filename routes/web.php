@@ -15,15 +15,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 //admin
-Route::get('/admin/dashboard',function(){
-    return view('admin.dashboard');
-})->middleware(['auth'])->name('admindshboard');
-Route::get('/admin/addcenter',[CentersController::class,'addcenterview'])->middleware(['auth'])->name('addcenter');
-Route::post('registercenter',[CentersController::class,'savecenters'])->middleware(['auth'])->name('registercenter');
-Route::get('/admin/centers',[CentersController::class,'centerslist'])->middleware(['auth'])->name('centerlist');
-Route::get('/admin/centers_manage',[CentersController::class,'centersmanage'])->middleware(['auth'])->name('centemanage');
-Route::delete('/admin/centers_manage/{centerid}',[CentersController::class,'deletecenter'])->middleware(['auth'])->name('deletecenter');
-Route::get('/centers_edit/{centerid}',[CentersController::class,'returncenter'])->middleware(['auth'])->name('editcenter');
+
 //center
 Route::post('orders/create',[OrdersController::class,'calculatecost'],function(){
     return view('centers.create');
@@ -58,3 +50,4 @@ Route::resource('companies', CompanyCRUDController::class);
 
 
 require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';

@@ -45,36 +45,29 @@ google.maps.event.addDomListener(window, 'load', centerlocated);
                 <div class="row">
                     <div class="col s12">
                         <div class="receipt-main card-content">
-                            <h6 class="blue-text centered-text">Add New Center</h6>
+                            <h6 class="blue-text centered-text">Edit Cnter Informations</h6>
                             {{-- errors --}}
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                            @if(session('status'))
-                            <div class="alert alert-success mb-1 mt-1">
-                            {{ session('status') }}
-                            </div>
-                            @endif
-                            @if ($message = Session::get('success'))
-                            <div class="red-text">
-                            <h6 class="blue-text">{{ $message }}</h6>
-                            </div>
-                            @endif
-                            <form method="POST" action="{{route('registercenter')}}">
+                            @foreach ($centerlist AS $center )
+                            <form method="POST" action="{{route('centerupdate',$center->centerid)}}">
                                 @csrf
                                 <div class=" row">
                                     <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">adjust</i>
                                         <input id="centername" name="centername" type="text" 
-                                        value="{{$centerlist}}" class="validate" required>
+                                        value="{{$center->centername}}" class="validate" required>
                                         <label for="centername">Center Name</label>
                                         <span class="helper-text" data-error="please enter valid center names" data-success="right"></span>
                                     </div>
                                     <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">location</i>
-                                        <input id="centerlocation" name="centerlocation" type="text" class="validate" required>
+                                        <input id="centerlocation" name="centerlocation" type="text"
+                                        value="{{str_ireplace(', Dar es Salaam, Tanzania','',$center->centerlocation)}}" class="validate" required>
                                         <label for="centerlocation">Center Location</label>
                                         <span class="helper-text" data-error="please enter valid center location" data-success="right"></span>
-                                    </div>
-                                    <input class="btn right blue" type="submit" value="Add">
+                                    </div> 
+                                    @endforeach
+                                    <input class="btn right blue" type="submit" value="Edit">
                                 </div>
                             </form>
                         </div>
