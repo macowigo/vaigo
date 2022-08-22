@@ -26,7 +26,7 @@ class VendorOrders extends Controller
           $distance = substr($dist, 0, strpos($dist, "km"));
           if($request->transport=="carry"){
             $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
-            return ['price' => $domcalculated];
+            return ['status' => true, 'price' => $domcalculated];
           }
           elseif($request->transport=="motocycle"){
             if($request->deliverytype=='standard'){
@@ -57,9 +57,9 @@ class VendorOrders extends Controller
             
           }
           else{
-            return ['price' => 'sorry error occurs'];
+            return ['status' => false];
           }
-          return ['price' => $domcalculated];
+          return ['status' => true, 'price' => $domcalculated];
     }
 
     function store(Request $request){
