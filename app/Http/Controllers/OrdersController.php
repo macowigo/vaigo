@@ -88,47 +88,54 @@ return redirect()->route('domesticnew')
           $response_a = json_decode($response, true);
           $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
           $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
-          $distance = substr($dist, 0, strpos($dist, "km"));
-          if($request->transport=="carry"){
-            $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
+          if(empty($dist) || empty($time)){
             return redirect('/orders/create')
-          ->with('cost','Domestic cost For carry is: '.number_format($domcalculated) .' Tshs From:
+          ->with('cost','Domestic cost For carry is: '.number_format(0) .' Tshs From:
               '.$request->fromlocation.' to: '.$request->deliverylocation );
           }
-          elseif($request->transport=="motocycle"){
-            if($request->deliverytype=='standard'){
-                if($request->ordervalue > 0  && $request->ordervalue < 99999){
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1300) *0.4 / 500) * 500;
-                }
-                elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
-                }
-                else{
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
-                }
-             }
-             elseif($request->deliverytype=='express'){
-                if($request->ordervalue > 0  && $request->ordervalue < 99999){
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
-                }
-                elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
-                }
-                else{
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
-                }
-             }
-             else{
-              return redirect('/orders/create')->with('cost','Sorry Select Transportation type first');
-             }
-            
-          }
           else{
-            return redirect('/orders/create')->with('cost','Sorry Error Occurs');
+            $distance = substr($dist, 0, strpos($dist, "km"));
+            if($request->transport=="carry"){
+              $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
+              return redirect('/orders/create')
+            ->with('cost','Domestic cost For carry is: '.number_format($domcalculated) .' Tshs From:
+                '.$request->fromlocation.' to: '.$request->deliverylocation );
+            }
+            elseif($request->transport=="motocycle"){
+              if($request->deliverytype=='standard'){
+                  if($request->ordervalue > 0  && $request->ordervalue < 99999){
+                      $domcalculated = ceil(((300*$distance)+(70*$time)+1300) *0.4 / 500) * 500;
+                  }
+                  elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
+                      $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
+                  }
+                  else{
+                      $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
+                  }
+               }
+               elseif($request->deliverytype=='express'){
+                  if($request->ordervalue > 0  && $request->ordervalue < 99999){
+                      $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
+                  }
+                  elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
+                      $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
+                  }
+                  else{
+                      $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
+                  }
+               }
+               else{
+                return redirect('/orders/create')->with('cost','Sorry Select Transportation type first');
+               }
+            }
+            else{
+              return redirect('/orders/create')->with('cost','Sorry Error Occurs');
+            }
+            return redirect('/orders/create')
+            ->with('cost','Domestic cost for Motocycle is: '.number_format($domcalculated) .' Tshs From:  '
+            .$request->fromlocation.' to: '.$request->deliverylocation );
+
           }
-          return redirect('/orders/create')
-          ->with('cost','Domestic cost for Motocycle is: '.number_format($domcalculated) .' Tshs From:  '
-          .$request->fromlocation.' to: '.$request->deliverylocation );
     }
 
     //store data to database
