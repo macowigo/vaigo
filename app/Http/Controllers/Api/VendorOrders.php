@@ -23,43 +23,49 @@ class VendorOrders extends Controller
           $response_a = json_decode($response, true);
           $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
           $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
-          $distance = substr($dist, 0, strpos($dist, "km"));
-          if($request->transport=="carry"){
-            $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
-            return ['status' => true, 'price' => $domcalculated];
-          }
-          elseif($request->transport=="motocycle"){
-            if($request->deliverytype=='standard'){
-                if($request->ordervalue > 0  && $request->ordervalue < 99999){
-                    $domcalculated =ceil(((300*$distance)+(70*$time)+1300)*0.4 / 500) * 500;
-                }
-                elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
-                }
-                else{
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
-                }
-             }
-             elseif($request->deliverytype=='express'){
-                if($request->ordervalue > 0  && $request->ordervalue < 99999){
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
-                }
-                elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
-                }
-                else{
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
-                }
-             }
-             else{
-                return ['price' => 'Select transport type first'];
-             }
-            
-          }
-          else{
-            return ['status' => false];
-          }
-          return ['status' => true, 'price' => $domcalculated];
+          if(empty($dist) || empty($time)){
+            return['status'=>false,'price'=>0];
+         }
+         else{
+            $distance = substr($dist, 0, strpos($dist, "km"));
+            if($request->transport=="carry"){
+                $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
+                return ['status' => true, 'price' => $domcalculated];
+              }
+              elseif($request->transport=="motocycle"){
+                if($request->deliverytype=='standard'){
+                    if($request->ordervalue > 0  && $request->ordervalue < 99999){
+                        $domcalculated =ceil(((300*$distance)+(70*$time)+1300)*0.4 / 500) * 500;
+                    }
+                    elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
+                        $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
+                    }
+                    else{
+                        $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
+                    }
+                 }
+                 elseif($request->deliverytype=='express'){
+                    if($request->ordervalue > 0  && $request->ordervalue < 99999){
+                        $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
+                    }
+                    elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
+                        $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
+                    }
+                    else{
+                        $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
+                    }
+                 }
+                 else{
+                    return ['price' => 'Select transport type first'];
+                 }
+              }
+              else{
+                return ['status' => false];
+              }
+              return ['status' => true, 'price' => $domcalculated];
+           
+         }   
+          
     }
 
     function store(Request $request){
