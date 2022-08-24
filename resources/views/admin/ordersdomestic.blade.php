@@ -8,7 +8,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
     <title>VAIGO-DomesticOrders</title>
-    <link rel="shortcut icon" href="../Images/PCM.png">
+    <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../datatable/style.css"/>
@@ -29,7 +29,7 @@
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
                                <i class="material-icons">home</i>
-                                Domestic Orders</h6>
+                                Domestic Orders: {{$domestic}}</h6>
                                 @if ($domesticorders->isEmpty())
                                 <span class="red-text">Sorry there is no Domestic Order Found</span>
                                 @else
@@ -42,27 +42,30 @@
                                 <table id="datatable" class="responsive-table">
                                     <thead>
                                         <tr>
-                                        <th>Order#</th>
                                         <th>Details</th>
-                                        <th>Value</th>
+                                        <th>OrderValues</th>
                                         <th>Transport</th>
                                         <th>Receiver</th>
+                                        <th>Payment</th>
                                         <th>From</th>
                                         <th>To</th>
-                                        <th>DeliveryTime</th>
+                                        <th>Created</th>
+                                        <th>Delivery</th>
                                         <th>Status</th>
                                         </tr>
                                     </thead>
                                     @foreach ($domesticorders as $values )
                                     <tr>
-                                        <td>{{$values->oderid}}</td>
                                         <td>{{$values->ord_details}}</td>
-                                        <td>{{number_format($values->value)}}</td>
+                                        <td>{{'Order Value:'.number_format($values->item_value).' Delivery Fee:'.number_format($values->value)}}</td>
                                         <td>{{$values->trans}}</td>
-                                        <td>{{$values->delv_names.', '.$values->delv_phone}}</td>
-                                        <td>{{$values->from_location}}</td>
-                                        <td>{{$values->delv_location}}</td>
-                                        <td>{{$values->delivery_time}}</td>
+                                        <td>{{$values->delv_names.' '.$values->delv_phone}}</td>
+                                        <td>{{$values->py_type}}</td>
+                                        <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->from_location)}}</td>
+                                        <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->delv_location)}}</td>
+                                        {{-- <td>{{substr($values->from_location,0,strpos($values->from_location,'Tanzania')) }}</td> --}}
+                                        <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
+                                        <td>{{$values->delivery_type}}</td>
                                         <td>{{$values->oder_status}}</td>
                                     </tr>
                                     @endforeach

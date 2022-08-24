@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CentersController;
+use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\VendorsController;
 use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function(){
@@ -23,5 +24,9 @@ Route::middleware('auth')->group(function(){
     Route::delete('/admin/vendors_manage/{id}',[VendorsController::class,'deletevendor'])->name('deletevendor');
     Route::get('/{id}/vendor_edit',[VendorsController::class,'getvendor'])->name('editvendorview');
     Route::post('/{id}/vendor_edit',[VendorsController::class,'updatevendor'])->name('editvendor');
+    #orders
+    Route::get('/admin/domestic_orders',[OrdersController::class,'domestic'])->name('admdomestic');
+    Route::get('/admin/regional_orders',[OrdersController::class,'regional'])->name('admregional');
+    Route::get('/admin/international_orders',[OrdersController::class,'international'])->name('adminternational');
 });
 

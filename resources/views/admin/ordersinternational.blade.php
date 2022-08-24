@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
-    <title>VAIGO-RegionalOrders</title>
-    <link rel="shortcut icon" href="../Images/PCM.png">
+    <title>VAIGO-InternationalOrders</title>
+    <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../datatable/style.css"/>
@@ -28,11 +28,11 @@
                         <div class="card material-table">
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
-                                <i class="material-icons">apartment</i>
-                                 Regional Orders
+                                <i class="material-icons">language</i>
+                                   International Orders
                             </h6>
-                            @if ($regionalorder->isEmpty())
-                            <span class="red-text">Sorry There is no Regional Order Record Found</span>
+                            @if ($internationaloders->isEmpty())
+                            <span class="red-text">Sorry There is no International Record Found</span>
                             @else
                             <div class="table-header">
                                 <div class="actions">
@@ -55,7 +55,7 @@
                                     <th>Status</th>
                                     </tr>
                                 </thead>
-                                @foreach ($regionalorder as $values )
+                                @foreach ($internationaloders as $values )
                                 <tr>
                                     <td>{{$values->oderid}}</td>
                                     <td>{{$values->order_type}}</td>
@@ -70,6 +70,7 @@
                                 </tr>
                                 @endforeach
                             </table>
+
                             @endif
                         </div>
                     </div>

@@ -60,6 +60,17 @@ class OrdersProvider extends ServiceProvider
             // });
             // return $view->with('counts', $counts);
         });
-        //
+        #admin
+        View::composer('admin.*', function ($admin) {
+            $today=date('Y-m-d');
+            $domesticcout=Oders::WHERE([['order_type','domestic']])->count();
+            $reginalcount=Oders::WHERE([['order_type','regional']])->count();
+            $internationalcount=Oders::WHERE([['order_type','international']])->count();
+            $admin->with('domestic', $domesticcout);
+            $admin->with('regional', $reginalcount);
+            $admin->with('international', $internationalcount);
+           //today
+       
+        });
     }
 }

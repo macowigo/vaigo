@@ -70,7 +70,6 @@ return redirect()->route('domesticnew')
         'transport' => 'required',
         'ordervalue'=>'required',
         'deliverytype'=>'required'
-     
         ]);
         $lat1=$request->fromLat;
         $long1=$request->fromLng;

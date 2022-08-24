@@ -34,42 +34,42 @@
     <div class="masonry row">
         <div class="col s12">  
         <h4 class="blue-text" >Dashboard</h4>
-        <a href="{{route('domesticorder')}}">
+        <a href="{{route('admdomestic')}}">
          <div class="col s12 m6 l4">
          <div class="card">
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
                         <span><i class="material-icons">home</i> Domestic Orders:</span>
-                        <span ></span>
+                        <span >{{$domestic}}</span>
                         </div>
                     </div>
                 </div>
             </div>
          </div>
          </a>
-         <a href="{{route('regionalorder')}}">
+         <a href="{{route('admregional')}}">
          <div class="col s12 m6 l4">
          <div class="card">
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
                         <span><i class="material-icons">apartment</i> Regional Orders:</span>
-                        <span ></span>
+                        <span >{{$regional}}</span>
                         </div>
                     </div>
                 </div>
             </div>
          </div>
          </a>
-         <a href="{{route('internationalorder')}}">
+         <a href="{{route('adminternational')}}">
          <div class="col s12 m6 l4">
          <div class="card">
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
                         <span><i class="material-icons">language</i> International Orders:</span>
-                        <span ></span>
+                        <span >{{$international}}</span>
                         </div>
                     </div>
                 </div>
