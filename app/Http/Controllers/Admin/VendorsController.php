@@ -18,7 +18,7 @@ class VendorsController extends Controller
   
    public function registervendor(Request $request){
     $password='Vaigo@'.random_int(100,999);
-    $sms="Habari $request->vendornames"."\n". "Your Vaigo account succefully created."."\n".
+    $tosend="Habari $request->vendornames"."\n". "Your Vaigo account succefully created."."\n".
     "Passwod: $password"."\n"."User name: $request->phone";
     $user_contact = substr_replace($request->phone, '255', 0, 1);
     $request->validate([
@@ -39,7 +39,7 @@ class VendorsController extends Controller
         'password'=>Hash::make($password),
     ]);
     if($insertvendordata){
-        SmsController::sendsms($sms,$user_contact);
+        SmsController::sendsms($tosend,$user_contact);
         return redirect()->route('vendors')->with('succes','Vendor Succesfully registered');
     }
     else{
