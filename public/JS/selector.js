@@ -23,15 +23,12 @@ $('#role').on('change', function() {
     if (this.value == 'center') {
         $("#center").show();
     }
-    if (this.value == 'departure') {
+    if (this.value == 'depaturer') {
         $("#center").hide();
     }
 });
 
-
-
 var clicked = 0;
-
 $(".toggle-password").click(function(e) {
     e.preventDefault();
 

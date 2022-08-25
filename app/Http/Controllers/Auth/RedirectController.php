@@ -13,8 +13,8 @@ class RedirectController extends Controller
         if($userrole=="admin"){
             return redirect('/admin/dashboard');
         }
-        elseif($userrole=="depature"){
-
+        elseif($userrole=="depaturer"){
+            return redirect('/depaturer/dashboard'); 
         }
         elseif($userrole=="center"){
             return redirect('/center/dashboard'); 

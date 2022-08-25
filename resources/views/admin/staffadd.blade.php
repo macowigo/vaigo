@@ -74,7 +74,7 @@ google.maps.event.addDomListener(window, 'load', desinationlocation);
                                             <option value="" disabled selected>Please select Staff Role</option>
                                             <option value="driver">Driver</option>
                                             <option value="center">Center</option>
-                                            <option value="departure">Departurer</option>
+                                            <option value="depaturer">Departurer</option>
                                         </select>
                                         <label for="role">User Role</label>
                                         <span class="helper-text" data-error="please enter your password" data-success="right"></span>

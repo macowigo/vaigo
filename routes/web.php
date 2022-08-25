@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RedirectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\CompanyCRUDController;
+use App\Http\Controllers\DeparturerOrderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,7 +15,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-//admin
 
 //center
 Route::post('orders/create',[OrdersController::class,'calculatecost'],function(){
@@ -39,14 +39,15 @@ Route::get('/centerorder/international',[OrdersController::class,'international'
     return view('centers.regional');
 })->middleware(['auth'])->name('internationalorder');
 
+#depatirer
+Route::middleware('auth')->group(function(){
+    Route::get('/depaturer/dashboard',function(){
+        return view('departurer.dashboard');
+    })->name('dptdashboard');
+    Route::get('/depaturer/new_orders',[DeparturerOrderController::class,'neworder'])->name('departurenew');
+    Route::get('/{oderid}/depaturer/',[DeparturerOrderController::class,'deptview'])->name('departurerview');
 
-
-
-Route::get('/map',function(){
-    return view('admin.map');
 });
-
-Route::resource('companies', CompanyCRUDController::class);
 
 
 require __DIR__.'/auth.php';

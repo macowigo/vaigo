@@ -78,7 +78,7 @@ class VendorOrders extends Controller
               $orderdata->trans=$request->transport;
               $orderdata->from_location=$request->fromlocation;
               $orderdata->delv_location=$request->deliverylocation;
-             // $orderdata->delv_names=$request->receivernames;
+              $orderdata->delv_names=$request->receivernames;
               $orderdata->delv_phone=$request->receiverphone;
               $orderdata->py_type=$request->paymentype;
               $orderdata->value=$request->deliveryFee;
