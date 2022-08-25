@@ -13,3 +13,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('calculate',[VendorOrders::class,'calculatecost']);
 Route::post('createorder',[VendorOrders::class,'store']);
 Route::post('login',[UserLogin::class,'login']);
+Route::get('myorder/{id}',[VendorOrders::class,'getorder']);
+

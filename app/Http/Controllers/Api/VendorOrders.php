@@ -91,4 +91,9 @@ class VendorOrders extends Controller
               return["status" => true] ;
           
     }
+    public function getorder($id)
+    {
+        $response = Oders :: where('customerid',$id)->get();
+        return $response;
+    }
 }
