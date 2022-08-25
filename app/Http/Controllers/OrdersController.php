@@ -89,7 +89,7 @@ return redirect()->route('domesticnew')
           $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
           if(empty($dist) || empty($time)){
             return redirect('/orders/create')
-          ->with('cost','Domestic cost For carry is: '.number_format(0) .' Tshs From:
+          ->with('cost','Domestic cost For carry is: 0 Tshs From:
               '.$request->fromlocation.' to: '.$request->deliverylocation );
           }
           else{

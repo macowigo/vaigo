@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CentersController;
 use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\StaffsController;
 use App\Http\Controllers\Admin\VendorsController;
 use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function(){
@@ -28,5 +29,12 @@ Route::middleware('auth')->group(function(){
     Route::get('/admin/domestic_orders',[OrdersController::class,'domestic'])->name('admdomestic');
     Route::get('/admin/regional_orders',[OrdersController::class,'regional'])->name('admregional');
     Route::get('/admin/international_orders',[OrdersController::class,'international'])->name('adminternational');
+
+    #staff
+    Route::get('/admin/add_user',[StaffsController::class,'addform'])->name('staffform');
+    Route::post('/admin/add_user',[StaffsController::class,'addstaff'])->name('staffadd');
+    Route::get('/admin/users',[StaffsController::class,'stafflist'])->name('staff');
+    Route::get('/admin/manage_users',[StaffsController::class,'usersmanage'])->name('manageusers');
+    Route::delete('{id}',[StaffsController::class,'deleteuser'])->name('deleteuser');
 });
 

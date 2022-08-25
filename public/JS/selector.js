@@ -16,6 +16,18 @@ $('#ordertype').on('change', function() {
     }
 });
 
+$('#role').on('change', function() {
+    if (this.value == 'driver') {
+        $("#center").hide();
+    }
+    if (this.value == 'center') {
+        $("#center").show();
+    }
+    if (this.value == 'departure') {
+        $("#center").hide();
+    }
+});
+
 
 
 var clicked = 0;

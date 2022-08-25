@@ -69,14 +69,14 @@ class VendorOrders extends Controller
     }
 
     function store(Request $request){
-       
               $orderdata= new Oders();
               $orderdata->oderid=random_int(1000,9999999);
-              $orderdata->center=78900;
-             // $orderdata->customer=$request->customer;
-              $orderdata->order_type='domestic';
+              $orderdata->center=$request->center;
+              $orderdata->customerid=$request->id;
+              $orderdata->customernames=$request->name;
+              $orderdata->order_type=$request->order;
               $orderdata->trans=$request->transport;
-              //$orderdata->from_location=$request->fromlocation;
+              $orderdata->from_location=$request->fromlocation;
               $orderdata->delv_location=$request->deliverylocation;
              // $orderdata->delv_names=$request->receivernames;
               $orderdata->delv_phone=$request->receiverphone;

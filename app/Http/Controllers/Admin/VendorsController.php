@@ -18,7 +18,7 @@ class VendorsController extends Controller
   
    public function registervendor(Request $request){
     $password='Vaigo@'.random_int(100,999);
-    $tosend="Habari $request->vendornames"."\n". "Your Vaigo account succefully created."."\n".
+    $tosend="Habari $request->vendornames"."\n". "Your Vaigo account Successfully created."."\n".
     "Passwod: $password"."\n"."User name: $request->phone";
     $user_contact = substr_replace($request->phone, '255', 0, 1);
     $request->validate([

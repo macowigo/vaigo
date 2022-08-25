@@ -37,6 +37,15 @@
                     </ul>
                 </div>
             </li>
+            <li class="bold waves-effect"><a class="collapsible-header">Vaigo Users<i class="material-icons">groups</i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{{route('staffform')}}" class="waves-effect">Register New User<i class="material-icons">group_add</i></a></li>
+                        <li><a href="{{route('staff')}}" class="waves-effect">View Users<i class="material-icons">group</i></a></li>
+                        <li><a href="{{route('manageusers')}}" class="waves-effect">Manage Users<i class="material-icons">construction</i></a></li>
+                    </ul>
+                </div>
+            </li>
             <li class="bold waves-effect"><a class="collapsible-header">Orders<i class="material-icons">subtitles</i></a>
                 <div class="collapsible-body">
                     <ul>
