@@ -24,7 +24,7 @@
                 <div class="collapsible-body">
                     <ul>
                         <li><a href="{{route('departurenew')}}" class="waves-effect">New Orders<i class="material-icons">subtitles</i></a></li>
-                        <li><a href="" class="waves-effect">Progress Orders<i class="material-icons">refresh</i></a></li>
+                        <li><a href="{{route('departurered')}}" class="waves-effect">Departured Orders<i class="material-icons">refresh</i></a></li>
                         <li><a href="" class="waves-effect">Complete Orders<i class="material-icons">check_circle</i></a></li>
                         <li><a href="" class="waves-effect">Manage Orders<i class="material-icons">construction</i></a></li>
                     </ul>

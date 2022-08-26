@@ -15,7 +15,7 @@
 </head>
 <body class="has-fixed-sidenav">
     <header>
-        @include('centers.nav')
+        @include('departurer.nav')
     </header>
     {{-- main --}}
     <main>
@@ -104,8 +104,5 @@
        <script src='../datatable/jquery.js'></script>
        <script src='../datatable/datatable.js'></script>
        <script src="../datatable/script.js"></script>
-       <script src='../datatable/buttonhtml5.js'></script>
-       <script src='../datatable/buttonprint.js'></script>
-       <script src='../datatable/datatablebuttons.js'></script>
 </body>
 </html>

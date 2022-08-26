@@ -14,3 +14,4 @@ Route::post('calculate',[VendorOrders::class,'calculatecost']);
 Route::post('createorder',[VendorOrders::class,'store']);
 Route::post('login',[UserLogin::class,'login']);
 Route::get('myorder/{id}',[VendorOrders::class,'getorder']);
+Route::delete('logout/{id}',[UserLogin::class,'logout']);

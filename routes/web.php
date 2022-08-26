@@ -4,12 +4,9 @@ use App\Http\Controllers\Admin\CentersController;
 use App\Http\Controllers\Auth\RedirectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\CompanyCRUDController;
 use App\Http\Controllers\DeparturerOrderController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');});
 Route::get('/redirect',[RedirectController::class,'index']);
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -45,8 +42,9 @@ Route::middleware('auth')->group(function(){
         return view('departurer.dashboard');
     })->name('dptdashboard');
     Route::get('/depaturer/new_orders',[DeparturerOrderController::class,'neworder'])->name('departurenew');
-    Route::get('/{oderid}/depaturer/',[DeparturerOrderController::class,'deptview'])->name('departurerview');
-
+    Route::get('/{oderid}/asignrider',[DeparturerOrderController::class,'deptview'])->name('departurerview');
+    Route::post('/{oderid}/dpt_orders/',[DeparturerOrderController::class,'asignrider'])->name('riderasign');
+    Route::get('/depaturer/dpt_orders/',[DeparturerOrderController::class,'deptorder'])->name('departurered');
 });
 
 

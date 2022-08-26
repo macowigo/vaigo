@@ -15,7 +15,7 @@
 </head>
 <body class="has-fixed-sidenav">
     <header>
-        @include('centers.nav')
+        @include('departurer.nav')
     </header>
     {{-- main --}}
     <main>
@@ -28,10 +28,10 @@
                         <div class="card material-table">
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
-                               <i class="material-icons">home</i>
-                                Domestic Orders: {{$domestic}}</h6>
-                                @if ($domesticorders->isEmpty())
-                                <span class="red-text">Sorry there is no Domestic Order Found</span>
+                               <i class="material-icons">refresh</i>
+                                Departured Domestic Orders: </h6>
+                                @if ($dptorders->isEmpty())
+                                <span class="red-text">Sorry there is no departured Domestic Order Found</span>
                                 @else
                                 <div class="table-header">
                                     <div class="actions">
@@ -54,16 +54,17 @@
                                         <th>Status</th>
                                         </tr>
                                     </thead>
-                                    @foreach ($domesticorders as $values )
+                                    @foreach ($dptorders as $values )
                                     <tr>
                                         <td>{{$values->ord_details}}</td>
-                                        <td>{{'Order Value:'.number_format($values->item_value).' Delivery Fee:'.number_format($values->value)}}</td>
+                                        <td>{{'Order Value:'.number_format($values->item_value).' 
+                                        Delivery Fee:'.number_format($values->value)}}
+                                        </td>
                                         <td>{{$values->trans}}</td>
                                         <td>{{$values->delv_names.' '.$values->delv_phone}}</td>
                                         <td>{{$values->py_type}}</td>
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->from_location)}}</td>
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->delv_location)}}</td>
-                                        {{-- <td>{{substr($values->from_location,0,strpos($values->from_location,'Tanzania')) }}</td> --}}
                                         <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
                                         <td>{{$values->delivery_type}}</td>
                                         <td>{{$values->oder_status}}</td>

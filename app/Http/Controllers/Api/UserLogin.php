@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserLogin extends Controller
@@ -29,5 +30,15 @@ class UserLogin extends Controller
     }
             return $response;
         
+    }
+    public function logout($id){
+        $delete=DB::table('personal_access_tokens')->WHERE('tokenable_id',$id)->delete();
+        if($delete){
+            $response = ['status' => true, 'message' => 'successful'];
+        }
+        else{
+            $response = ['status' => false, 'message' => 'couldnt reach server'];
+        }
+ return $response;
     }
 }
