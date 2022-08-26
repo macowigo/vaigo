@@ -30,6 +30,10 @@
                             <h6 class="blue-text centered-text">
                                <i class="material-icons">refresh</i>
                                 Departured Domestic Orders: </h6>
+                                {{-- success masage --}}
+                                @if ($message = Session::get('succes'))
+                                <h6 class="blue-text">{{ $message }}</h6>
+                                @endif
                                 @if ($dptorders->isEmpty())
                                 <span class="red-text">Sorry there is no departured Domestic Order Found</span>
                                 @else
@@ -51,6 +55,7 @@
                                         <th>To</th>
                                         <th>Created</th>
                                         <th>Delivery</th>
+                                        <th>Rider</th>
                                         <th>Status</th>
                                         </tr>
                                     </thead>
@@ -67,6 +72,7 @@
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->delv_location)}}</td>
                                         <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
                                         <td>{{$values->delivery_type}}</td>
+                                        <td>{{$values->ridernames.' '.$values->riderphone}}</td>
                                         <td>{{$values->oder_status}}</td>
                                     </tr>
                                     @endforeach

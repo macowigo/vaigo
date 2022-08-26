@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function(){
     })->name('dptdashboard');
     Route::get('/depaturer/new_orders',[DeparturerOrderController::class,'neworder'])->name('departurenew');
     Route::get('/{oderid}/asignrider',[DeparturerOrderController::class,'deptview'])->name('departurerview');
-    Route::post('/{oderid}/dpt_orders/',[DeparturerOrderController::class,'asignrider'])->name('riderasign');
+    Route::post('/{oderid}/asignrider',[DeparturerOrderController::class,'asignrider'])->name('riderasign');
     Route::get('/depaturer/dpt_orders/',[DeparturerOrderController::class,'deptorder'])->name('departurered');
 });
 

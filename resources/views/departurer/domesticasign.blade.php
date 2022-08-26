@@ -38,7 +38,10 @@
                             <h6 class="red-text">{{ $message }}</h6>
                             </div>
                             @endif
-                            <form method="POST" action="{{route('riderasign',$orderid)}}">
+                            @foreach ($order as $selectedorder )
+                                
+                            @endforeach
+                            <form method="POST" action="{{route('riderasign',$selectedorder->oderid)}}">
                                 @csrf
                                 <div class=" row">
                                         <div class="input-field col s12">

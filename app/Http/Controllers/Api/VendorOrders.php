@@ -43,7 +43,7 @@ class VendorOrders extends Controller
                     else{
                         $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
                     }
-                 }
+                 } 
                  elseif($request->deliverytype=='express'){
                     if($request->ordervalue > 0  && $request->ordervalue < 99999){
                         $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
@@ -86,7 +86,7 @@ class VendorOrders extends Controller
               $orderdata->ord_details=$request->details;
               $orderdata->created_time=date('Y-m-d H:i:s');
               $orderdata->delivery_type=$request->deliverytype;
-              $orderdata->oder_status='ordered';
+              $orderdata->oder_status='pending';
               $orderdata->save();
               return["status" => true] ;
           

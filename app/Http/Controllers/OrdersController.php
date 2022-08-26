@@ -29,7 +29,7 @@ class OrdersController extends Controller
     $domesticdata['domesticorders']= Oders::WHERE([
       ['order_type','domestic'],
       ['center',$usercenter],
-      ['oder_status','ordered']
+      ['oder_status','pending']
       ])->get();
     return view('centers.domesticnew',$domesticdata);
    }

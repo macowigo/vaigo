@@ -50,7 +50,7 @@ class OrdersProvider extends ServiceProvider
             $centers->with('internationaltoday', $internationaltodaycount);
             //new domestic
             $domesticnewcount=Oders::WHERE([['order_type','domestic'],
-            ['center',$usercenter],['oder_status','ordered']])->count();
+            ['center',$usercenter],['oder_status','pending']])->count();
             $centers->with('domesticnew', $domesticnewcount);
             //composer with chache
             // $counts = Cache::remember('counts', 60, function() {

@@ -16,26 +16,28 @@ class DeparturerOrderController extends Controller
             ])->paginate();
           return view('departurer.domesticnew',$neworder);
     }
-    public function deptview(){
+    public function deptview($orderid){
         $getdrivers['driverlists']=DB::table('users')->WHERE('role','driver')->SELECT('id','name','phone')->get();
-        return view('departurer.domesticasign',$getdrivers);
+        $getorder['order']=DB::table('oders')->WHERE('oderid',$orderid)->SELECT('oderid','ord_details',)->get();
+        return view('departurer.domesticasign',$getdrivers,$getorder);
     }
 
     public function asignrider(Request $request,$orderid)
     {
+        
         $request->validate(['rider'=> 'required']);
         $rider=DB::table('users')->WHERE('id',$request->rider)->SELECT('name','phone')->first();
-        $tosend="";
-        $user_contact="";
+        $tosend=" Habari $rider->name Una oda mpya";
+        $user_contact = substr_replace($rider->phone, '255', 0, 1);
         $asignride=DB::table('oders')->WHERE('oderid',$orderid)
         ->update([
-            'oder_status'=>'departured',
+            'oder_status'=>'delivering',
             'riderid'=>$request->rider,
             'ridernames'=>$rider->name,
             'riderphone'=>$rider->phone,
         ]);
         if($asignride){
-            //SmsController::sendsms($tosend,$user_contact);
+            SmsController::sendsms($tosend,$user_contact);
             return redirect()->route('departurered')->with('succes','Order departured Successfully');
         }
         else {
@@ -47,7 +49,7 @@ class DeparturerOrderController extends Controller
     public function deptorder(){
         $departuredorder['dptorders']=Oders::WHERE([
             ['order_type','domestic'],
-            ['oder_status','departured']
+            ['oder_status','delivering']
             ])->paginate();
           return view('departurer.domesticdpt',$departuredorder);
     }
