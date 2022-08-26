@@ -39,7 +39,7 @@ class VendorsController extends Controller
         'password'=>Hash::make($password),
     ]);
     if($insertvendordata){
-        SmsController::sendsms($tosend,$user_contact);
+        // SmsController::sendsms($tosend,$user_contact);
         return redirect()->route('vendors')->with('succes','Vendor Succesfully registered');
     }
     else{

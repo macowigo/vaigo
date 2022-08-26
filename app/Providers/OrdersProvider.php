@@ -72,5 +72,17 @@ class OrdersProvider extends ServiceProvider
            //today
        
         });
+         #departure
+        View::composer('departurer.*', function ($departure) {
+            $today=date('Y-m-d');
+            $domesticnewcout=Oders::WHERE([['order_type','domestic'],['oder_status','created']])->count();
+            $domesticdelivered=Oders::WHERE([['order_type','domestic'],['oder_status','delivering']])->count();
+            $domesticcpmplete=Oders::WHERE([['order_type','domestic'],['oder_status','complete']])->count();
+            $departure->with('domesticnew', $domesticnewcout);
+            $departure->with('domesticdelivering', $domesticdelivered);
+            $departure->with('domesticcompleted', $domesticcpmplete);
+           //today
+       
+        });
     }
 }

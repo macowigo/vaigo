@@ -34,13 +34,13 @@
     <div class="masonry row">
         <div class="col s12">  
         <h4 class="blue-text" >Dashboard</h4>
-        <a href="">
+        <a href="{{route('departurenew')}}">
          <div class="col s12 m6 l4">
          <div class="card">
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
-                        <span><i class="material-icons">open_in_new</i> Domestic New Orders: </span>
+                        <span><i class="material-icons">open_in_new</i> Domestic New Orders:{{$domesticnew}} </span>
                         <span ></span>
                         </div>
                     </div>
@@ -48,13 +48,13 @@
             </div>
          </div>
          </a>
-         <a href="{{route('domesticorder')}}">
+         <a href="{{route('departurered')}}">
             <div class="col s12 m6 l4">
             <div class="card">
                    <div class="card-stacked">
                        <div class=" card-metrics-static">
                            <div class="card-content">
-                           <span><i class="material-icons">home</i> Domestic Orders: </span>
+                           <span><i class="material-icons">refresh</i> Domestic Depatured Orders:{{$domesticdelivering}} </span>
                            <span ></span>
                            </div>
                        </div>
@@ -62,27 +62,13 @@
                </div>
             </div>
             </a>
-         <a href="{{route('regionalorder')}}">
+         <a href="">
          <div class="col s12 m6 l4">
          <div class="card">
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
-                        <span><i class="material-icons">apartment</i> Regional Orders: </span>
-                        <span ></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-         </div>
-         </a>
-         <a href="{{route('internationalorder')}}">
-         <div class="col s12 m6 l4">
-         <div class="card">
-                <div class="card-stacked">
-                    <div class=" card-metrics-static">
-                        <div class="card-content">
-                        <span><i class="material-icons">language</i> International Orders: </span>
+                        <span><i class="material-icons">check_circle</i> Domestic Completed Orders:{{$domesticcompleted}} </span>
                         <span ></span>
                         </div>
                     </div>

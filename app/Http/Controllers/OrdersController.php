@@ -204,7 +204,7 @@ return redirect()->route('domesticnew')
           $orderdata= new Oders;
           $orderdata->oderid=random_int(1000,9999999);
           $orderdata->center=Auth::User()->centerid;
-          $orderdata->customer=$request->customer;
+          $orderdata->customernames=$request->customer;
           $orderdata->order_type=$request->ordertype;
           $orderdata->trans=$request->transport;
           $orderdata->from_location=$request->fromlocation;
@@ -224,35 +224,8 @@ return redirect()->route('domesticnew')
       }
       //end domestic order
       else{
-        $request->validate([
-          'ordertype' => 'required',
-          'pickup' => 'required',
-          'dellocation' => 'required',
-          'percelsize' => 'required',
-          'value' => 'required',
-          'details' => 'required',
-          'paymentype' => 'required',
-          'receivernames' => 'required',
-          'receiverphone' => 'required'
-          ]);
-     
-      $orderdata= new Oders;
-      $orderdata->oderid=random_int(1000,9999999);
-      $orderdata->center=Auth::User()->centerid;
-      $orderdata->customer=$request->customer;
-      $orderdata->order_type=$request->ordertype;
-      $orderdata->pick_up=$request->pickup;
-      $orderdata->desination=$request->dellocation;
-      $orderdata->parcel_size=$request->percelsize;
-      $orderdata->value=$request->value;
-      $orderdata->ord_details=$request->details;
-      $orderdata->py_type=$request->paymentype;
-      $orderdata->delv_names=$request->receivernames;
-      $orderdata->delv_phone=$request->receiverphone;
-      $orderdata->oder_status='created';
-     $orderdata->save();
      return redirect()->route('regionalorder')
-->with('success','Order has been created successfully.');
+       ->with('success','Order has been created successfully.');
       }
 
 

@@ -217,9 +217,9 @@ function getDistance()
                                         <select id="paymentype" name="paymentype"  class="validate">
                                             <option value="" disabled selected>Please select Payment Type</option>
                                             <option value="Order Fully Paid">Order Fully Paid</option>
-                                            <option value="Customer Pay Full">Customer Pay Full</option>
-                                            <option value="Customer Pay Order Only">Customer Pay Order Only</option>
-                                            <option value="Customer Pay Delivery Only">Customer Pay Delivery Only</option>
+                                            <option value="Customer Pays Full">Customer Pays Full</option>
+                                            <option value="Customer pays for order only">Customer pays for order only</option>
+                                            <option value="Customer pays Delivery only">Customer Pay Delivery Only</option>
                                         </select>
                                         <label for="paymentype">Payment Type</label>
                                         <span class="helper-text" data-error="please enter valid payment method" data-success="right"></span>

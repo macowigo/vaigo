@@ -37,7 +37,7 @@ class DeparturerOrderController extends Controller
             'riderphone'=>$rider->phone,
         ]);
         if($asignride){
-            SmsController::sendsms($tosend,$user_contact);
+            //SmsController::sendsms($tosend,$user_contact);
             return redirect()->route('departurered')->with('succes','Order departured Successfully');
         }
         else {
