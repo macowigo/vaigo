@@ -208,12 +208,7 @@ return redirect()->route('domesticnew')
           $orderdata->order_type=$request->ordertype;
           $orderdata->trans=$request->transport;
           $orderdata->from_location=$request->fromlocation;
-          $orderdata->from_latitude=$request->fromLat;
-          $orderdata->from_longitude=$request->fromLng;
           $orderdata->delv_location=$request->deliverylocation;
-          $orderdata->delv_latitude=$request->delvLat;
-          $orderdata->delv_longitude=$request->delvLng;
-          $orderdata->distance=$dist;
           $orderdata->delv_names=$request->receivernames;
           $orderdata->delv_phone=$request->receiverphone;
           $orderdata->py_type=$request->paymentype;
