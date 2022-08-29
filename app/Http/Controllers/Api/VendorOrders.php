@@ -96,4 +96,10 @@ class VendorOrders extends Controller
         $response = Oders :: where('customerid',$id)->get();
         return $response;
     }
+    public function filterorder( $id, $date)
+    {
+        $formateddate=date('Y-m-d',strtotime($date)) ; 
+        $response = Oders :: WHERE([['customerid',$id],['created_date',$formateddate]])->get();
+        return $response;
+    }
 }
