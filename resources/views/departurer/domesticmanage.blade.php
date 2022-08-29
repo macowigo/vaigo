@@ -54,9 +54,9 @@
                                         <th>From</th>
                                         <th>To</th>
                                         <th>Created</th>
-                                        <th>DeliveryType</th>
                                         <th>Rider</th>
                                         <th>Status</th>
+                                        <th>Cancel</th>
                                         </tr>
                                     </thead>
                                     @foreach ($dptorders as $values )
@@ -71,9 +71,16 @@
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->from_location)}}</td>
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->delv_location)}}</td>
                                         <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
-                                        <td>{{$values->delivery_type}}</td>
                                         <td>{{$values->ridernames.' '.$values->riderphone}}</td>
                                         <td>{{$values->oder_status}}</td>
+                                        <td>
+                                            <form action="{{route('incdomestic',$values->oderid)}}" method="POST">
+                                                @csrf
+                                            <button class="btn-floating red btn-small" title="click to assign driver">
+                                            <i class="material-icons">cancel</i>
+                                            </button> 
+                                            </form>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </table>
@@ -103,8 +110,5 @@
        <script src='../datatable/jquery.js'></script>
        <script src='../datatable/datatable.js'></script>
        <script src="../datatable/script.js"></script>
-       <script src='../datatable/buttonhtml5.js'></script>
-       <script src='../datatable/buttonprint.js'></script>
-       <script src='../datatable/datatablebuttons.js'></script>
 </body>
 </html>

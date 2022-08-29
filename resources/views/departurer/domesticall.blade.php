@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
-    <title>VAIGO-DomesticOrders</title>
+    <title>VAIGO-DomesticAllOrders</title>
     <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,14 +28,10 @@
                         <div class="card material-table">
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
-                               <i class="material-icons">refresh</i>
-                                Departured Domestic Orders: </h6>
-                                {{-- success masage --}}
-                                @if ($message = Session::get('succes'))
-                                <h6 class="blue-text">{{ $message }}</h6>
-                                @endif
-                                @if ($dptorders->isEmpty())
-                                <span class="red-text">Sorry there is no departured Domestic Order Found</span>
+                               <i class="material-icons">select_all</i>
+                                All Domestic Orders: </h6>
+                                @if ($domesticallorders->isEmpty())
+                                <span class="red-text">Sorry there is no Domestic Order Found</span>
                                 @else
                                 <div class="table-header">
                                     <div class="actions">
@@ -59,7 +55,7 @@
                                         <th>Status</th>
                                         </tr>
                                     </thead>
-                                    @foreach ($dptorders as $values )
+                                    @foreach ($domesticallorders as $values )
                                     <tr>
                                         <td>{{$values->ord_details}}</td>
                                         <td>{{'Order Value:'.number_format($values->item_value).' 

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
-    <title>VAIGO-DomesticOrders</title>
+    <title>VAIGO-DomesticIncompleteOrders</title>
     <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,14 +28,14 @@
                         <div class="card material-table">
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
-                               <i class="material-icons">refresh</i>
-                                Departured Domestic Orders: </h6>
+                               <i class="material-icons">incomplete_circle</i>
+                                Incomplete Domestic Orders: </h6>
                                 {{-- success masage --}}
                                 @if ($message = Session::get('succes'))
                                 <h6 class="blue-text">{{ $message }}</h6>
                                 @endif
-                                @if ($dptorders->isEmpty())
-                                <span class="red-text">Sorry there is no departured Domestic Order Found</span>
+                                @if ($incompleteorders->isEmpty())
+                                <span class="red-text">Sorry there is no Incomplete Domestic Order Found</span>
                                 @else
                                 <div class="table-header">
                                     <div class="actions">
@@ -56,10 +56,9 @@
                                         <th>Created</th>
                                         <th>DeliveryType</th>
                                         <th>Rider</th>
-                                        <th>Status</th>
                                         </tr>
                                     </thead>
-                                    @foreach ($dptorders as $values )
+                                    @foreach ($incompleteorders as $values )
                                     <tr>
                                         <td>{{$values->ord_details}}</td>
                                         <td>{{'Order Value:'.number_format($values->item_value).' 
@@ -73,7 +72,6 @@
                                         <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
                                         <td>{{$values->delivery_type}}</td>
                                         <td>{{$values->ridernames.' '.$values->riderphone}}</td>
-                                        <td>{{$values->oder_status}}</td>
                                     </tr>
                                     @endforeach
                                 </table>

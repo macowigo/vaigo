@@ -36,7 +36,7 @@ Route::get('/centerorder/international',[OrdersController::class,'international'
     return view('centers.regional');
 })->middleware(['auth'])->name('internationalorder');
 
-#depatirer
+#departurer
 Route::middleware('auth')->group(function(){
     Route::get('/depaturer/dashboard',function(){
         return view('departurer.dashboard');
@@ -44,9 +44,12 @@ Route::middleware('auth')->group(function(){
     Route::get('/depaturer/new_orders',[DeparturerOrderController::class,'neworder'])->name('departurenew');
     Route::get('/{oderid}/asignrider',[DeparturerOrderController::class,'deptview'])->name('departurerview');
     Route::post('/{oderid}/asignrider',[DeparturerOrderController::class,'asignrider'])->name('riderasign');
-    Route::get('/depaturer/dpt_orders/',[DeparturerOrderController::class,'deptorder'])->name('departurered');
+    Route::get('/depaturer/dpt_orders',[DeparturerOrderController::class,'deptorder'])->name('departurered');
+    Route::get('/depaturer/inc_orders',[DeparturerOrderController::class,'incompleteorders'])->name('incdptdm');
+    Route::get('/depaturer/orders_complete',[DeparturerOrderController::class,'completeorders'])->name('dmcomplete');
+    Route::get('/depaturer/orders',[DeparturerOrderController::class,'domesticallorders'])->name('dmalldpt');
+    Route::get('/manage/dpt_orders',[DeparturerOrderController::class,'managedeptorder'])->name('dptmanage');
+    Route::post('/manage/{oderid}',[DeparturerOrderController::class,'cancelorder'])->name('incdomestic');
 });
-
-
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';

@@ -25,8 +25,10 @@
                     <ul>
                         <li><a href="{{route('departurenew')}}" class="waves-effect">New Orders<i class="material-icons">subtitles</i></a></li>
                         <li><a href="{{route('departurered')}}" class="waves-effect">Departured Orders<i class="material-icons">refresh</i></a></li>
-                        <li><a href="" class="waves-effect">Complete Orders<i class="material-icons">check_circle</i></a></li>
-                        <li><a href="" class="waves-effect">Manage Orders<i class="material-icons">construction</i></a></li>
+                        <li><a href="{{route('incdptdm')}}" class="waves-effect">Incomplete Orders<i class="material-icons">incomplete_circle</i></a></li>
+                        <li><a href="{{route('dmcomplete')}}" class="waves-effect">Complete Orders<i class="material-icons">check_circle</i></a></li>
+                        <li><a href="{{route('dmalldpt')}}" class="waves-effect">All Orders<i class="material-icons">select_all</i></a></li>
+                        <li><a href="{{route('dptmanage')}}" class="waves-effect">Manage Orders<i class="material-icons">construction</i></a></li>
                     </ul>
                 </div>
             </li>      

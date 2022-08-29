@@ -10,13 +10,8 @@
     <meta name="description" content="">
     <title>VAIGO-Dashboard</title>
     <link rel="shortcut icon" href="../Images/vaigo.png">
-    <!-- Materialize-->
     <link href="../CSS/vaigo.css" rel="stylesheet">
-    <!-- Material Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="../CSS/icon.css" rel="stylesheet">
-
-  
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
     <link rel="stylesheet" type="text/css" href="../datatable/style.css"/>
     
@@ -62,7 +57,7 @@
                </div>
             </div>
             </a>
-         <a href="">
+         <a href="{{route('dmcomplete')}}">
          <div class="col s12 m6 l4">
          <div class="card">
                 <div class="card-stacked">

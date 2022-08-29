@@ -53,4 +53,40 @@ class DeparturerOrderController extends Controller
             ])->paginate();
           return view('departurer.domesticdpt',$departuredorder);
     }
+    public function incompleteorders(){
+        $domesticincomplete['incompleteorders']=Oders::WHERE([
+            ['order_type','domestic'],
+            ['oder_status','incomplete']
+            ])->paginate();
+          return view('departurer.domesticinc',$domesticincomplete);
+    }
+    public function completeorders(){
+        $domesticcomplete['completeorders']=Oders::WHERE([
+            ['order_type','domestic'],
+            ['oder_status','complete']
+            ])->paginate();
+          return view('departurer.domesticcomp',$domesticcomplete);
+    }
+    public function domesticallorders(){
+        $domesticall['domesticallorders']=Oders::WHERE([['order_type','domestic']])->paginate();
+          return view('departurer.domesticall',$domesticall);
+    }
+    public function managedeptorder(){
+        $departuredorder['dptorders']=Oders::WHERE([
+            ['order_type','domestic'],
+            ['oder_status','delivering']
+            ])->paginate();
+          return view('departurer.domesticmanage',$departuredorder);
+    }
+    public function cancelorder($id){
+        $incomplete=DB::table('oders')->WHERE('oderid',$id)->update(['oder_status'=>'incomplete']);
+        if($incomplete){
+            return redirect()->route('dptmanage')->with('succes','OrderSuccessfully cancelled');
+        }
+        else
+        {
+         return redirect()->route('dptmanage')->with('succes','Sorry Order Cancellation failed');
+        }
+          
+    }
 }

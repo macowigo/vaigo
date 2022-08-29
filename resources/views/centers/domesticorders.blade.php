@@ -50,7 +50,7 @@
                                         <th>From</th>
                                         <th>To</th>
                                         <th>Created</th>
-                                        <th>Delivery</th>
+                                        <th>DeliveryType</th>
                                         <th>Status</th>
                                         </tr>
                                     </thead>
