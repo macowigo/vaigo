@@ -89,4 +89,15 @@ class DeparturerOrderController extends Controller
         }
           
     }
+    public function completeorder($id){
+        $complete=DB::table('oders')->WHERE('oderid',$id)->update(['oder_status'=>'complete']);
+        if($complete){
+            return redirect()->route('dptmanage')->with('succes','Order Successfully completed');
+        }
+        else
+        {
+         return redirect()->route('dptmanage')->with('succes','Sorry Order completion failed');
+        }
+          
+    }
 }

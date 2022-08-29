@@ -74,10 +74,17 @@
                                         <td>{{$values->ridernames.' '.$values->riderphone}}</td>
                                         <td>{{$values->oder_status}}</td>
                                         <td>
-                                            <form action="{{route('incdomestic',$values->oderid)}}" method="POST">
+                                            <form>
                                                 @csrf
-                                            <button class="btn-floating red btn-small" title="click to cancel order">
+                                                {{-- cancell --}}
+                                            <button class="btn-floating red btn-small" formmethod="POST" title="click to cancel order"
+                                             formaction="{{route('incdomestic',$values->oderid)}}">
                                             <i class="material-icons">incomplete_circle</i>
+                                            </button> 
+                                            {{-- complete --}}
+                                            <button class="btn-floating blue btn-small" formmethod="POST" title="click to complete order"
+                                            formaction="{{route('compdomestic',$values->oderid)}}">
+                                                <i class="material-icons">done_outline</i>
                                             </button> 
                                             </form>
                                         </td>

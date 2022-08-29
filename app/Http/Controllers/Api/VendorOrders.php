@@ -98,8 +98,13 @@ class VendorOrders extends Controller
     }
     public function filterorder( $id, $date)
     {
-        $formateddate=date('Y-m-d',strtotime($date)) ; 
-        $response = Oders :: WHERE([['customerid',$id],['created_date',$formateddate]])->get();
-        return $response;
+        $response = Oders :: WHERE([['customerid',$id],['created_date',$date]])->get();
+        if(count($response) > 0){
+            return['status' => true, 'orders' => $response];
+        }
+        else{
+            return['status' => false];
+        }
+        
     }
 }

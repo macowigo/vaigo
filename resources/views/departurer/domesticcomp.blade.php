@@ -56,7 +56,6 @@
                                         <th>Created</th>
                                         <th>DeliveryType</th>
                                         <th>Rider</th>
-                                        <th>Status</th>
                                         </tr>
                                     </thead>
                                     @foreach ($completeorders as $values )
@@ -73,7 +72,6 @@
                                         <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
                                         <td>{{$values->delivery_type}}</td>
                                         <td>{{$values->ridernames.' '.$values->riderphone}}</td>
-                                        <td>{{$values->oder_status}}</td>
                                     </tr>
                                     @endforeach
                                 </table>

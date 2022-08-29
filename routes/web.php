@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/depaturer/orders',[DeparturerOrderController::class,'domesticallorders'])->name('dmalldpt');
     Route::get('/manage/dpt_orders',[DeparturerOrderController::class,'managedeptorder'])->name('dptmanage');
     Route::post('/manage/{oderid}',[DeparturerOrderController::class,'cancelorder'])->name('incdomestic');
+    Route::post('/complete/{oderid}',[DeparturerOrderController::class,'completeorder'])->name('compdomestic');
 });
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
