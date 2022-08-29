@@ -81,7 +81,7 @@ class DeparturerOrderController extends Controller
     public function cancelorder($id){
         $incomplete=DB::table('oders')->WHERE('oderid',$id)->update(['oder_status'=>'incomplete']);
         if($incomplete){
-            return redirect()->route('dptmanage')->with('succes','OrderSuccessfully cancelled');
+            return redirect()->route('dptmanage')->with('succes','Order Successfully cancelled');
         }
         else
         {

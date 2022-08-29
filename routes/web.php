@@ -1,6 +1,4 @@
 <?php
-
-use App\Http\Controllers\Admin\CentersController;
 use App\Http\Controllers\Auth\RedirectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrdersController;
@@ -11,31 +9,20 @@ Route::get('/redirect',[RedirectController::class,'index']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
-
 //center
-Route::post('orders/create',[OrdersController::class,'calculatecost'],function(){
-    return view('centers.create');
-})->name('calculate');
-Route::get('/center/dashboard',function(){
-    return view('centers.dashboard');
-})->middleware(['auth'])->name('centerdashboard');
-Route::resource('orders',OrdersController::class)->middleware(['auth']);
-Route::get('/centerorder/domestic',[OrdersController::class,'domestic'],function(){
-    return view('centers.domesticorders');
-})->middleware(['auth'])->name('domesticorder');
-//domestic new order
-Route::get('/center/domestic_neworders',[OrdersController::class,'domesticneworder']
-)->middleware(['auth'])->name('domesticnew');
-
-Route::get('/centerorder/regional',[OrdersController::class,'regional'],function(){
-    return view('centers.regional');
-})->middleware(['auth'])->name('regionalorder');
-
-Route::get('/centerorder/international',[OrdersController::class,'international'],function(){
-    return view('centers.regional');
-})->middleware(['auth'])->name('internationalorder');
-
+Route::middleware('auth')->group(function(){
+    Route::get('/center/dashboard',function(){
+        return view('centers.dashboard');
+    })->name('centerdashboard');
+    Route::resource('orders',OrdersController::class);
+    Route::post('/orders/create',[OrdersController::class,'calculatecost'])->name('calculate');
+    Route::get('/center/domestic_neworders',[OrdersController::class,'domesticneworder'])->name('domesticnew');
+    Route::post('/create/{oderid}',[OrdersController::class,'acceptorder'])->name('acceptdomestic');
+    Route::post('/cancell/{oderid}',[OrdersController::class,'cancelorder'])->name('canceldomestic');
+    Route::get('/centerorder/domestic',[OrdersController::class,'domestic'])->name('domesticorder');
+    Route::get('/centerorder/regional',[OrdersController::class,'regional'])->name('regionalorder');
+    Route::get('/centerorder/international',[OrdersController::class,'international'])->name('internationalorder');
+});
 #departurer
 Route::middleware('auth')->group(function(){
     Route::get('/depaturer/dashboard',function(){

@@ -30,6 +30,14 @@
                             <h6 class="blue-text centered-text">
                                <i class="material-icons">open_in_new</i>
                                 New Domestic Orders: {{$domesticnew}}</h6>
+                                {{-- succes notification --}}
+                                @if ($message = Session::get('success'))
+                                <h6 class="blue-text">{{ $message }}</h6>
+                                @endif
+                                {{-- failed notification --}}
+                                @if ($message = Session::get('failed'))
+                                <h6 class="red-text">{{ $message }}</h6>
+                                @endif
                                 @if ($domesticorders->isEmpty())
                                 <span class="red-text">Sorry there is no new Domestic Order Found</span>
                                 @else
@@ -68,15 +76,20 @@
                                         <td>{{$values->delivery_type}}</td>
                                         <td>{{$values->oder_status}}</td>
                                         <td>
-                                            <form action="{{ route('orders.update',$values->oderid) }}" method="Post">
-                                                {{-- <a class="btn btn-primary" href="{{ route('companies.edit',$ordervalues->oderid) }}">Edit</a> --}}
+                                            <form action="{{ route('acceptdomestic',$values->oderid) }}" method="Post">
                                                 @csrf
-                                                @method('PUT')
                                                 <button type="submit" class="btn-floating blue btn-small"
                                                 title="click to create" onclick="return confirm('Are you sure to create this order?')">
                                                 <i class="material-icons">add_circle</i>
                                             </button>
                                                 </form>
+                                                <form action="{{ route('canceldomestic',$values->oderid) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="btn-floating red btn-small"
+                                                    title="click to cancel" onclick="return confirm('Are you sure to cancel this order?')">
+                                                    <i class="material-icons">cancel</i>
+                                                </button>
+                                                    </form>
                                         </td>
                                     </tr>
                                     @endforeach

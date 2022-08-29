@@ -34,11 +34,25 @@ class OrdersController extends Controller
     return view('centers.domesticnew',$domesticdata);
    }
 
-   public function update( $id)
+   public function acceptorder( $id){
+  $createorder = DB::table('oders')->where('oderid', $id)->update(['oder_status'=>'created']);
+  if($createorder){
+    return redirect()->route('domesticnew')->with('success','Order ceated successfully');
+  }
+  else{
+    return redirect()->route('domesticnew')->with('failed',' Sorry Order ceation failed');
+  }
+    }
+
+public function cancelorder($id)
 {
-  $update = DB::table('oders')->where('oderid', $id)->update(['oder_status'=>'created']);
-return redirect()->route('domesticnew')
-->with('success','Company Has Been updated successfully');
+  $cancelorder=DB::table('oders')->WHERE('oderid',$id)->update(['oder_status'=>'cancelled']);
+  if($cancelorder){
+    return redirect()->route('domesticnew')->with('success','Order cancelled successfully');
+  }
+  else{
+    return redirect()->route('domesticnew')->with('failed','Sorry Order cancellation failed');
+  }
 }
    public function regional(){
     $usercenter=Auth::User()->centerid;
