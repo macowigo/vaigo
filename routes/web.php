@@ -11,7 +11,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 //center
-Route::middleware('auth')->group(function(){
+
+Route::middleware('auth','role:center')->group(function(){
     Route::get('/center/dashboard',function(){
         return view('centers.dashboard');
     })->name('centerdashboard');
@@ -26,7 +27,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/centerorder/international',[OrdersController::class,'international'])->name('internationalorder');
 });
 #departurer
-Route::middleware('auth')->group(function(){
+Route::middleware('auth','role:depature')->group(function(){
     Route::get('/depaturer/dashboard',function(){
         return view('departurer.dashboard');
     })->name('dptdashboard');

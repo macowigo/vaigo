@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\StaffsController;
 use App\Http\Controllers\Admin\VendorsController;
 use Illuminate\Support\Facades\Route;
-Route::middleware('auth')->group(function(){
+Route::middleware('auth','role:admin')->group(function(){
     Route::get('/admin/dashboard',function(){
         return view('admin.dashboard');
     })->name('admindshboard');
