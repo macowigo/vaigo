@@ -23,69 +23,69 @@ class DomesticOrder extends Controller
       $long1=$request->fromLng;
       $lat2=$request->delvLat;
       $long2=$request->delvLng;
-      if($request->fromLat!="" || $request->delvLat!="") {
-      $apiurl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$lat1.",".$long1."&destinations=".$lat2.",".$long2."&mode=driving&key=AIzaSyCFnY0qEUXZW-efcSTWmQ2Ga7te_pNsA4o";
-      $receiveddata = curl_init();
-      curl_setopt($receiveddata, CURLOPT_URL, $apiurl);
-      curl_setopt($receiveddata, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($receiveddata, CURLOPT_PROXYPORT, 3128);
-      curl_setopt($receiveddata, CURLOPT_SSL_VERIFYHOST, 0);
-      curl_setopt($receiveddata, CURLOPT_SSL_VERIFYPEER, 0);
-      $response = curl_exec($receiveddata);
-      curl_close($receiveddata);
-      $response_a = json_decode($response, true);
-        $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
-        $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
-        if(empty($dist) || empty($time)){
-          return redirect('/orders/create')
-        ->with('cost','Domestic cost For carry is: 0 Tshs From:
-            '.$request->fromlocation.' to: '.$request->deliverylocation );
-        }
-        else{
-          $distance = substr($dist, 0, strpos($dist, "km"));
-          if($request->transport=="carry"){
-            $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
-            return redirect('/orders/create')
-          ->with('cost','Domestic cost For carry is: '.number_format($domcalculated) .' Tshs From:
-              '.$request->fromlocation.' to: '.$request->deliverylocation );
-          }
-          elseif($request->transport=="motocycle"){
-            if($request->deliverytype=='standard'){
-                if($request->ordervalue > 0  && $request->ordervalue < 99999){
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1300) *0.4 / 500) * 500;
-                }
-                elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
-                }
-                else{
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
-                }
-              }
-              elseif($request->deliverytype=='express'){
-                if($request->ordervalue > 0  && $request->ordervalue < 99999){
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
-                }
-                elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
-                }
-                else{
-                    $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
-                }
-              }
-              else{
-              return redirect('/orders/create')->with('cost','Sorry Select Transportation type first');
-              }
-          }
-          else{
-            return redirect('/orders/create')->with('cost','Sorry Error Occurs');
-          }
-          return redirect('/orders/create')
-          ->with('cost','Domestic cost for Motocycle is: '.number_format($domcalculated) .' Tshs From:  '
-          .$request->fromlocation.' to: '.$request->deliverylocation );
-        }
+      if(empty($request->fromLat)||empty($request->fromLng)||empty($request->delvLat)||empty($request->delvLng)){
+        return redirect('/orders/create')->with('wronglocations','Sorry wrong locations selected');
       }
         else{
-          return redirect('/orders/create')->with('wronglocations','Sorry wrong locations selected');
+          $apiurl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$lat1.",".$long1."&destinations=".$lat2.",".$long2."&mode=driving&key=AIzaSyCFnY0qEUXZW-efcSTWmQ2Ga7te_pNsA4o";
+          $receiveddata = curl_init();
+          curl_setopt($receiveddata, CURLOPT_URL, $apiurl);
+          curl_setopt($receiveddata, CURLOPT_RETURNTRANSFER, 1);
+          curl_setopt($receiveddata, CURLOPT_PROXYPORT, 3128);
+          curl_setopt($receiveddata, CURLOPT_SSL_VERIFYHOST, 0);
+          curl_setopt($receiveddata, CURLOPT_SSL_VERIFYPEER, 0);
+          $response = curl_exec($receiveddata);
+          curl_close($receiveddata);
+          $response_a = json_decode($response, true);
+            $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
+            $time =round($response_a['rows'][0]['elements'][0]['duration']['value']/60,0) ;
+            if(empty($dist) || empty($time)){
+              return redirect('/orders/create')
+            ->with('cost','Domestic cost For carry is: 0 Tshs From:
+                '.$request->fromlocation.' to: '.$request->deliverylocation );
+            }
+            else{
+              $distance = substr($dist, 0, strpos($dist, "km"));
+              if($request->transport=="carry"){
+                $domcalculated = ceil(((2000*$distance)+(250*$time)+5000) / 500) * 500;
+                return redirect('/orders/create')
+              ->with('cost','Domestic cost For carry is: '.number_format($domcalculated) .' Tshs From:
+                  '.$request->fromlocation.' to: '.$request->deliverylocation );
+              }
+              elseif($request->transport=="motocycle"){
+                if($request->deliverytype=='standard'){
+                    if($request->ordervalue > 0  && $request->ordervalue < 99999){
+                        $domcalculated = ceil(((300*$distance)+(70*$time)+1300) *0.4 / 500) * 500;
+                    }
+                    elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
+                        $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
+                    }
+                    else{
+                        $domcalculated = ceil(((300*$distance)+(70*$time)+1800) * 0.4 / 500) * 500;
+                    }
+                  }
+                  elseif($request->deliverytype=='express'){
+                    if($request->ordervalue > 0  && $request->ordervalue < 99999){
+                        $domcalculated = ceil(((300*$distance)+(70*$time)+1300) / 500) * 500;
+                    }
+                    elseif($request->ordervalue > 99999   && $request->ordervalue < 999999){
+                        $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
+                    }
+                    else{
+                        $domcalculated = ceil(((300*$distance)+(70*$time)+1800) / 500) * 500;
+                    }
+                  }
+                  else{
+                  return redirect('/orders/create')->with('cost','Sorry Select Transportation type first');
+                  }
+              }
+              else{
+                return redirect('/orders/create')->with('cost','Sorry Error Occurs');
+              }
+              return redirect('/orders/create')
+              ->with('cost','Domestic cost for Motocycle is: '.number_format($domcalculated) .' Tshs From:  '
+              .$request->fromlocation.' to: '.$request->deliverylocation );
+            }
         }    
    }
       #add order
@@ -104,8 +104,11 @@ class DomesticOrder extends Controller
             $long1=$request->fromLng;
             $lat2=$request->delvLat;
             $long2=$request->delvLng;
-            if($request->fromLat!="" || $request->delvLat!="") {
-              $apiurl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$lat1.",".$long1."&destinations=".$lat2.",".$long2."&mode=driving&key=AIzaSyCFnY0qEUXZW-efcSTWmQ2Ga7te_pNsA4o";
+            if(empty($request->fromLat)||empty($request->fromLng)||empty($request->delvLat)||empty($request->delvLng)) {
+              return redirect('/orders/create')->with('failed','Sorry wrong locations selected'); 
+              }
+           else{
+            $apiurl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$lat1.",".$long1."&destinations=".$lat2.",".$long2."&mode=driving&key=AIzaSyCFnY0qEUXZW-efcSTWmQ2Ga7te_pNsA4o";
               $receiveddata = curl_init();
               curl_setopt($receiveddata, CURLOPT_URL, $apiurl);
               curl_setopt($receiveddata, CURLOPT_RETURNTRANSFER, 1);
@@ -178,10 +181,7 @@ class DomesticOrder extends Controller
                 $orderdata->delivery_type=$request->deliverytype;
                 $orderdata->oder_status='created';
                $orderdata->save();
-               return redirect()->route('domesticorder')->with('success','Order has been created successfully.');    
-              }
-           else{
-            return redirect('/orders/create')->with('failed','Sorry wrong locations selected');
+               return redirect()->route('domesticorder')->with('success','Order has been created successfully.');   
           }
       }
 
