@@ -20,14 +20,15 @@
 
         <li><a href="{{route('centerdashboard')}}" class="waves-effect active">Dashboard<i class="material-icons">web</i></a></li>
         <ul class="collapsible collapsible-accordion">
-        <li class="bold waves-effect"><a class="collapsible-header">Orders<i class="material-icons">subtitles</i></a>
+        <li class="bold waves-effect"><a class="collapsible-header">Domestic Orders<i class="material-icons">subtitles</i></a>
                 <div class="collapsible-body">
                     <ul>
                         <li><a href="{{ route('orders.create') }}" class="waves-effect">Create Order<i class="material-icons">post_add</i></a></li>
+                        <li><a href="{{ route('domesticnew') }}" class="waves-effect">New Order<i class="material-icons">open_in_new</i></a></li>
                         <li><a href="{{route('domesticorder')}}" class="waves-effect">Domestic Orders<i class="material-icons">home</i></a></li>
-                        <li><a href="{{route('regionalorder')}}" class="waves-effect">Regional Orders<i class="material-icons">apartment</i></a></li>
+                        {{-- <li><a href="{{route('regionalorder')}}" class="waves-effect">Regional Orders<i class="material-icons">apartment</i></a></li>
                         <li><a href="{{route('internationalorder')}}" class="waves-effect">International Orders<i class="material-icons">language</i></a></li>
-                        <li><a href="{{route('orders.index')}}" class="waves-effect">Manage Orders<i class="material-icons">construction</i></a></li>
+                        <li><a href="{{route('orders.index')}}" class="waves-effect">Manage Orders<i class="material-icons">construction</i></a></li> --}}
                     </ul>
                 </div>
             </li>      

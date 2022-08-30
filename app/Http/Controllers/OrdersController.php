@@ -13,47 +13,9 @@ class OrdersController extends Controller
         $data['orders'] = Oders::orderBy('oderid','desc')->paginate();
         return view('centers.index', $data);
    }
-   public function domestic(){
-    $usercenter=Auth::User()->centerid;
-    $domesticdata['domesticorders']= Oders::WHERE([
-      ['order_type','domestic'],
-      ['center',$usercenter]
-      ])->get();
-      $domesticCount =count($domesticdata);
-      with( $domesticCount);
-    return view('centers.domesticorders',$domesticdata);
-   }
+  
    //domestic new
-   public function domesticneworder(){
-    $usercenter=Auth::User()->centerid;
-    $domesticdata['domesticorders']= Oders::WHERE([
-      ['order_type','domestic'],
-      ['center',$usercenter],
-      ['oder_status','pending']
-      ])->get();
-    return view('centers.domesticnew',$domesticdata);
-   }
 
-   public function acceptorder( $id){
-  $createorder = DB::table('oders')->where('oderid', $id)->update(['oder_status'=>'created']);
-  if($createorder){
-    return redirect()->route('domesticnew')->with('success','Order ceated successfully');
-  }
-  else{
-    return redirect()->route('domesticnew')->with('failed',' Sorry Order ceation failed');
-  }
-    }
-
-public function cancelorder($id)
-{
-  $cancelorder=DB::table('oders')->WHERE('oderid',$id)->update(['oder_status'=>'cancelled']);
-  if($cancelorder){
-    return redirect()->route('domesticnew')->with('success','Order cancelled successfully');
-  }
-  else{
-    return redirect()->route('domesticnew')->with('failed','Sorry Order cancellation failed');
-  }
-}
    public function regional(){
     $usercenter=Auth::User()->centerid;
     $regionaldata['regionalorder']=Oders::WHERE([

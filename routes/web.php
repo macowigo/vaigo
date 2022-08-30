@@ -3,6 +3,7 @@ use App\Http\Controllers\Auth\RedirectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\DeparturerOrderController;
+use App\Http\Controllers\Orders\DomesticOrder;
 
 Route::get('/', function () {return view('welcome');});
 Route::get('/redirect',[RedirectController::class,'index']);
@@ -15,11 +16,12 @@ Route::middleware('auth')->group(function(){
         return view('centers.dashboard');
     })->name('centerdashboard');
     Route::resource('orders',OrdersController::class);
-    Route::post('/orders/create',[OrdersController::class,'calculatecost'])->name('calculate');
-    Route::get('/center/domestic_neworders',[OrdersController::class,'domesticneworder'])->name('domesticnew');
-    Route::post('/create/{oderid}',[OrdersController::class,'acceptorder'])->name('acceptdomestic');
-    Route::post('/cancell/{oderid}',[OrdersController::class,'cancelorder'])->name('canceldomestic');
-    Route::get('/centerorder/domestic',[OrdersController::class,'domestic'])->name('domesticorder');
+    Route::post('/orders/calculate',[DomesticOrder::class,'calculatecost'])->name('calculate');
+    Route::post('/orders/create',[DomesticOrder::class,'createorder'])->name('createdomestic');
+    Route::get('/center/domestic_neworders',[DomesticOrder::class,'domesticneworder'])->name('domesticnew');
+    Route::post('/create/{oderid}',[DomesticOrder::class,'acceptorder'])->name('acceptdomestic');
+    Route::post('/cancell/{oderid}',[DomesticOrder::class,'cancelorder'])->name('canceldomestic');
+    Route::get('/centerorder/domestic',[DomesticOrder::class,'domestic'])->name('domesticorder');
     Route::get('/centerorder/regional',[OrdersController::class,'regional'])->name('regionalorder');
     Route::get('/centerorder/international',[OrdersController::class,'international'])->name('internationalorder');
 });

@@ -108,53 +108,104 @@ function getDistance()
                             <h6 class="red-text">{{ $message }}</h6>
                             </div>
                             @endif
-                            <form action="POST">
+                            <form method="" action="">
                                 @csrf
                                 <div class=" row">
                                     <div class="input-field col s12 m12 l6">
-                                        <i class="material-icons prefix">local_shipping</i>
-                                        <select id="transport" name="transport"class="validate" required >
-                                            <option value="" disabled selected>Please select Transportation Type</option>
-                                            <option value="motocycle">Motocyle</option>
-                                            <option value="carry">Carry</option>
-                                            {{-- <option value="kenter">Kenter</option> --}}
+                                        <i class="material-icons prefix">subtitles</i>
+                                        <select id="ordertype" name="ordertype"class="validate" required>
+                                            <option value="" disabled selected>Please select Order Type</option>
+                                            <option value="domestic">Domestic</option>
+                                            <option value="regional">Regional</option>
+                                            <option value="international">International</option>
                                         </select>
-                                        <label for="transport">Transportation Type</label>
+                                        <label for="ordertype">Order Type</label>
                                         <span class="helper-text" data-error="please enter your password" data-success="right"></span>
                                     </div>
-                                    <div class="input-field col s12 m12 l6">
-                                        <i class="material-icons prefix">location_on</i>
-                                        <input id="fromlocation" name="fromlocation" type="text" class="validate"  required >
-                                        <label for="fromlocation">From location</label>
-                                        <input type="hidden" id="fromLat" name="fromLat" />
-                                        <input type="hidden" id="fromLng" name="fromLng" />
-                                        <input type="hidden" id="distance" name="distance" />
-                                        <span class="helper-text" data-error="please select valid location" data-success="right"></span>
+                                    <div id="domestic" style="display: none;">
+                                        <div class="input-field col s12 m12 l6">
+                                            <i class="material-icons prefix">subtitles</i>
+                                            <select id="transport" name="transport"class="validate" >
+                                                <option value="" disabled selected>Please select Transportation Type</option>
+                                                <option value="motocycle">Motocyle</option>
+                                                <option value="carry">Carry</option>
+                                                {{-- <option value="kenter">Kenter</option> --}}
+                                            </select>
+                                            <label for="transport">Transportation Type</label>
+                                            <span class="helper-text" data-error="please enter your password" data-success="right"></span>
+                                        </div>
+                                        <div class="input-field col s12 m12 l6">
+                                            <i class="material-icons prefix">location_on</i>
+                                            <input id="fromlocation" name="fromlocation" type="text" class="validate" >
+                                            <label for="fromlocation">From location</label>
+                                            <input type="hidden" id="fromLat" name="fromLat" />
+                                            <input type="hidden" id="fromLng" name="fromLng" />
+                                            <input type="hidden" id="distance" name="distance" />
+                                            <span class="helper-text" data-error="please select valid location" data-success="right"></span>
+                                        </div>
+                                        <div class="input-field col s12 m12 l6">
+                                            <i class="material-icons prefix">location_on</i>
+                                            <input id="deliverylocation" name="deliverylocation" type="text" class="validate" >
+                                            <label for="deliverylocation">Delivery location</label>
+                                            <input type="hidden" id="delvLat" name="delvLat" />
+                                            <input type="hidden" id="delvLng" name="delvLng" />
+                                            <span class="helper-text" data-error="please enter valid location" data-success="right"></span>
+                                        </div>
+                                        <div class="input-field col s12 m12 l6">
+                                            <i class="material-icons prefix">money</i>
+                                            <input id="ordervalue" name="ordervalue" type="number" class="validate" >
+                                            <label for="ordervalue">Order value</label>
+                                            <span class="helper-text" data-error="please enter valid order value" data-success="right"></span>
+                                         </div>
+                                         <div class="input-field col s12 m12 l6">
+                                            <i class="material-icons prefix">schedule</i>
+                                            <select id="deliverytype" name="deliverytype"  class="validate">
+                                                <option value="" disabled selected>Please select Delivery Type</option>
+                                                <option value="express">Express Delivery</option>
+                                                <option value="standard">Standard Delivery</option>
+                                            </select>
+                                            <label for="deliverytype">Payment Type</label>
+                                            <span class="helper-text" data-error="please enter valid delivery method" data-success="right"></span>
+                                        </div>
+                                        {{-- <div class="input-field col s12 m12 l6">
+                                            <i class="material-icons prefix">schedule</i>
+                                            <input id="delvltime" name="delvltime" type="text" class="timepicker" >
+                                            <label for="delvltime">Delivery Time</label>
+                                            <span class="helper-text" data-error="please enter valid delivery time" data-success="right"></span>
+                                        </div> --}}
                                     </div>
-                                    <div class="input-field col s12 m12 l6">
-                                        <i class="material-icons prefix">location_on</i>
-                                        <input id="deliverylocation" name="deliverylocation" type="text" class="validate" required >
-                                        <label for="deliverylocation">Delivery location</label>
-                                        <input type="hidden" id="delvLat" name="delvLat" />
-                                        <input type="hidden" id="delvLng" name="delvLng" />
-                                        <span class="helper-text" data-error="please select valid location" data-success="right"></span>
-                                    </div>
-                                    <div class="input-field col s12 m12 l6">
+                                    <div id="regional" style="display: none;">
+                                        <div class="input-field col s12 m12 l6">
+                                            <i class="material-icons prefix">location_on</i>
+                                            <input id="pickup" name="pickup" type="text" class="validate" >
+                                            <label for="pickup">Pick up location</label>
+                                            <span class="helper-text" data-error="please enter valid pickup location" data-success="right"></span>
+                                        </div>
+                                        <div class="input-field col s12 m12 l6">
+                                            <i class="material-icons prefix">location_on</i>
+                                            <input id="dellocation" name="dellocation" type="text" class="validate" >
+                                            <label for="dellocation">Delivery location</label>
+                                            <span class="helper-text" data-error="please enter valid delivery location" data-success="right"></span>
+                                        </div>
+                                        <div class="input-field col s12 m12 l6">
+                                            <i class="material-icons prefix">category</i>
+                                            <input id="percelsize" name="percelsize" type="text" class="validate" >
+                                            <label for="percelsize">Percel Size</label>
+                                            <span class="helper-text" data-error="please enter valid percel size" data-success="right"></span>
+                                        </div>
+                                        <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">money</i>
-                                        <input id="ordervalue" name="ordervalue" type="number" class="validate" required>
-                                        <label for="ordervalue">Order value</label>
+                                        <input id="value" name="value" type="number" class="validate" onblur="findTotal()" >
+                                        <label for="value">Order value</label>
+                                        <span class="helper-text" data-error="please enter valid order value" data-success="right"></span>
+                                       </div>
+                                       <div class="input-field col s12 m12 l6">
+                                        <i class="material-icons prefix">money</i>
+                                        <input id="ordercost" name="ordercost" type="number" class="validate" >
+                                        <label for="ordercost">Transport Cost</label>
                                         <span class="helper-text" data-error="please enter valid order value" data-success="right"></span>
                                     </div>
-                                    <div class="input-field col s12 m12 l6">
-                                        <i class="material-icons prefix">schedule</i>
-                                        <select id="deliverytype" name="deliverytype"  class="validate" required>
-                                        <option value="" disabled selected>Please select Delivery Type</option>
-                                        <option value="express">Express Delivery</option>
-                                        <option value="standard">Standard Delivery</option>
-                                    </select>
-                                    <label for="deliverytype">Payment Type</label>
-                                    <span class="helper-text" data-error="please select delivery type" data-success="right"></span>
-                                  </div>
+                                    </div>
                                     <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">subtitles</i>
                                         <input id="details" name="details" type="text" class="validate" >
@@ -186,21 +237,16 @@ function getDistance()
                                         <label for="receiverphone">Receive Phone Number</label>
                                         <span class="helper-text" data-error="please enter valid phone number" data-success="right"></span>
                                     </div>
-                                    <input class="btn right blue" type="submit" formmethod="POST" formaction="{{route('createdomestic')}}" value="Create">
+                                    <input class="btn right blue" type="submit" formmethod="POST" formaction="{{route('orders.store')}}" value="Create">
                                     <div></div>
                                     <button class="btn left blue" formaction="{{route('calculate')}}" 
-                                     formmethod="POST" >GET COST
+                                     formmethod="POST" id="domesticbutton" style="display:none ;">GET COST
                                     </button>
                                 </div>
                             </form>
                             @if ($message = Session::get('cost'))
                             <div class="blue-text">
                             <p class="blue-text">{{ $message }}</p>
-                            </div>
-                            @endif
-                            @if ($message = Session::get('wronglocations'))
-                            <div class="red-text">
-                            <p class="red-text">{{ $message }}</p>
                             </div>
                             @endif
                         </div>
@@ -211,6 +257,7 @@ function getDistance()
        <!-- Scripts -->
        <script src="../JS/jquery.min.js"></script>
        <script src="../JS/moment.min.js"></script>
+       <script src="../JS/selector.js"></script>
 
        <script type="text/javascript" src="../JS/Chart.js"></script>
        <script type="text/javascript" src="../JS/Chart.Financial.js"></script>
@@ -223,6 +270,10 @@ function getDistance()
        <!-- Initialization script -->
        <script src="../JS/admin-materialize.min.js"></script>
        <script src='../JS/preloader.js'></script>
+       <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+               integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+               crossorigin="anonymous">
+      </script>
 
 </body>
 </html>
