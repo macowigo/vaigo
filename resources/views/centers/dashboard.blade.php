@@ -14,9 +14,6 @@
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <!-- Material Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="../CSS/icon.css" rel="stylesheet">
-
-  
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
     <link rel="stylesheet" type="text/css" href="../datatable/style.css"/>
     
@@ -48,6 +45,20 @@
             </div>
          </div>
          </a>
+         <a href="{{route('domestictoday')}}">
+            <div class="col s12 m6 l4">
+            <div class="card">
+                   <div class="card-stacked">
+                       <div class=" card-metrics-static">
+                           <div class="card-content">
+                           <span><i class="material-icons">today</i>Today Domestic Orders: {{ $domestictoday }}</span>
+                           <span ></span>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+            </div>
+            </a>
          <a href="{{route('domesticorder')}}">
             <div class="col s12 m6 l4">
             <div class="card">
@@ -62,7 +73,7 @@
                </div>
             </div>
             </a>
-         <a href="{{route('regionalorder')}}">
+         {{-- <a href="{{route('regionalorder')}}">
          <div class="col s12 m6 l4">
          <div class="card">
                 <div class="card-stacked">
@@ -89,44 +100,84 @@
                 </div>
             </div>
          </div>
-         </a>
+         </a> --}}
         <div class="col s12 ">
          <div class="card">
           <div class="card-stacked">
           <div class="card-metrics-static">
           <div class="card-content">
-            <h6 class="blue-text centered-text"><i class="material-icons">today</i> Today Orders</h6>
+            <h6 class="blue-text centered-text"><i class="material-icons">home</i> Domestic Orders</h6>
             <ul class="collection">
-
-    <li class="collection-item avatar">
-      <i class="material-icons circle blue">home</i>
-      <span class="title blue-text">Today Domestic Orders</span>
-      <p class="blue-text">{{ $domestictoday}}</p>
-      <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle blue">apartment</i>
-      <span class="title blue-text">Today Regional Orders</span>
-      <p class="blue-text">{{ $regionaltoday}}</p>
-      <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
-    </li>
-    <li class="collection-item avatar">
-        <i class="material-icons circle blue">language</i>
-        <span class="title blue-text">Today International Orders</span>
-        <p class="blue-text">{{ $internationaltoday}}</p>
-        <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
-      </li>
+                <li class="collection-item avatar">
+                    <i class="material-icons circle blue">add_to_queue</i>
+                    <span class="title blue-text">Domestic Created Orders</span>
+                    <p class="blue-text">{{ $domesticcreated}}</p>
+                    <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                        <i class="material-icons">visibility</i></a>
+                  </li>
+                    <li class="collection-item avatar">
+                    <i class="material-icons circle blue">cancel</i>
+                    <span class="title blue-text">Domestic Cancelled Orders</span>
+                    <p class="blue-text">{{ $domesticancel}}</p>
+                    <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                        <i class="material-icons">visibility</i></a>
+                    </li>
+                    <li class="collection-item avatar">
+                    <i class="material-icons circle blue">rotate_right</i>
+                    <span class="title blue-text">Domestic Delivering Orders</span>
+                    <p class="blue-text">{{ $domesticdeliver}}</p>
+                    <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                        <i class="material-icons">visibility</i></a>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle blue">incomplete_circle</i>
+                        <span class="title blue-text">Domestic Incomplete Orders</span>
+                        <p class="blue-text">{{ $domesticinc}}</p>
+                        <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                        <i class="material-icons">visibility</i></a>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle blue">task_alt</i>
+                        <span class="title blue-text">Domestic Complete Orders</span>
+                        <p class="blue-text">{{ $domesticcomp}}</p>
+                        <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                        <i class="material-icons">visibility</i></a>
+                    </li>
          </ul>
             </div>
           </div>
           </div>
          </div>
+        </div>
+        <div class="col s12">
+            <div class="card">
+                <div class="card-stacked">
+                    <div class="card-metrics-static">
+                        <div class="card-content">
+                            <h6 class=" centered-text blue-text">Domestic Order statistics</h6>
+                            <script>
+                                   var orderdata = <?php echo $orders; ?>;
+                                    console.log(orderdata);
+                                    google.charts.load('current', {'packages':['corechart']});
+                                    google.charts.setOnLoadCallback(drawChart);
+                                    function drawChart() {
+                                    var data = google.visualization.arrayToDataTable(orderdata);
+                                    var options = { colors:['#2F557F','#00b533']};
+                                    var chart = new google.visualization.ColumnChart(document.getElementById('linechart'));
+                                    chart.draw(data, options);
+                                    }
+                            </script>
+                      <div id="linechart"></div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div> 
+
     </div> 
 </div>
             
 </main>
-
     <!-- Scripts -->
     <script src="../JS/jquery.min.js"></script>
     <script src="../JS/moment.min.js"></script>
@@ -147,9 +198,6 @@
     <script src='../datatable/jquery.js'></script>
     <script src='../datatable/datatable.js'></script>
     <script src="../datatable/script.js"></script>
-    <script src='../datatable/buttonhtml5.js'></script>
-    <script src='../datatable/buttonprint.js'></script>
-    <script src='../datatable/datatablebuttons.js'></script>
     <script src='../JS/preloader.js'></script>
 </body>
 </body>

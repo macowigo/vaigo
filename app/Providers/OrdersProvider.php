@@ -52,6 +52,23 @@ class OrdersProvider extends ServiceProvider
             $domesticnewcount=Oders::WHERE([['order_type','domestic'],
             ['center',$usercenter],['oder_status','pending']])->count();
             $centers->with('domesticnew', $domesticnewcount);
+            #domestic categories
+            $domesticcreated=Oders::WHERE([
+                ['order_type','domestic'],['center',$usercenter],['oder_status','created']])->count();
+            $domesticcancelled=Oders::WHERE([
+                ['order_type','domestic'],['center',$usercenter],['oder_status','cancelled']])->count();
+            $domesticdelivering=Oders::WHERE([
+             ['order_type','domestic'],['center',$usercenter],['oder_status','delivering']])->count();
+            $domesticincomplete=Oders::WHERE([
+                ['order_type','domestic'],['center',$usercenter],['oder_status','incomplete']])->count();
+            $domesticcomplete=Oders::WHERE([
+             ['order_type','domestic'],['center',$usercenter],['oder_status','complete']])->count();
+             $centers->with('domesticcreated', $domesticcreated);
+            $centers->with('domesticancel', $domesticcancelled);
+            $centers->with('domesticdeliver', $domesticdelivering);
+            $centers->with('domesticinc', $domesticincomplete);
+            $centers->with('domesticcomp', $domesticcomplete);
+
             //composer with chache
             // $counts = Cache::remember('counts', 60, function() {
             //     return ['domestic'=>Oders::WHERE('order_type','domestic')->count(),

@@ -13,13 +13,12 @@ Route::get('/dashboard', function () {
 //center
 
 Route::middleware('auth','role:center')->group(function(){
-    Route::get('/center/dashboard',function(){
-        return view('centers.dashboard');
-    })->name('centerdashboard');
+    Route::get('/center/dashboard',[DomesticOrder::class,'dashboardview'])->name('centerdashboard');
     Route::resource('orders',OrdersController::class);
     Route::post('/orders/calculate',[DomesticOrder::class,'calculatecost'])->name('calculate');
     Route::post('/orders/create',[DomesticOrder::class,'createorder'])->name('createdomestic');
     Route::get('/center/domestic_neworders',[DomesticOrder::class,'domesticneworder'])->name('domesticnew');
+    Route::get('/center/domestic_today',[DomesticOrder::class,'domestictoday'])->name('domestictoday');
     Route::post('/create/{oderid}',[DomesticOrder::class,'acceptorder'])->name('acceptdomestic');
     Route::post('/cancell/{oderid}',[DomesticOrder::class,'cancelorder'])->name('canceldomestic');
     Route::get('/centerorder/domestic',[DomesticOrder::class,'domestic'])->name('domesticorder');
@@ -27,7 +26,7 @@ Route::middleware('auth','role:center')->group(function(){
     Route::get('/centerorder/international',[OrdersController::class,'international'])->name('internationalorder');
 });
 #departurer
-Route::middleware('auth','role:depature')->group(function(){
+Route::middleware('auth','role:depaturer')->group(function(){
     Route::get('/depaturer/dashboard',function(){
         return view('departurer.dashboard');
     })->name('dptdashboard');

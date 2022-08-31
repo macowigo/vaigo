@@ -24,14 +24,14 @@ class EnsureUserHasRole
             if(Auth::user()->role=="admin"){
                 return  redirect()->route('admindshboard');
             }
-            elseif(Auth::user()->role=="depature"){
+            elseif(Auth::user()->role=="depaturer"){
                 return  redirect()->route('dptdashboard');
             }
             elseif(Auth::user()->role=="center"){
                 return  redirect()->route('centerdashboard');
             }
             else{
-                return  redirect()->route('/');
+                return  redirect('/');
             }
         }
         

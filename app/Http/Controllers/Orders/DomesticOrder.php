@@ -194,6 +194,17 @@ class DomesticOrder extends Controller
           ])->get();
         return view('centers.domesticnew',$domesticdata);
        }
+       
+       public function domestictoday(){
+        $today=date('Y-m-d');
+        $usercenter=Auth::User()->centerid;
+        $domesticdata['domestictodayorders']= Oders::WHERE([
+          ['order_type','domestic'],
+          ['center',$usercenter],
+          ['created_date',$today]
+          ])->get();
+        return view('centers.domestictoday',$domesticdata);
+       }
 
        public function acceptorder( $id){
         $createorder = DB::table('oders')->where('oderid', $id)->update(['oder_status'=>'created']);
@@ -223,5 +234,17 @@ class DomesticOrder extends Controller
           $domesticCount =count($domesticdata);
           with( $domesticCount);
         return view('centers.domesticorders',$domesticdata);
+       }
+       
+    public  function dashboardview(){
+        $usercenter=Auth::User()->centerid;
+        $domesticorders = Oders::WHERE([['order_type','domestic'],['center',$usercenter]])
+        ->select(DB::raw("oder_status as status"),DB::raw("SUM(value) as ordervalue"),
+          DB::raw("SUM(item_value) as deliveryfee")) ->groupBy(DB::raw("oder_status"))->get();
+      $result[] = ['Satus','DeliveryFee','OrderValue'];
+      foreach ($domesticorders as $key => $value) {
+      $result[++$key] = [$value->status, (int)$value->ordervalue, (int)$value->deliveryfee];
+      }
+     return view('centers.dashboard')->with('orders',json_encode($result));
        }
 }
