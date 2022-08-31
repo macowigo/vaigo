@@ -247,4 +247,53 @@ class DomesticOrder extends Controller
       }
      return view('centers.dashboard')->with('orders',json_encode($result));
        }
+
+       public function createddomestic(){
+        $usercenter=Auth::User()->centerid;
+        $domesticdata['domesticorders']= Oders::WHERE([
+          ['oder_status','created'],
+          ['order_type','domestic'],
+          ['center',$usercenter]
+          ])->get();
+        return view('centers.domesticcreated',$domesticdata);
+       }
+
+       public function cancelleddomestic(){
+        $usercenter=Auth::User()->centerid;
+        $domesticdata['domesticorders']= Oders::WHERE([
+          ['oder_status','cancelled'],
+          ['order_type','domestic'],
+          ['center',$usercenter]
+          ])->get();
+        return view('centers.domesticcancel',$domesticdata);
+       }
+
+       public function deliverdomestic(){
+        $usercenter=Auth::User()->centerid;
+        $domesticdata['domesticorders']= Oders::WHERE([
+          ['oder_status','delivering'],
+          ['order_type','domestic'],
+          ['center',$usercenter]
+          ])->get();
+        return view('centers.domesticdelivering',$domesticdata);
+       }
+
+       public function incompletedomestic(){
+        $usercenter=Auth::User()->centerid;
+        $domesticdata['domesticorders']= Oders::WHERE([
+          ['oder_status','incomplete'],
+          ['order_type','domestic'],
+          ['center',$usercenter]
+          ])->get();
+        return view('centers.domesticincomplete',$domesticdata);
+       }
+       public function completedomestic(){
+        $usercenter=Auth::User()->centerid;
+        $domesticdata['domesticorders']= Oders::WHERE([
+          ['oder_status','complete'],
+          ['order_type','domestic'],
+          ['center',$usercenter]
+          ])->get();
+        return view('centers.domesticcomplete',$domesticdata);
+       }
 }

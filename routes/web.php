@@ -10,8 +10,7 @@ Route::get('/redirect',[RedirectController::class,'index']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-//center
-
+#center
 Route::middleware('auth','role:center')->group(function(){
     Route::get('/center/dashboard',[DomesticOrder::class,'dashboardview'])->name('centerdashboard');
     Route::resource('orders',OrdersController::class);
@@ -19,6 +18,11 @@ Route::middleware('auth','role:center')->group(function(){
     Route::post('/orders/create',[DomesticOrder::class,'createorder'])->name('createdomestic');
     Route::get('/center/domestic_neworders',[DomesticOrder::class,'domesticneworder'])->name('domesticnew');
     Route::get('/center/domestic_today',[DomesticOrder::class,'domestictoday'])->name('domestictoday');
+    Route::get('/center/domestic_created',[DomesticOrder::class,'createddomestic'])->name('domesticcreated');
+    Route::get('/center/domestic_cancelled',[DomesticOrder::class,'cancelleddomestic'])->name('domesticancelled');
+    Route::get('/center/domestic_delivering',[DomesticOrder::class,'deliverdomestic'])->name('domesticdelivering');
+    Route::get('/center/domestic_incomplete',[DomesticOrder::class,'incompletedomestic'])->name('domesticincomplete');
+    Route::get('/center/domestic_complete',[DomesticOrder::class,'completedomestic'])->name('domesticcomplete');
     Route::post('/create/{oderid}',[DomesticOrder::class,'acceptorder'])->name('acceptdomestic');
     Route::post('/cancell/{oderid}',[DomesticOrder::class,'cancelorder'])->name('canceldomestic');
     Route::get('/centerorder/domestic',[DomesticOrder::class,'domestic'])->name('domesticorder');

@@ -112,35 +112,35 @@
                     <i class="material-icons circle blue">add_to_queue</i>
                     <span class="title blue-text">Domestic Created Orders</span>
                     <p class="blue-text">{{ $domesticcreated}}</p>
-                    <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                    <a href="{{route('domesticcreated')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
                         <i class="material-icons">visibility</i></a>
                   </li>
                     <li class="collection-item avatar">
                     <i class="material-icons circle blue">cancel</i>
                     <span class="title blue-text">Domestic Cancelled Orders</span>
                     <p class="blue-text">{{ $domesticancel}}</p>
-                    <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                    <a href="{{route('domesticancelled')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
                         <i class="material-icons">visibility</i></a>
                     </li>
                     <li class="collection-item avatar">
                     <i class="material-icons circle blue">rotate_right</i>
                     <span class="title blue-text">Domestic Delivering Orders</span>
                     <p class="blue-text">{{ $domesticdeliver}}</p>
-                    <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                    <a href="{{route('domesticdelivering')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
                         <i class="material-icons">visibility</i></a>
                     </li>
                     <li class="collection-item avatar">
                         <i class="material-icons circle blue">incomplete_circle</i>
                         <span class="title blue-text">Domestic Incomplete Orders</span>
                         <p class="blue-text">{{ $domesticinc}}</p>
-                        <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                        <a href="{{route('domesticincomplete')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
                         <i class="material-icons">visibility</i></a>
                     </li>
                     <li class="collection-item avatar">
                         <i class="material-icons circle blue">task_alt</i>
                         <span class="title blue-text">Domestic Complete Orders</span>
                         <p class="blue-text">{{ $domesticcomp}}</p>
-                        <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                        <a href="{{route('domesticcomplete')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
                         <i class="material-icons">visibility</i></a>
                     </li>
          </ul>
@@ -154,7 +154,7 @@
                 <div class="card-stacked">
                     <div class="card-metrics-static">
                         <div class="card-content">
-                            <h6 class=" centered-text blue-text">Domestic Order statistics</h6>
+                            <h6 class=" centered-text blue-text">Domestic Order Statistics</h6>
                             <script>
                                    var orderdata = <?php echo $orders; ?>;
                                     console.log(orderdata);
