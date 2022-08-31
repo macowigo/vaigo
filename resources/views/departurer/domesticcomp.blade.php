@@ -29,7 +29,7 @@
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
                                <i class="material-icons">check_circle</i>
-                                Complete Domestic Orders: </h6>
+                                Complete Domestic Orders: {{$domesticcompleted}}</h6>
                                 {{-- success masage --}}
                                 @if ($message = Session::get('succes'))
                                 <h6 class="blue-text">{{ $message }}</h6>

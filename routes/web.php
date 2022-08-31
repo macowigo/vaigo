@@ -1,8 +1,8 @@
 <?php
 use App\Http\Controllers\Auth\RedirectController;
+use App\Http\Controllers\DeparturerOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\DeparturerOrderController;
 use App\Http\Controllers\Orders\DomesticOrder;
 
 Route::get('/', function () {return view('welcome');});
@@ -31,12 +31,11 @@ Route::middleware('auth','role:center')->group(function(){
 });
 #departurer
 Route::middleware('auth','role:depaturer')->group(function(){
-    Route::get('/depaturer/dashboard',function(){
-        return view('departurer.dashboard');
-    })->name('dptdashboard');
+    Route::get('/depaturer/dashboard',[DeparturerOrderController::class,'dashboardview'])->name('dptdashboard');
     Route::get('/depaturer/new_orders',[DeparturerOrderController::class,'neworder'])->name('departurenew');
     Route::get('/{oderid}/asignrider',[DeparturerOrderController::class,'deptview'])->name('departurerview');
     Route::post('/{oderid}/asignrider',[DeparturerOrderController::class,'asignrider'])->name('riderasign');
+    Route::get('/depaturer/cancelled_orders',[DeparturerOrderController::class,'cancelledtorder'])->name('domcancelled');
     Route::get('/depaturer/dpt_orders',[DeparturerOrderController::class,'deptorder'])->name('departurered');
     Route::get('/depaturer/inc_orders',[DeparturerOrderController::class,'incompleteorders'])->name('incdptdm');
     Route::get('/depaturer/orders_complete',[DeparturerOrderController::class,'completeorders'])->name('dmcomplete');

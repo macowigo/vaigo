@@ -29,7 +29,7 @@
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
                                <i class="material-icons">select_all</i>
-                                All Domestic Orders: </h6>
+                                All Domestic Orders:{{$domesticall}} </h6>
                                 @if ($domesticallorders->isEmpty())
                                 <span class="red-text">Sorry there is no Domestic Order Found</span>
                                 @else

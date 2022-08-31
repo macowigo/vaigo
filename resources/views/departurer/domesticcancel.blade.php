@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
-    <title>VAIGO-DomesticIncompleteOrders</title>
+    <title>VAIGO-DomesticCancelledOrders</title>
     <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,14 +28,10 @@
                         <div class="card material-table">
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
-                               <i class="material-icons">incomplete_circle</i>
-                                Incomplete Domestic Orders:{{$domesticincompleted}} </h6>
-                                {{-- success masage --}}
-                                @if ($message = Session::get('succes'))
-                                <h6 class="blue-text">{{ $message }}</h6>
-                                @endif
-                                @if ($incompleteorders->isEmpty())
-                                <span class="red-text">Sorry there is no Incomplete Domestic Order Found</span>
+                               <i class="material-icons">cancel</i>
+                                Cancelled Domestic Orders: {{$domesticcancell}}</h6>
+                                @if ($cancelledorders->isEmpty())
+                                <span class="red-text">Sorry there is no Cancelled Domestic Order Found</span>
                                 @else
                                 <div class="table-header">
                                     <div class="actions">
@@ -58,7 +54,7 @@
                                         <th>Rider</th>
                                         </tr>
                                     </thead>
-                                    @foreach ($incompleteorders as $values )
+                                    @foreach ($cancelledorders as $values )
                                     <tr>
                                         <td>{{$values->ord_details}}</td>
                                         <td>{{'Order Value:'.number_format($values->item_value).' 

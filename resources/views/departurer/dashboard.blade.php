@@ -57,13 +57,13 @@
                </div>
             </div>
             </a>
-         <a href="{{route('dmcomplete')}}">
+         <a href="{{route('dmalldpt')}}">
          <div class="col s12 m6 l4">
          <div class="card">
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
-                        <span><i class="material-icons">check_circle</i> Domestic Completed Orders:{{$domesticcompleted}} </span>
+                        <span><i class="material-icons">select_all</i> Domestic All Orders:{{$domesticall}} </span>
                         <span ></span>
                         </div>
                     </div>
@@ -76,33 +76,67 @@
           <div class="card-stacked">
           <div class="card-metrics-static">
           <div class="card-content">
-            <h6 class="blue-text centered-text"><i class="material-icons">today</i> Today Orders</h6>
+            <h6 class="blue-text centered-text"><i class="material-icons">home</i> Domestic Orders</h6>
             <ul class="collection">
 
     <li class="collection-item avatar">
-      <i class="material-icons circle blue">home</i>
-      <span class="title blue-text">Today Domestic Orders</span>
-      <p class="blue-text"></p>
-      <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
+      <i class="material-icons circle blue">cancel</i>
+      <span class="title blue-text">Domestic Cancelled Orders</span>
+      <p class="blue-text">{{$domesticcancell}}</p>
+      <a href="{{route('domcancelled')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
     </li>
     <li class="collection-item avatar">
-      <i class="material-icons circle blue">apartment</i>
-      <span class="title blue-text">Today Regional Orders</span>
-      <p class="blue-text"></p>
-      <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
+      <i class="material-icons circle blue">refresh</i>
+      <span class="title blue-text">Domestic Departured Orders</span>
+      <p class="blue-text">{{$domesticdelivering}}</p>
+      <a href="{{route('departurered')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable">
+        <i class="material-icons">visibility</i></a>
     </li>
     <li class="collection-item avatar">
-        <i class="material-icons circle blue">language</i>
-        <span class="title blue-text">Today International Orders</span>
-        <p class="blue-text"></p>
-        <a href="" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
+        <i class="material-icons circle blue">incomplete_circle</i>
+        <span class="title blue-text">Domestic Incomplete Orders</span>
+        <p class="blue-text">{{$domesticincompleted}}</p>
+        <a href="{{route('incdptdm')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable">
+        <i class="material-icons">visibility</i></a>
+      </li>
+      <li class="collection-item avatar">
+        <i class="material-icons circle blue">check_circle</i>
+        <span class="title blue-text">Domestic Complete Orders</span>
+        <p class="blue-text">{{$domesticcompleted}}</p>
+        <a href="{{route('dmcomplete')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable">
+        <i class="material-icons">visibility</i></a>
       </li>
          </ul>
             </div>
           </div>
           </div>
          </div>
-        </div> 
+        </div>
+        <div class="col s12">
+            <div class="card">
+                <div class="card-stacked">
+                    <div class="card-metrics-static">
+                        <div class="card-content">
+                            <h6 class=" centered-text blue-text">Domestic Order Statistics</h6>
+                            <script>
+                                   var orderdata = <?php echo $orders; ?>;
+                                    console.log(orderdata);
+                                    google.charts.load('current', {'packages':['corechart']});
+                                    google.charts.setOnLoadCallback(drawChart);
+                                    function drawChart() {
+                                    var data = google.visualization.arrayToDataTable(orderdata);
+                                    var options = { colors:['#2F557F','#00b533']};
+                                    var chart = new google.visualization.ColumnChart(document.getElementById('linechart'));
+                                    chart.draw(data, options);
+                                    }
+                            </script>
+                      <div id="linechart"></div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div> 
 </div>
             

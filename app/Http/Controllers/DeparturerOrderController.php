@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Api\SmsController;
 use App\Models\Oders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 class DeparturerOrderController extends Controller
 {
     public function neworder(){
@@ -42,8 +39,14 @@ class DeparturerOrderController extends Controller
         }
         else {
             return redirect()->route('departurerview')->with('failed',' Sorry Order departurer Failed');
-        }
-        
+        } 
+    }
+    public function cancelledtorder(){
+        $cancelledorder['cancelledorders']=Oders::WHERE([
+            ['order_type','domestic'],
+            ['oder_status','cancelled']
+            ])->paginate();
+          return view('departurer.domesticcancel',$cancelledorder);
     }
 
     public function deptorder(){
@@ -100,4 +103,14 @@ class DeparturerOrderController extends Controller
         }
           
     }
+    public  function dashboardview(){
+        $domesticorders = Oders::WHERE([['order_type','domestic']])
+        ->select(DB::raw("oder_status as status"),DB::raw("SUM(value) as ordervalue"),
+          DB::raw("SUM(item_value) as deliveryfee")) ->groupBy(DB::raw("oder_status"))->get();
+      $result[] = ['Satus','DeliveryFee','OrderValue'];
+      foreach ($domesticorders as $key => $value) {
+      $result[++$key] = [$value->status, (int)$value->ordervalue, (int)$value->deliveryfee];
+      }
+     return view('departurer.dashboard')->with('orders',json_encode($result));
+       }
 }

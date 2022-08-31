@@ -31,7 +31,6 @@ class OrdersProvider extends ServiceProvider
         View::composer('centers.*', function ($centers) {
             $usercenter=Auth::user()->centerid;
             $today=date('Y-m-d');
-
             $domesticcout=Oders::WHERE([['order_type','domestic'],['center',$usercenter]])->count();
             $reginalcount=Oders::WHERE([['order_type','regional'],['center',$usercenter]])->count();
             $internationalcount=Oders::WHERE([['order_type','international'],['center',$usercenter]])->count();
@@ -92,12 +91,18 @@ class OrdersProvider extends ServiceProvider
          #departure
         View::composer('departurer.*', function ($departure) {
             $today=date('Y-m-d');
+            $domesticcancellcout=Oders::WHERE([['order_type','domestic'],['oder_status','cancelled']])->count();
             $domesticnewcout=Oders::WHERE([['order_type','domestic'],['oder_status','created']])->count();
             $domesticdelivered=Oders::WHERE([['order_type','domestic'],['oder_status','delivering']])->count();
             $domesticcpmplete=Oders::WHERE([['order_type','domestic'],['oder_status','complete']])->count();
+            $domesticincpmplete=Oders::WHERE([['order_type','domestic'],['oder_status','incomplete']])->count();
+            $domesticall=Oders::WHERE([['order_type','domestic']])->count();
+            $departure->with('domesticcancell', $domesticcancellcout);
             $departure->with('domesticnew', $domesticnewcout);
             $departure->with('domesticdelivering', $domesticdelivered);
             $departure->with('domesticcompleted', $domesticcpmplete);
+            $departure->with('domesticincompleted', $domesticincpmplete);
+            $departure->with('domesticall', $domesticall);
            //today
        
         });

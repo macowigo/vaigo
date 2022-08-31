@@ -2763,6 +2763,6 @@
             body {
                 min-width: 992px!important
             }
-            .badge {
+            .badge 
                 border: 1px solid #000
-            }
+            
