@@ -31,6 +31,9 @@
                         <li><a href="{{route('orders.index')}}" class="waves-effect">Manage Orders<i class="material-icons">construction</i></a></li> --}}
                     </ul>
                 </div>
+            </li>
+            <li>
+             <a href="{{route('changepass')}}" class="waves-effect">ChangePassword<i class="material-icons">lock</i></a>
             </li>      
             <li>
                 <form method="POST" action="{{ route('logout') }}">

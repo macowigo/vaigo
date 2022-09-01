@@ -60,7 +60,7 @@
                 </div>
             </li>
          <li>
-         <a href="" class="waves-effect">ChangePassword<i class="material-icons">lock</i></a>
+         <a href="{{route('changepass')}}" class="waves-effect">ChangePassword<i class="material-icons">lock</i></a>
          </li> 
          <li>
             <form method="POST" action="{{ route('logout') }}">

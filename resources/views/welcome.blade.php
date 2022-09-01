@@ -11,7 +11,6 @@
     <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="../CSS/icon.css" rel="stylesheet">
 </head>
 <body>
   @include('nav')
@@ -27,6 +26,9 @@
 <h6 class="brand-logo blue-text centered-text"> VAIGO LOGIN </h6>
 <br>
 <br>
+@if ($message = Session::get('success'))
+<h6 class="blue-text">{{ $message }}</h6>
+@endif
     <h6 class=" centered-text card-title">Enter Your Credentials to LogIn</h6>
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
     <form method="POST" action="{{ route('login') }}" >

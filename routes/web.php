@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Auth\ChangePassword;
 use App\Http\Controllers\Auth\RedirectController;
 use App\Http\Controllers\DeparturerOrderController;
 use Illuminate\Support\Facades\Route;
@@ -44,5 +46,13 @@ Route::middleware('auth','role:depaturer')->group(function(){
     Route::post('/manage/{oderid}',[DeparturerOrderController::class,'cancelorder'])->name('incdomestic');
     Route::post('/complete/{oderid}',[DeparturerOrderController::class,'completeorder'])->name('compdomestic');
 });
+#change password
+Route::middleware('auth')->group(function(){
+    Route::get('auth/changepassword',function(){
+        return view('admin.changepassword');
+    })->name('changepass');
+    Route::post('auth/changepassword',[ChangePassword::class,'changepassword'])->name('changepassword');
+});
+
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
