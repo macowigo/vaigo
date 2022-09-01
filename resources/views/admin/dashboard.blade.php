@@ -14,9 +14,6 @@
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <!-- Material Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="../CSS/icon.css" rel="stylesheet">
-
-  
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
     <link rel="stylesheet" type="text/css" href="../datatable/style.css"/>
     
@@ -34,76 +31,162 @@
     <div class="masonry row">
         <div class="col s12">  
         <h4 class="blue-text" >Dashboard</h4>
-        <a href="{{route('admdomestic')}}">
+        <a href="{{route('centerlist')}}">
          <div class="col s12 m6 l4">
          <div class="card">
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
-                        <span><i class="material-icons">home</i> Domestic Orders:</span>
-                        <span >{{$domestic}}</span>
+                        <span><i class="material-icons">adjust</i> Vaigo Centers:</span>
+                        <span >{{$centers}}</span>
                         </div>
                     </div>
                 </div>
             </div>
          </div>
          </a>
-         <a href="{{route('admregional')}}">
+         <a href="{{route('vendors')}}">
          <div class="col s12 m6 l4">
          <div class="card">
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
-                        <span><i class="material-icons">apartment</i> Regional Orders:</span>
-                        <span >{{$regional}}</span>
+                        <span><i class="material-icons">group</i> Vaigo Vendors:</span>
+                        <span >{{$vendors}}</span>
                         </div>
                     </div>
                 </div>
             </div>
          </div>
          </a>
-         <a href="{{route('adminternational')}}">
+         <a href="{{route('admdomestictoday')}}">
          <div class="col s12 m6 l4">
          <div class="card">
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
-                        <span><i class="material-icons">language</i> International Orders:</span>
-                        <span >{{$international}}</span>
+                        <span><i class="material-icons">home</i> Today Domestic Orders:</span>
+                        <span >{{$domestictoday}}</span>
                         </div>
                     </div>
                 </div>
             </div>
          </div>
          </a>
-        <div class="col s12 ">
-         <div class="card">
-          <div class="card-stacked">
-          <div class="card-metrics-static">
-          <div class="card-content">
-            <h6 class="blue-text centered-text"><i class="material-icons">leaderboard</i> Heading</h6>
-            <ul class="collection">
+         <div class="col s12 ">
+            <div class="card">
+             <div class="card-stacked">
+             <div class="card-metrics-static">
+             <div class="card-content">
+               <h6 class="blue-text centered-text"><i class="material-icons">home</i> Domestic Orders</h6>
+               <ul class="collection">
+                <li class="collection-item avatar">
+                    <i class="material-icons circle blue">pending_actions</i>
+                    <span class="title blue-text"> Pending Orders</span>
+                    <p class="blue-text">{{ $domesticpending}}</p>
+                    <a href="{{route('admdompending')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                        <i class="material-icons">visibility</i></a>
+                    </li>
+                <li class="collection-item avatar">
+                <i class="material-icons circle blue">add_to_queue</i>
+                <span class="title blue-text"> Created Orders</span>
+                <p class="blue-text">{{ $domesticcreated}}</p>
+                <a href="{{route('admdomcreated')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                    <i class="material-icons">visibility</i></a>
+                </li>
+                <li class="collection-item avatar">
+                <i class="material-icons circle blue">cancel</i>
+                <span class="title blue-text"> Cancelled Orders</span>
+                <p class="blue-text">{{ $domesticancel}}</p>
+                <a href="{{route('admdomcancelled')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                    <i class="material-icons">visibility</i></a>
+                </li>
+                <li class="collection-item avatar">
+                <i class="material-icons circle blue">rotate_right</i>
+                <span class="title blue-text"> Delivering Orders</span>
+                <p class="blue-text">{{ $domesticdeliver}}</p>
+                <a href="{{route('admdomdeliver')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                    <i class="material-icons">visibility</i></a>
+                </li>
+                <li class="collection-item avatar">
+                    <i class="material-icons circle blue">incomplete_circle</i>
+                    <span class="title blue-text"> Incomplete Orders</span>
+                    <p class="blue-text">{{ $domesticinc}}</p>
+                    <a href="{{route('admdominc')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                    <i class="material-icons">visibility</i></a>
+                </li>
+                <li class="collection-item avatar">
+                    <i class="material-icons circle blue">task_alt</i>
+                    <span class="title blue-text"> Complete Orders</span>
+                    <p class="blue-text">{{ $domesticcomp}}</p>
+                    <a href="{{route('admdomcomp')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
+                    <i class="material-icons">visibility</i></a>
+                </li>
+            </ul>
+               </div>
+             </div>
+             </div>
+            </div>
+           </div>
 
-    <li class="collection-item avatar">
-      <i class="material-icons circle blue">home</i>
-      <span class="title blue-text">Something to show</span>
-      <p class="blue-text">
-      
-      <a href="leaders_branch" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle blue">house</i>
-      <span class="title blue-text">Something to show</span>
-      <p class="blue-text"></p>
-     
-      <a href="leaders_zone" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect  blue hoverable"><i class="material-icons">visibility</i></a>
-    </li>
-         </ul>
+           <div class="col s12 m6 l6">
+            <div class="card">
+                <div class="card-stacked">
+                    <div class="card-metrics-static">
+                        <div class="card-content">
+                            <h6 class=" centered-text blue-text">Vaigo Staff Statistics</h6>
+                            <script>
+                                   var userdata = <?php echo $users; ?>;
+                                    console.log(userdata);
+                                    google.charts.load('current', {'packages':['corechart']});
+                                    google.charts.setOnLoadCallback(drawChart);
+                                    function drawChart() {
+                                    var data = google.visualization.arrayToDataTable(userdata);
+                                    var options = {
+                                        is3D:true,  
+                                         pieHole: 0.4,
+                                         colors:['#2F557F','#00b533','#40A8DD','#26A69A','#26A69A']
+                                        };
+                                    var chart = new google.visualization.PieChart(document.getElementById('users'));
+                                    chart.draw(data, options);
+                                    }
+                            </script>
+                      <div id="users"></div> 
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          </div>
-         </div>
-        </div> 
+        </div>
+        <div class="col s12 m6 l6">
+            <div class="card">
+                <div class="card-stacked">
+                    <div class="card-metrics-static">
+                        <div class="card-content">
+                            <h6 class=" centered-text blue-text">Vaigo Delivery Fee Statistics</h6>
+                            <script>
+                                   var orderdata = <?php echo $oders; ?>;
+                                    console.log(orderdata);
+                                    google.charts.load('current', {'packages':['corechart']});
+                                    google.charts.setOnLoadCallback(drawChart);
+                                    function drawChart() {
+                                    var data = google.visualization.arrayToDataTable(orderdata);
+                                    var options = {
+                                        is3D:true,  
+                                         pieHole: 0.9,
+                                         //colors:['#2F557F','#00b533','#40A8DD','#26A69A','#26A69A']
+                                        };
+                                    var chart = new google.visualization.PieChart(document.getElementById('orders'));
+                                    chart.draw(data, options);
+                                    }
+                            </script>
+                      <div id="orders"></div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+
     </div> 
 </div>
             

@@ -46,13 +46,16 @@
                     </ul>
                 </div>
             </li>
-            <li class="bold waves-effect"><a class="collapsible-header">Orders<i class="material-icons">subtitles</i></a>
+            <li class="bold waves-effect"><a class="collapsible-header">Domestic Orders<i class="material-icons">subtitles</i></a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a href="{{route('admdomestic')}}" class="waves-effect">Domestic Orders<i class="material-icons">home</i></a></li>
-                        <li><a href="{{route('admregional')}}" class="waves-effect">Regional Orders<i class="material-icons">apartment</i></a></li>
-                        <li><a href="{{route('adminternational')}}" class="waves-effect">International Orders<i class="material-icons">language</i></a></li>
-                        <li><a href="" class="waves-effect">Manage Orders<i class="material-icons">construction</i></a></li>
+                        <li><a href="{{route('admdompending')}}" class="waves-effect">Pending Orders<i class="material-icons">pending_actions</i></a></li>
+                        <li><a href="{{route('admdomcreated')}}" class="waves-effect">Created Orders<i class="material-icons">add_to_queue</i></a></li>
+                        <li><a href="{{route('admdomcancelled')}}" class="waves-effect">Cancel Orders<i class="material-icons">cancel</i></a></li>
+                        <li><a href="{{route('admdomdeliver')}}" class="waves-effect">Delivering Orders<i class="material-icons">rotate_right</i></a></li>
+                        <li><a href="{{route('admdominc')}}" class="waves-effect">Incomplete Orders<i class="material-icons">incomplete_circle</i></a></li>
+                        <li><a href="{{route('admdomcomp')}}" class="waves-effect">Complete Orders<i class="material-icons">task_alt</i></a></li>
+                        <li><a href="{{route('admdomestic')}}" class="waves-effect">All Orders<i class="material-icons">select_all</i></a></li>
                     </ul>
                 </div>
             </li>
