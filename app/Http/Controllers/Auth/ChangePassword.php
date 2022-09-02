@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Api\SmsController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Validation\Rules;
@@ -22,6 +23,9 @@ class ChangePassword extends Controller
             $upadatepassword=User::WHERE('id',Auth::user()->id)
             ->update(['password'=>Hash::make($request->password)]);
             if($upadatepassword){
+                $tosend="Hello ". Auth::user()->name. " Your Password Successfully Changed";
+                $user_contact= substr_replace(Auth::user()->phone,255,0,1) ;
+               // SmsController::sendsms($tosend,$user_contact);
                 return redirect()->route('ondoka')->with('success','Your Password Successfully Changed Please login');
             }
             else{
