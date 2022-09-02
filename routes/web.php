@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\ChangePassword;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RedirectController;
 use App\Http\Controllers\DeparturerOrderController;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,7 @@ Route::middleware('auth')->group(function(){
         return view('admin.changepassword');
     })->name('changepass');
     Route::post('auth/changepassword',[ChangePassword::class,'changepassword'])->name('changepassword');
+    Route::any('auth/logout',[LogoutController::class,'logout'])->name('ondoka');
 });
 
 require __DIR__.'/auth.php';

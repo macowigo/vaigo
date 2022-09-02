@@ -63,30 +63,23 @@
          <a href="{{route('changepass')}}" class="waves-effect">ChangePassword<i class="material-icons">lock</i></a>
          </li> 
          <li>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <a :href="route('logout')" class="waves-effect red-text"
-                onclick="event.preventDefault();this.closest('form').submit();">
+            <a href="{{route('ondoka') }}" class="waves-effect red-text">Log Out
                 <i class="material-icons red-text">logout</i>
-                LogOut
-                </a>
-            </form>
+            </a>
         </li>
         </ul>
     </li>
 </ul>
-
 <div id="chat-dropdown" class="dropdown-content dropdown-tabbed">
     <div  class="col s12">
         <ul class="collection flush">
             <li>
-                <a href="change_password" class="waves-effect blue-text">Change Password
+                <a href="{{route('changepass')}}" class="waves-effect blue-text">Change Password
                     <i class="material-icons blue-text">lock</i>
               </a>
             </li>
             <li>
-
-                <a href="logout" class="waves-effect red-text">logout
+                <a href="{{route('ondoka')}}" class="waves-effect red-text">logout
                     <i class="material-icons red-text">logout</i>
               </a>
             </li>
