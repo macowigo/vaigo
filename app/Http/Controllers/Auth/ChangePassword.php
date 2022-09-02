@@ -22,12 +22,11 @@ class ChangePassword extends Controller
             $upadatepassword=User::WHERE('id',Auth::user()->id)
             ->update(['password'=>Hash::make($request->password)]);
             if($upadatepassword){
-                return redirect('/')->with('success','Your Password Successfully Changed Please login');
+                return redirect()->route('ondoka')->with('success','Your Password Successfully Changed Please login');
             }
             else{
                 return redirect()->back()->with('failed','Sorry Your Password Changes Failed');
             }
-
         }
         else{
             return redirect()->back()->with('failed','Sorry your Current Password is not Correct');
