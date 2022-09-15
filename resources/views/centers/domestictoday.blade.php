@@ -30,6 +30,9 @@
                             <h6 class="blue-text centered-text">
                                <i class="material-icons">home</i>
                                 Domestic Today Orders: {{$domestictoday}}</h6>
+                                @if ($message = Session::get('success'))
+                                <h6 class="blue-text centered-text">{{ $message }}</h6>
+                                @endif
                                 @if ($domestictodayorders->isEmpty())
                                 <span class="red-text">Sorry there is no Domestic Today Order Found</span>
                                 @else
