@@ -181,7 +181,7 @@ class DomesticOrder extends Controller
                 $orderdata->delivery_type=$request->deliverytype;
                 $orderdata->oder_status='created';
                $orderdata->save();
-               return redirect()->route('domesticorder')->with('success','Order has been created successfully.');   
+               return redirect()->route('domestictoday')->with('success','Order has been created successfully.');   
           }
       }
 

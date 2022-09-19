@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AgentsController;
 use App\Http\Controllers\Admin\CentersController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\StaffsController;
@@ -41,5 +42,12 @@ Route::middleware('auth','role:admin')->group(function(){
     Route::get('/admin/users',[StaffsController::class,'stafflist'])->name('staff');
     Route::get('/admin/manage_users',[StaffsController::class,'usersmanage'])->name('manageusers');
     Route::delete('{id}',[StaffsController::class,'deleteuser'])->name('deleteuser');
+
+    #agent
+    Route::get('/add/agent_location',[AgentsController::class,'agentlocationform'])->name('locationform');
+    Route::get('/admin/agentcenters',[AgentsController::class,'agentlocationlist'])->name('agentlocation');
+    Route::post('/admin/addcenter',[AgentsController::class,'addagentlocation'])->name('addagentlocation');
+    Route::get('/manage/agentcenter',[AgentsController::class,'centersmanage'])->name('manageagentlocation');
+
 });
 

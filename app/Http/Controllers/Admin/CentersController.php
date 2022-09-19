@@ -20,6 +20,7 @@ class CentersController extends Controller
             'centerid'=>random_int(100,9999),
             'centername'=>$request->centername,
             'centerlocation'=>$request->centerlocation,
+            'type'=>'center'
         ]);
         if($addcenter){
             return redirect()->route('centerlist')->with('success','center has been added successfully.');
@@ -30,20 +31,20 @@ class CentersController extends Controller
         }
     }
     public function centerslist(){
-        $centerlist['centerlist']=DB::table('centers')->select('*')->get();
+        $centerlist['centerlist']=DB::table('centers')->where('type','center')->select('*')->get();
         return view('admin.centers',$centerlist);
     }
     public function centersmanage(){
-        $centerlist['centerlist']=DB::table('centers')->select('*')->get();
+        $centerlist['centerlist']=DB::table('centers')->where('type','center')->select('*')->get();
         return view('admin.centersmanage',$centerlist);
     }
     public function deletecenter( $centerid ){
         $delete=DB::table('centers')->WHERE('centerid',$centerid )->delete();
         if($delete){
-            return redirect()->route('centemanage')->with('success','center has been added successfully.');
+            return redirect()->back()->with('success','center has been deleted successfully.');
         }
         else{
-            return redirect()->route('centemanage')->with('success','sorry action failed.');
+            return redirect()->back()->with('success','sorry action failed.');
         }
 
     }

@@ -26,6 +26,11 @@ $('#role').on('change', function() {
     if (this.value == 'depaturer') {
         $("#center").hide();
     }
+    if (this.value == 'agent') {
+        $("#center").hide();
+        $("#agent").show();
+    }
+    
 });
 
 var clicked = 0;

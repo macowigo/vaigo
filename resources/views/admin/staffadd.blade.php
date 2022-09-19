@@ -75,6 +75,7 @@ google.maps.event.addDomListener(window, 'load', desinationlocation);
                                             <option value="driver">Driver</option>
                                             <option value="center">Center</option>
                                             <option value="depaturer">Departurer</option>
+                                            <option value="agent">Agent</option>
                                         </select>
                                         <label for="role">User Role</label>
                                         <span class="helper-text" data-error="please enter your password" data-success="right"></span>
@@ -102,13 +103,26 @@ google.maps.event.addDomListener(window, 'load', desinationlocation);
                                     <div id="center" style="display: none;">
                                         <div class="input-field col s12 m12 l6">
                                             <i class="material-icons prefix">adjust</i>
-                                            <select name="staffcenter" class="validate">
+                                            <select name="center" class="validate">
                                              <option value="" disabled selected>Please Select Center</option>
                                              @foreach ($centerlist as $center)
                                              <option value="{{$center->centerid}}">{{$center->centername}}</option>
                                              @endforeach
                                             </select>
-                                            <label for="staffcenter">Staff Center</label>
+                                            <label for="center">Staff Center</label>
+                                            <span class="helper-text" data-error="please select valid location" data-success="right"></span>
+                                        </div>
+                                    </div>
+                                    <div id="agent" style="display: none;">
+                                        <div class="input-field col s12 m12 l6">
+                                            <i class="material-icons prefix">support_agent</i>
+                                            <select name="center" class="validate">
+                                             <option value="" disabled selected>Please Select Center</option>
+                                             @foreach ($agentcenterlist as $center)
+                                             <option value="{{$center->centerid}}">{{$center->centername}}</option>
+                                             @endforeach
+                                            </select>
+                                            <label for="center">Agent Center Location</label>
                                             <span class="helper-text" data-error="please select valid location" data-success="right"></span>
                                         </div>
                                     </div>

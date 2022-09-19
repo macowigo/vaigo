@@ -12,8 +12,9 @@ class StaffsController extends Controller
 {
     public function addform()
     {
-       $centerlist['centerlist']=DB::table('centers')->select('*')->get();
-       return view('admin.staffadd',$centerlist);
+       $centerlist['centerlist']=DB::table('centers')->where('type','center')->get();
+       $agentcenterlist['agentcenterlist']=DB::table('centers')->where('type','agentlocation')->get();
+       return view('admin.staffadd',$centerlist,$agentcenterlist);
     }
 
     public function addstaff(Request $request)
@@ -21,14 +22,14 @@ class StaffsController extends Controller
     $password='Vaigo@'.random_int(100,999);
     $user_contact = substr_replace($request->phone, '255', 0, 1);
     $request->validate(['role'=>'required']);
-    if($request->role=="center"){
+    if($request->role=="center" || $request->role=="agent" ){
         $tosend="Habari $request->names"."\n". "Your Vaigo account Successfully created."."\n".
         "Passwod: $password"."\n"."User name: $request->email";
         $request->validate([
             'phone'=>'required|unique:users',
             'email'=>'required|unique:users',
             'names'=>'required',
-            'staffcenter'=>'required'
+            'center'=>'required'
         ]);
     }
     elseif($request->role=="driver"){
@@ -54,7 +55,7 @@ class StaffsController extends Controller
         'name'=>$request->names,
         'phone'=>$request->phone,
         'role'=>$request->role,
-        'centerid'=>$request->staffcenter,
+        'centerid'=>$request->center,
         'email'=>$request->email,
         'password'=>Hash::make($password),
     ]);

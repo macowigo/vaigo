@@ -25,6 +25,9 @@
                         <li><a href="{{ route('addcenter') }}" class="waves-effect">Register Center<i class="material-icons">add_circle</i></a></li>
                         <li><a href="{{route('centerlist')}}" class="waves-effect">View Centers<i class="material-icons">view_list</i></a></li>
                         <li><a href="{{route('centemanage')}}" class="waves-effect">Manage Centers<i class="material-icons">construction</i></a></li>
+                        <li><a href="{{ route('locationform') }}" class="waves-effect">Register Agent Location<i class="material-icons">add_circle</i></a></li>
+                        <li><a href="{{route('agentlocation')}}" class="waves-effect">View Agent Center Locations<i class="material-icons">support_agent</i></a></li>
+                        <li><a href="{{route('manageagentlocation')}}" class="waves-effect">Manage Agent Centers<i class="material-icons">construction</i></a></li>
                     </ul>
                 </div>
             </li>
