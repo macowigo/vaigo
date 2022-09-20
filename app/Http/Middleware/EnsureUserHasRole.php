@@ -30,8 +30,11 @@ class EnsureUserHasRole
             elseif(Auth::user()->role=="center"){
                 return  redirect()->route('centerdashboard');
             }
+            elseif(Auth::user()->role=="agent"){
+                return  redirect()->route('agentdshboard');
+            }
             else{
-                return  redirect('/');
+                return  redirect()->route('ondoka');
             }
         }
         

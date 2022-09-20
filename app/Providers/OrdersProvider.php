@@ -81,7 +81,7 @@ class OrdersProvider extends ServiceProvider
         #admin
         View::composer('admin.*', function ($admin) {
             $today=date('Y-m-d');
-            $centercount=Centers::count();
+            $centercount=Centers::WHERE('type','center')->count();
             $vendorcount=User::WHERE('role','vendor')->count();
             $domestictodaycout=Oders::WHERE([['order_type','domestic'],['created_date',$today]])->count();
             $domesticcout=Oders::WHERE([['order_type','domestic']])->count();

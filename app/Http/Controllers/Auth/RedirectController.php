@@ -19,14 +19,14 @@ class RedirectController extends Controller
         elseif($userrole=="center"){
             return redirect('/center/dashboard'); 
         }
-        elseif($userrole=="driver"){
-            
+        elseif($userrole=="agent"){
+            return redirect('/agent/dashboard'); 
         }
         elseif($userrole=="customer"){
             
         }
         else{
-            return redirect('/');
+            return redirect()->route('ondoka');
         }
 
     }

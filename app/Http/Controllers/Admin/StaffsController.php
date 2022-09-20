@@ -60,7 +60,7 @@ class StaffsController extends Controller
         'password'=>Hash::make($password),
     ]);
     if($insertstaffdata){
-       //SmsController::sendsms($tosend,$user_contact);
+        SmsController::sendsms($tosend,$user_contact);
         return redirect()->route('staff')->with('succes','Staff Successfully registered');
     }
     else{

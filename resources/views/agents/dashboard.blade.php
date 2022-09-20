@@ -21,7 +21,7 @@
 
 <body class="has-fixed-sidenav">
     <header>
-       @include('centers.nav')
+       @include('agents.nav')
     </header>
 <main>
 <div class="progress" id="loading">
@@ -37,7 +37,7 @@
                 <div class="card-stacked">
                     <div class=" card-metrics-static">
                         <div class="card-content">
-                        <span><i class="material-icons">open_in_new</i> Domestic New Orders: {{ $domesticnew }}</span>
+                        <span><i class="material-icons">open_in_new</i> Domestic New Orders: {{ 7 }}</span>
                         <span ></span>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                    <div class="card-stacked">
                        <div class=" card-metrics-static">
                            <div class="card-content">
-                           <span><i class="material-icons">today</i>Today Domestic Orders: {{ $domestictoday }}</span>
+                           <span><i class="material-icons">today</i>Today Domestic Orders: {{ 7 }}</span>
                            <span ></span>
                            </div>
                        </div>
@@ -65,7 +65,7 @@
                    <div class="card-stacked">
                        <div class=" card-metrics-static">
                            <div class="card-content">
-                           <span><i class="material-icons">home</i> Domestic Orders: {{ $domestic }}</span>
+                           <span><i class="material-icons">home</i> Domestic Orders: {{ 8 }}</span>
                            <span ></span>
                            </div>
                        </div>
@@ -111,35 +111,35 @@
                 <li class="collection-item avatar">
                     <i class="material-icons circle blue">add_to_queue</i>
                     <span class="title blue-text">Domestic Created Orders</span>
-                    <p class="blue-text">{{ $domesticcreated}}</p>
+                    <p class="blue-text">{{ 8}}</p>
                     <a href="{{route('domesticcreated')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
                         <i class="material-icons">visibility</i></a>
                   </li>
                     <li class="collection-item avatar">
                     <i class="material-icons circle blue">cancel</i>
                     <span class="title blue-text">Domestic Cancelled Orders</span>
-                    <p class="blue-text">{{ $domesticancel}}</p>
+                    <p class="blue-text">{{ 9}}</p>
                     <a href="{{route('domesticancelled')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
                         <i class="material-icons">visibility</i></a>
                     </li>
                     <li class="collection-item avatar">
                     <i class="material-icons circle blue">rotate_right</i>
                     <span class="title blue-text">Domestic Delivering Orders</span>
-                    <p class="blue-text">{{ $domesticdeliver}}</p>
+                    <p class="blue-text">{{ 10}}</p>
                     <a href="{{route('domesticdelivering')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
                         <i class="material-icons">visibility</i></a>
                     </li>
                     <li class="collection-item avatar">
                         <i class="material-icons circle blue">incomplete_circle</i>
                         <span class="title blue-text">Domestic Incomplete Orders</span>
-                        <p class="blue-text">{{ $domesticinc}}</p>
+                        <p class="blue-text">{{ 11 }}</p>
                         <a href="{{route('domesticincomplete')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
                         <i class="material-icons">visibility</i></a>
                     </li>
                     <li class="collection-item avatar">
                         <i class="material-icons circle blue">task_alt</i>
                         <span class="title blue-text">Domestic Complete Orders</span>
-                        <p class="blue-text">{{ $domesticcomp}}</p>
+                        <p class="blue-text">{{ 12 }}</p>
                         <a href="{{route('domesticcomplete')}}" class="secondary-content btn-small btn-floating pulse  halfway-fab waves-effect blue hoverable">
                         <i class="material-icons">visibility</i></a>
                     </li>

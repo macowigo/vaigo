@@ -26,6 +26,10 @@
         @if(Auth::user()->role=="center")
         @include('centers.nav') 
         @endif
+
+        @if(Auth::user()->role=="agent")
+        @include('agents.nav') 
+        @endif
         
     </header>
     {{-- main --}}
