@@ -31,16 +31,15 @@
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">Create New Regional Order</h6>
                             {{-- errors --}}
-                            <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                            <x-auth-validation-errors class="red-text centered-text" :errors="$errors" />
+                            <x-auth-session-status class="red-text centered-text" :status="session('status')" />
                             @if(session('status'))
-                            <div class="alert alert-success mb-1 mt-1">
+                            <div class="red-text centered-text">
                             {{ session('status') }}
                             </div>
                             @endif
                             @if ($message = Session::get('failed'))
-                            <div class="red-text">
-                            <h6 class="red-text">{{ $message }}</h6>
-                            </div>
+                            <h6 class="red-text centered-text">{{ $message }}</h6>
                             @endif
                             <form action="POST">
                                 @csrf
@@ -71,13 +70,13 @@
                                     </div>
                                     <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">category</i>
-                                        <select id="deliverytype" name="deliverytype"  class="validate" required>
+                                        <select id="percelcategory" name="percelcategory"  class="validate" required>
                                         <option value="" disabled selected>Please select Percel Category</option>
                                         <option value="electronic">Electronic</option>
                                         <option value="normal">Normal</option>
                                         <option value="documents">Documents</option>
                                     </select>
-                                    <label for="deliverytype">Percel Category</label>
+                                    <label for="percelcategory">Percel Category</label>
                                     <span class="helper-text" data-error="please select delivery type" data-success="right"></span>
                                   </div>
                                     <div class="input-field col s12 m12 l6">
@@ -88,8 +87,8 @@
                                     </div>
                                     <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">subtitles</i>
-                                        <input id="details" name="details" type="text" class="validate" >
-                                        <label for="details">Order Details</label>
+                                        <input id="orderdetails" name="orderdetails" type="text" class="validate" >
+                                        <label for="orderdetails">Order Details</label>
                                         <span class="helper-text" data-error="please enter valid order details" data-success="right"></span>
                                     </div>
                                     <div class="input-field col s12 m12 l6">
@@ -118,7 +117,7 @@
                                         <label for="receiverphone">Receive Phone Number</label>
                                         <span class="helper-text" data-error="please enter valid phone number" data-success="right"></span>
                                     </div>
-                                    <input class="btn right blue" type="submit" formmethod="POST" formaction="{{route('createdomestic')}}" value="Create">
+                                    <input class="btn right blue" type="submit" formmethod="POST" formaction="{{route('createorderregional')}}" value="Create">
                                     <div></div>
                                     <button class="btn left blue" formaction="{{route('calculate')}}" 
                                      formmethod="POST" >GET COST

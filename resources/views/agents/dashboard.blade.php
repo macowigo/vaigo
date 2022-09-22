@@ -31,27 +31,13 @@
     <div class="masonry row">
         <div class="col s12">  
         <h4 class="blue-text" >Dashboard</h4>
-        <a href="{{route('domesticnew')}}">
-         <div class="col s12 m6 l4">
-         <div class="card">
-                <div class="card-stacked">
-                    <div class=" card-metrics-static">
-                        <div class="card-content">
-                        <span><i class="material-icons">open_in_new</i> Domestic New Orders: {{ 7 }}</span>
-                        <span ></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-         </div>
-         </a>
-         <a href="{{route('domestictoday')}}">
+         <a href="{{route('agenttodayorders')}}">
             <div class="col s12 m6 l4">
             <div class="card">
                    <div class="card-stacked">
                        <div class=" card-metrics-static">
                            <div class="card-content">
-                           <span><i class="material-icons">today</i>Today Domestic Orders: {{ 7 }}</span>
+                           <span><i class="material-icons">today</i>Today Regional Orders: {{$ordertoday }}</span>
                            <span ></span>
                            </div>
                        </div>
@@ -59,13 +45,27 @@
                </div>
             </div>
             </a>
+         <a href="{{route('agentmonthlyorders')}}">
+         <div class="col s12 m6 l4">
+         <div class="card">
+                <div class="card-stacked">
+                    <div class=" card-metrics-static">
+                        <div class="card-content">
+                        <span><i class="material-icons">calendar_month</i> {{date('F')}} Regional Orders: {{ $ordermonth }}</span>
+                        <span ></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+         </a>
          <a href="{{route('domesticorder')}}">
             <div class="col s12 m6 l4">
             <div class="card">
                    <div class="card-stacked">
                        <div class=" card-metrics-static">
                            <div class="card-content">
-                           <span><i class="material-icons">home</i> Domestic Orders: {{ 8 }}</span>
+                           <span><i class="material-icons">apartment</i> All Regional Orders: {{$ordercount }}</span>
                            <span ></span>
                            </div>
                        </div>
