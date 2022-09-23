@@ -8,6 +8,9 @@ Route::middleware('auth','role:agent')->group(function(){
     Route::get('agent/todayorders',[OrdersController::class,'todayregionalorders'])->name('agenttodayorders');
     Route::post('agent/createorder',[OrdersController::class,'createregionalorder'])->name('createorderregional');
     Route::get('agent/monthlyorders',[OrdersController::class,'monthlyregionalorders'])->name('agentmonthlyorders');
+    Route::post('agent/getcost',[OrdersController::class,'calculatefee'])->name('agentcalculate');
+    Route::get('agent/commisiontoday',[OrdersController::class,'commisontoday'])->name('agencommtoday');
+    Route::get('agent/commisionmonthly',[OrdersController::class,'commisonmonthly'])->name('agencommonthly');
     
 });
 

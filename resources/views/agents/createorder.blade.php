@@ -48,10 +48,9 @@
                                         <i class="material-icons prefix">arrow_back</i>
                                         <select id="fromregion" name="fromregion"class="validate" required >
                                             <option value="" disabled selected>Please select From Region</option>
-                                            <option value="Dar es salaam">Dar es salaam</option>
-                                            <option value="Mwanza">Mwanza</option>
-                                            <option value="Arusha">Arusha</option>
-                                            <option value="Morogoro">Morogoro</option>
+                                            @foreach ($centers as $centerlist)
+                                            <option value="{{$centerlist->centername}}">{{$centerlist->centerlocation.','.$centerlist->centername}}</option> 
+                                            @endforeach
                                         </select>
                                         <label for="fromregion">From Region</label>
                                         <span class="helper-text" data-error="please enter your password" data-success="right"></span>
@@ -60,23 +59,21 @@
                                         <i class="material-icons prefix">arrow_forward</i>
                                         <select id="desinationregion" name="desinationregion"class="validate" required >
                                             <option value="" disabled selected>Please select Desination Region</option>
-                                            <option  value="Dar es salaam" >Dar es salaam</option>
-                                            <option value="Mwanza">Mwanza</option>
-                                            <option value="Arusha">Arusha</option>
-                                            <option value="Morogoro">Morogoro</option>
+                                            @foreach ($centers as $centerlist)
+                                            <option value="{{$centerlist->centerid}}">{{$centerlist->centerlocation.','.$centerlist->centername}}</option> 
+                                            @endforeach
                                         </select>
                                         <label for="desinationregion">Desination Region</label>
                                         <span class="helper-text" data-error="please enter your password" data-success="right"></span>
                                     </div>
                                     <div class="input-field col s12 m12 l6">
-                                        <i class="material-icons prefix">category</i>
-                                        <select id="percelcategory" name="percelcategory"  class="validate" required>
+                                        <i class="material-icons prefix">straighten</i>
+                                        <select id="percelsize" name="percelsize"  class="validate" required>
                                         <option value="" disabled selected>Please select Percel Category</option>
-                                        <option value="electronic">Electronic</option>
-                                        <option value="normal">Normal</option>
-                                        <option value="documents">Documents</option>
+                                        <option value="Small">SMALL</option>
+                                        <option value="Medium">MEDIUM</option>
                                     </select>
-                                    <label for="percelcategory">Percel Category</label>
+                                    <label for="percelsize">Percel Size</label>
                                     <span class="helper-text" data-error="please select delivery type" data-success="right"></span>
                                   </div>
                                     <div class="input-field col s12 m12 l6">
@@ -119,7 +116,7 @@
                                     </div>
                                     <input class="btn right blue" type="submit" formmethod="POST" formaction="{{route('createorderregional')}}" value="Create">
                                     <div></div>
-                                    <button class="btn left blue" formaction="{{route('calculate')}}" 
+                                    <button class="btn left blue" formaction="{{route('agentcalculate')}}" 
                                      formmethod="POST" >GET COST
                                     </button>
                                 </div>

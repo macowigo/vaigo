@@ -119,7 +119,7 @@ google.maps.event.addDomListener(window, 'load', desinationlocation);
                                             <select name="center" class="validate">
                                              <option value="" disabled selected>Please Select Center</option>
                                              @foreach ($agentcenterlist as $center)
-                                             <option value="{{$center->centerid}}">{{$center->centername}}</option>
+                                             <option value="{{$center->centerid}}">{{$center->centerlocation.','.$center->centername }}</option>
                                              @endforeach
                                             </select>
                                             <label for="center">Agent Center Location</label>

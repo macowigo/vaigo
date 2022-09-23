@@ -26,9 +26,14 @@
                         <li><a href="{{ route('agentcreateorderview') }}" class="waves-effect">Create Order<i class="material-icons">post_add</i></a></li>
                         <li><a href="{{ route('agenttodayorders') }}" class="waves-effect">Today Orders<i class="material-icons">calendar_today</i></a></li>
                         <li><a href="{{route('agentmonthlyorders')}}" class="waves-effect">{{date('F')}} Orders<i class="material-icons">calendar_month</i></a></li>
-                        {{-- <li><a href="{{route('regionalorder')}}" class="waves-effect">Regional Orders<i class="material-icons">apartment</i></a></li>
-                        <li><a href="{{route('internationalorder')}}" class="waves-effect">International Orders<i class="material-icons">language</i></a></li>
-                        <li><a href="{{route('orders.index')}}" class="waves-effect">Manage Orders<i class="material-icons">construction</i></a></li> --}}
+                    </ul>
+                </div>
+            </li>
+             <li class="bold waves-effect"><a class="collapsible-header">Commisions<i class="material-icons">payments</i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{{ route('agencommtoday') }}" class="waves-effect">Today Commission<i class="material-icons">money</i></a></li>
+                        <li><a href="{{route('agencommonthly')}}" class="waves-effect">{{date('F')}} Commission<i class="material-icons">money</i></a></li>
                     </ul>
                 </div>
             </li>

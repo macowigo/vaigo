@@ -11,26 +11,6 @@
     <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFnY0qEUXZW-efcSTWmQ2Ga7te_pNsA4o&libraries=places"></script>
-   <script>
-    
-function centerlocated(){
-    var options={
-        componentRestrictions: {country: "TZ"}
-    };
-    var input=document.getElementById('centerlocation');
-    var fromlocation=new google.maps.places.Autocomplete(input,options);
-    google.maps.event.addListener(fromlocation, 'place_changed', function () {
-        var place = fromlocation.getPlace();
-        document.getElementById('fromLat').value = place.geometry.location.lat();
-        document.getElementById('fromLng').value = place.geometry.location.lng();
-    });
-}
-google.maps.event.addDomListener(window, 'load', centerlocated);
-
-
-   </script>
-
 </head>
 <body class="has-fixed-sidenav">
     <header>
@@ -64,7 +44,14 @@ google.maps.event.addDomListener(window, 'load', centerlocated);
                                 <div class=" row">
                                     <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">adjust</i>
-                                        <input id="centername" name="centername" type="text" class="validate" required>
+                                        <select id="centername" name="centername" required>
+                                            <option value="" disabled selected>Please Select Region</option>
+                                            <option value="DAR ES SALAAM" >DAR ES SALAAM</option>
+                                            <option value="MOROGORO" >MOROGORO</option>
+                                            <option value="DODOMA" >DODOMA</option>
+                                            <option value="KAHAMA">KAHAMA</option>
+                                            <option value="ARUSHA">ARUSHA</option>
+                                        </select>
                                         <label for="centername">Region</label>
                                         <span class="helper-text" data-error="please enter valid center names" data-success="right"></span>
                                     </div>

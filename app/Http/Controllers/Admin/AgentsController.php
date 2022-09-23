@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Unique;
 
 class AgentsController extends Controller
 {
@@ -16,7 +17,7 @@ class AgentsController extends Controller
     {
         $request->validate([
             'centername'=>'required',
-            'centerlocation'=>'required'
+            'centerlocation'=>'required|unique:centers'
         ]);
        $addcenter= DB::table('centers')->insert([
             'centerid'=>random_int(100,9999),
