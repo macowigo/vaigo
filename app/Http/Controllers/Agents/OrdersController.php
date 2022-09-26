@@ -27,7 +27,7 @@ public function dashboardview()
 #create domestic order
 public function createorderview()
 {
-    $agentcenters['centers']=Centers::WHERE('type','agentlocation')
+    $agentcenters['centers']=Centers::WHERE([['type','agentlocation'],['centerid','!=',Auth::user()->centerid]])
     ->distinct('centername')->orderBy('centername')->get();
     return view('agents.createorder',$agentcenters);
 }
