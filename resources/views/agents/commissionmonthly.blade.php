@@ -28,7 +28,8 @@
                         <div class="card material-table">
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
-                                <i class="material-icons">payments</i> {{date('F')}} Commision: {{$ordermonth}}
+                                <i class="material-icons">payments</i> {{date('F')}} Commision:
+                                {{number_format(($summonthmine/10 )+($summonth/20))}}
                             </h6>
                             <x-auth-session-status class="red-text centered-text" :status="session('status')" />
                             @if(session('status'))

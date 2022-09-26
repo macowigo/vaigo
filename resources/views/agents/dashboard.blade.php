@@ -59,20 +59,34 @@
             </div>
          </div>
          </a>
-         <a href="{{route('domesticorder')}}">
+         <a href="{{route('agencommtoday')}}">
             <div class="col s12 m6 l4">
             <div class="card">
                    <div class="card-stacked">
                        <div class=" card-metrics-static">
                            <div class="card-content">
-                           <span><i class="material-icons">apartment</i> All Regional Orders: {{$ordercount }}</span>
-                           <span ></span>
+                           <span><i class="material-icons">payments</i> Today Commision:</span>
+                           <span >{{number_format(($sumtodaymine/10 )+($sumtoday/20))}}</span>
                            </div>
                        </div>
                    </div>
                </div>
             </div>
             </a>
+            <a href="{{route('agencommonthly')}}">
+                <div class="col s12 m6 l4">
+                <div class="card">
+                       <div class="card-stacked">
+                           <div class=" card-metrics-static">
+                               <div class="card-content">
+                               <span><i class="material-icons">payments</i> {{date('F')}} Commision:</span>
+                               <span >{{number_format(($summonthmine/10 )+($summonth/20))}}</span>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+                </a>
          {{-- <a href="{{route('regionalorder')}}">
          <div class="col s12 m6 l4">
          <div class="card">

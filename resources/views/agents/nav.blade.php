@@ -26,6 +26,7 @@
                         <li><a href="{{ route('agentcreateorderview') }}" class="waves-effect">Create Order<i class="material-icons">post_add</i></a></li>
                         <li><a href="{{ route('agenttodayorders') }}" class="waves-effect">Today Orders<i class="material-icons">calendar_today</i></a></li>
                         <li><a href="{{route('agentmonthlyorders')}}" class="waves-effect">{{date('F')}} Orders<i class="material-icons">calendar_month</i></a></li>
+                        <li><a href="{{route('agentrgmanage')}}" class="waves-effect">Manage Orders<i class="material-icons">construction</i></a></li>
                     </ul>
                 </div>
             </li>

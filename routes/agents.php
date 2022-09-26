@@ -11,6 +11,9 @@ Route::middleware('auth','role:agent')->group(function(){
     Route::post('agent/getcost',[OrdersController::class,'calculatefee'])->name('agentcalculate');
     Route::get('agent/commisiontoday',[OrdersController::class,'commisontoday'])->name('agencommtoday');
     Route::get('agent/commisionmonthly',[OrdersController::class,'commisonmonthly'])->name('agencommonthly');
+    Route::get('agent/manageorders',[OrdersController::class,'manageregionalorders'])->name('agentrgmanage');
+    Route::post('resend/{id}',[OrdersController::class,'resendsms'])->name('agentresendsms');
+    Route::post('cancel/{id}',[OrdersController::class,'cancelorder'])->name('agentcancelorder');
     
 });
 

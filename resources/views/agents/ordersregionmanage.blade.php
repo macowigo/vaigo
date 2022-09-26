@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
-    <title>VAIGO-TodayOrdersCommision</title>
+    <title>VAIGO-ManageRegionalOrders</title>
     <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,8 +28,7 @@
                         <div class="card material-table">
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
-                                <i class="material-icons">payments</i> Today Commision:
-                                {{number_format(($sumtodaymine/10 )+($sumtoday/20))}}
+                                <i class="material-icons">construction</i> Manage Regional Orders
                             </h6>
                             <x-auth-session-status class="red-text centered-text" :status="session('status')" />
                             @if(session('status'))
@@ -40,8 +39,11 @@
                             @if ($message = Session::get('success'))
                             <h6 class="blue-text centered-text">{{ $message }}</h6>
                             @endif
+                            @if ($message = Session::get('fail'))
+                            <h6 class="red-text centered-text">{{ $message }}</h6>
+                            @endif
                                 @if ($orders->isEmpty())
-                                <span class="red-text">Sorry there is no any Order Found Today</span>
+                                <span class="red-text">Sorry there is no any Order Found</span>
                                 @else
                                 <div class="table-header">
                                     <div class="actions">
@@ -54,31 +56,47 @@
                                         <tr>
                                         <th>Percel#</th>
                                         <th>Details</th>
-                                        <th>PercelValue</th>
-                                        <th>DeliveryFee</th>
+                                        <th>PercelValues</th>
+                                        <th>Sender</th>
+                                        <th>Receiver</th>
                                         <th>From</th>
                                         <th>To</th>
                                         <th>Created</th>
-                                        <th>Commision</th>
                                         <th>Status</th>
+                                        <th>Actions</th>
                                         </tr>
                                     </thead>
                                     @foreach ($orders as $values )
                                     <tr>
                                         <td>{{$values->oderid}}</td>
                                         <td>{{$values->ord_details}}</td>
-                                        <td>{{number_format($values->item_value)}}</td>
-                                        <td>{{number_format($values->value)}}</td>
+                                        <td>{{'Percel Value:'.number_format($values->item_value).' Delivery Fee:'.number_format($values->value)}}</td>
+                                        <td>{{$values->customernames.' '.$values->customerphone}}</td>
+                                        <td>{{$values->delv_names.' '.$values->delv_phone}}</td>
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->from_location)}}</td>
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->delv_location)}}</td>
                                         <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
-                                        @if ($values->center==Auth::user()->centerid)
-                                            <td>{{number_format($values->value/10)}}</td>
-                                        @endif
-                                        @if ($values->desination==Auth::user()->centerid)
-                                            <td>{{number_format($values->value *5 /100)}}</td>
-                                        @endif
                                         <td>{{$values->oder_status}}</td>
+                                        <td>
+                                            <form>
+                                                @csrf
+                                                @if ($values->oder_status!='cancelled')
+                                                <button class="btn-floating blue btn-small" title="click to resendsms"
+                                                onclick="return confirm('Are you sure to resendsms?')"
+                                                formaction="{{route('agentresendsms',$values->oderid)}}" formmethod="POST">
+                                                <i class="material-icons">sms</i>
+                                                </button> 
+                                                @endif
+                                                @if ($values->oder_status=='created')
+                                                <button class="btn-floating red btn-small" title="click to cancel"
+                                                onclick="return confirm('Are you sure to cancel this order?')"
+                                                formaction="{{route('agentcancelorder',$values->oderid)}}" formmethod="POST">
+                                                <i class="material-icons">cancel</i>
+                                                </button>  
+                                                @endif
+                                               
+                                            </form>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </table>
@@ -96,8 +114,7 @@
        <script type="text/javascript" src="../JS/Chart.js"></script>
        <script type="text/javascript" src="../JS/Chart.Financial.js"></script>
        <script src="../JS/fullcalendar.min.js"></script>
-       <script 
-       type="text/javascript" src="../JS/datatables.min.js"></script>
+       <script type="text/javascript" src="../JS/datatables.min.js"></script>
        <script src="../JS/imagesloaded.pkgd.min.js"></script>
        <script src="../JS/masonry.pkgd.min.js"></script>
 
@@ -108,8 +125,5 @@
        <script src='../datatable/jquery.js'></script>
        <script src='../datatable/datatable.js'></script>
        <script src="../datatable/script.js"></script>
-       <script src='../datatable/buttonhtml5.js'></script>
-       <script src='../datatable/buttonprint.js'></script>
-       <script src='../datatable/datatablebuttons.js'></script>
 </body>
 </html>

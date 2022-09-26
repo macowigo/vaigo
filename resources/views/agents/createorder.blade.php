@@ -45,17 +45,6 @@
                                 @csrf
                                 <div class=" row">
                                     <div class="input-field col s12 m12 l6">
-                                        <i class="material-icons prefix">arrow_back</i>
-                                        <select id="fromregion" name="fromregion"class="validate" required >
-                                            <option value="" disabled selected>Please select From Region</option>
-                                            @foreach ($centers as $centerlist)
-                                            <option value="{{$centerlist->centername}}">{{$centerlist->centerlocation.','.$centerlist->centername}}</option> 
-                                            @endforeach
-                                        </select>
-                                        <label for="fromregion">From Region</label>
-                                        <span class="helper-text" data-error="please enter your password" data-success="right"></span>
-                                    </div>
-                                    <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">arrow_forward</i>
                                         <select id="desinationregion" name="desinationregion"class="validate" required >
                                             <option value="" disabled selected>Please select Desination Region</option>
