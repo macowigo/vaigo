@@ -72,11 +72,15 @@
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->from_location)}}</td>
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->delv_location)}}</td>
                                         <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
+                                        @if ($values->oder_status=='cancelled')
+                                        <td>0</td>
+                                        @else
                                         @if ($values->center==Auth::user()->centerid)
-                                            <td>{{number_format($values->value/10)}}</td>
-                                        @endif
+                                        <td>{{number_format($values->value/10)}}</td>
+                                         @endif
                                         @if ($values->desination==Auth::user()->centerid)
-                                            <td>{{number_format($values->value *5 /100)}}</td>
+                                        <td>{{number_format($values->value *5 /100)}}</td>
+                                        @endif
                                         @endif
                                         <td>{{$values->oder_status}}</td>
                                     </tr>

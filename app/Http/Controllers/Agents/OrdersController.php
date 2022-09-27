@@ -15,14 +15,26 @@ class OrdersController extends Controller
 public function dashboardview()
 {
     $usercenter=Auth::User()->centerid;
-    $domesticorders = Oders::WHERE([['order_type','regional'],['center',$usercenter]])
-    ->select(DB::raw("oder_status as status"),DB::raw("SUM(value) as ordervalue"),
-      DB::raw("SUM(item_value) as deliveryfee")) ->groupBy(DB::raw("oder_status"))->get();
-  $result[] = ['Satus','DeliveryFee','OrderValue'];
-  foreach ($domesticorders as $key => $value) {
-  $result[++$key] = [$value->status, (int)$value->ordervalue, (int)$value->deliveryfee];
-  }
-    return view('agents.dashboard')->with('orders',json_encode($result));
+    $sourcecommision = Oders::WHERE([['order_type','regional'],['center',$usercenter],
+    ['oder_status','!=','cancelled']])->select(DB::raw("EXTRACT(MONTH FROM created_at) as months "),
+    DB::raw("SUM(value) as deliveryfee"))->groupBy(DB::raw("EXTRACT(MONTH FROM created_at)"))->get();
+    $source[] = ['Months','Delivery Fee','Commision'];
+    foreach ($sourcecommision as $key => $value) {
+      date("M", mktime(0, 0, 0, $value->months, 10));
+    $source[++$key] = [date("F", mktime(0, 0, 0, $value->months, 10)),(int)$value->deliveryfee, (int)$value->deliveryfee/10];
+    }
+
+    $desinationcommision = Oders::WHERE([['order_type','regional'],['desination',$usercenter],
+    ['oder_status','!=','cancelled']])->select(DB::raw("EXTRACT(MONTH FROM created_at) as months "),
+    DB::raw("SUM(value) as deliveryfee"))->groupBy(DB::raw("EXTRACT(MONTH FROM created_at)"))->get();
+    $desination[] = ['Months','Delivery Fee','Commision'];
+    foreach ($desinationcommision as $key => $value) {
+      date("M", mktime(0, 0, 0, $value->months, 10));
+    $desination[++$key] = [date("F", mktime(0, 0, 0, $value->months, 10)),(int)$value->deliveryfee, (int)$value->deliveryfee/20];
+    }
+
+ 
+    return view('agents.dashboard')->with(['source'=>json_encode($source),'desination'=>json_encode($desination)]);
 }
 #create domestic order
 public function createorderview()
@@ -179,6 +191,7 @@ public function createregionalorder(Request $request)
 
     public function manageregionalorders()
     {
+        #think about finishing order
         $usercenter=Auth::user()->centerid;
         $managedorders['orders']=Oders::WHERE([['order_type','regional'],['center',$usercenter]])
             ->whereMonth('created_at',date('m'))->get();
@@ -202,8 +215,7 @@ public function createregionalorder(Request $request)
             $orderdetails=Oders::WHERE('oderid',$id)->first();
             $sms="Sorry dear customer your order of Number:$id From: $orderdetails->from_location To: $orderdetails->delv_location has cancelled"."\n". 
             "Thank you for Choosing Vaigo"."\n"."TEL: 0715881342";
-            $user_contact=substr_replace($orderdetails->customerphone, '255', 0, 1).','.substr_replace($orderdetails->delv_phone, '255', 0, 1);
-            //SmsController::sendsms($sms,$user_contact);
+            SmsController::sendsms($sms,substr_replace($orderdetails->customerphone, '255', 0, 1));
            return redirect()->back()->with('success','Order of Percel#: ' .$id.' has Cancelled Successfully');
         }
         else{

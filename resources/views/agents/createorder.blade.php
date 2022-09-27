@@ -41,6 +41,9 @@
                             @if ($message = Session::get('failed'))
                             <h6 class="red-text centered-text">{{ $message }}</h6>
                             @endif
+                            @if ($message = Session::get('cost')) 
+                            <p class="blue-text">{{ $message }}</p>
+                            @endif
                             <form action="POST">
                                 @csrf
                                 <div class=" row">
@@ -71,6 +74,8 @@
                                         <label for="ordervalue">Order value</label>
                                         <span class="helper-text" data-error="please enter valid order value" data-success="right"></span>
                                     </div>
+
+                                    
                                     <div class="input-field col s12 m12 l6">
                                         <i class="material-icons prefix">subtitles</i>
                                         <input id="orderdetails" name="orderdetails" type="text" class="validate" >
@@ -110,16 +115,6 @@
                                     </button>
                                 </div>
                             </form>
-                            @if ($message = Session::get('cost'))
-                            <div class="blue-text">
-                            <p class="blue-text">{{ $message }}</p>
-                            </div>
-                            @endif
-                            @if ($message = Session::get('wronglocations'))
-                            <div class="red-text">
-                            <p class="red-text">{{ $message }}</p>
-                            </div>
-                            @endif
                         </div>
                     </div>
                 </div>

@@ -87,35 +87,8 @@
                    </div>
                 </div>
                 </a>
-         {{-- <a href="{{route('regionalorder')}}">
-         <div class="col s12 m6 l4">
-         <div class="card">
-                <div class="card-stacked">
-                    <div class=" card-metrics-static">
-                        <div class="card-content">
-                        <span><i class="material-icons">apartment</i> Regional Orders: {{ $regional }}</span>
-                        <span ></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-         </div>
-         </a>
-         <a href="{{route('internationalorder')}}">
-         <div class="col s12 m6 l4">
-         <div class="card">
-                <div class="card-stacked">
-                    <div class=" card-metrics-static">
-                        <div class="card-content">
-                        <span><i class="material-icons">language</i> International Orders: {{ $international}}</</span>
-                        <span ></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-         </div>
-         </a> --}}
-        <div class="col s12 ">
+
+        {{-- <div class="col s12 ">
          <div class="card">
           <div class="card-stacked">
           <div class="card-metrics-static">
@@ -162,15 +135,17 @@
           </div>
           </div>
          </div>
-        </div>
+        </div> --}}
+
+
         <div class="col s12">
             <div class="card">
                 <div class="card-stacked">
                     <div class="card-metrics-static">
                         <div class="card-content">
-                            <h6 class=" centered-text blue-text">Domestic Order Statistics</h6>
+                            <h6 class=" centered-text blue-text">Regional Orders Source Commision Statistics</h6>
                             <script>
-                                   var orderdata = <?php echo $orders; ?>;
+                                   var orderdata =<?php echo $source; ?> ;
                                     console.log(orderdata);
                                     google.charts.load('current', {'packages':['corechart']});
                                     google.charts.setOnLoadCallback(drawChart);
@@ -181,7 +156,32 @@
                                     chart.draw(data, options);
                                     }
                             </script>
-                      <div id="linechart"></div> 
+                            <div id="linechart"></div>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="col s12">
+            <div class="card">
+                <div class="card-stacked">
+                    <div class="card-metrics-static">
+                        <div class="card-content">
+                            <h6 class=" centered-text blue-text">Regional Orders Desination Commision Statistics</h6>
+                            <script>
+                                   var desinationdata =<?php echo $desination; ?> ;
+                                    console.log(desinationdata);
+                                    google.charts.load('current', {'packages':['corechart']});
+                                    google.charts.setOnLoadCallback(drawChart);
+                                    function drawChart() {
+                                    var data = google.visualization.arrayToDataTable(desinationdata);
+                                    var options = { colors:['#2F557F','#00b533']};
+                                    var chart = new google.visualization.ColumnChart(document.getElementById('desination'));
+                                    chart.draw(data, options);
+                                    }
+                            </script>
+                            <div id="desination"></div>  
                         </div>
                     </div>
                 </div>
