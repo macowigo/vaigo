@@ -148,7 +148,7 @@ public function createregionalorder(Request $request)
             "Percel Number: $orderid "."\n"."Percel Value: $request->ordervalue"."\n".
             "Type: $request->percelsize,$request->orderdetails "."\n".
             "Issued Date: $date"."\n"."Thank you for Choosing Vaigo"."\n". "TEL: 0715881342";
-            //SmsController::sendsms($sms,substr_replace($request->senderphone, '255', 0, 1));
+            SmsController::sendsms($sms,substr_replace($request->senderphone, '255', 0, 1));
             return redirect()->route('agenttodayorders')->with('success','Your Order Successfully Created');
         }
         else{
@@ -222,6 +222,4 @@ public function createregionalorder(Request $request)
             return redirect()->back()->with('fail','Sorry Order of Percel#: ' .$id.' not Cancelled please try again');
         } 
     }
-
-
 }
