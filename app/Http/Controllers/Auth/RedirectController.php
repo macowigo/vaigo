@@ -22,11 +22,9 @@ class RedirectController extends Controller
         elseif($userrole=="agent"){
             return redirect('/agent/dashboard'); 
         }
-        elseif($userrole=="customer"){
-            
-        }
+       
         else{
-            return redirect()->route('ondoka');
+            return redirect()->route('notauth');
         }
 
     }
