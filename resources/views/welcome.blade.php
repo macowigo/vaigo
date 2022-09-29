@@ -26,11 +26,14 @@
 <h6 class="brand-logo blue-text centered-text"> VAIGO LOGIN </h6>
 <br>
 <br>
-@if ($message = Session::get('success'))
-<h6 class="blue-text">{{ $message }}</h6>
+@if ($message = Session::get('failed'))
+<h6 class="centered-text red-text">{{ $message }}</h6>
+@endif
+@if ($message = Session::get('logout'))
+<h6 class="centered-text red-text">{{ $message }}</h6>
 @endif
     <h6 class=" centered-text card-title">Enter Your Credentials to LogIn</h6>
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+    <x-auth-validation-errors class="centered-text" :errors="$errors" />
     <form method="POST" action="{{ route('login') }}" >
         @csrf
         <div class="input-field">

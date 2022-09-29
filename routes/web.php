@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function(){
     })->name('changepass');
     Route::post('auth/changepassword',[ChangePassword::class,'changepassword'])->name('changepassword');
     Route::any('auth/logout',[LogoutController::class,'logout'])->name('ondoka');
+    Route::any('not/authenticated',[LogoutController::class,'notauthenticated'])->name('notauth');
 });
 
 require __DIR__.'/auth.php';
