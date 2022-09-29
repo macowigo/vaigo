@@ -14,6 +14,8 @@ Route::middleware('auth','role:agent')->group(function(){
     Route::get('agent/manageorders',[OrdersController::class,'manageregionalorders'])->name('agentrgmanage');
     Route::post('resend/{id}',[OrdersController::class,'resendsms'])->name('agentresendsms');
     Route::post('cancel/{id}',[OrdersController::class,'cancelorder'])->name('agentcancelorder');
+    Route::post('receive/{id}',[OrdersController::class,'receiveorder'])->name('agentreceiverorder');
+    Route::post('deliver/{id}',[OrdersController::class,'delivereorder'])->name('agentdeliverorder');
     
 });
 

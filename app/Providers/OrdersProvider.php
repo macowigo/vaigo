@@ -112,6 +112,7 @@ class OrdersProvider extends ServiceProvider
          #departure
         View::composer('departurer.*', function ($departure) {
             $today=date('Y-m-d');
+            #domestic
             $domesticcancellcout=Oders::WHERE([['order_type','domestic'],['oder_status','cancelled']])->count();
             $domesticnewcout=Oders::WHERE([['order_type','domestic'],['oder_status','created']])->count();
             $domesticdelivered=Oders::WHERE([['order_type','domestic'],['oder_status','delivering']])->count();
@@ -124,6 +125,16 @@ class OrdersProvider extends ServiceProvider
             $departure->with('domesticcompleted', $domesticcpmplete);
             $departure->with('domesticincompleted', $domesticincpmplete);
             $departure->with('domesticall', $domesticall);
+
+            #regional
+            $regionalcreatedcount=Oders::WHERE([['order_type','regional'],['oder_status','created']])->count();
+            $regionalcollectedcount=Oders::WHERE([['order_type','regional'],['oder_status','collected']])->count();
+            $regionalonthewaycount=Oders::WHERE([['order_type','regional'],['oder_status','on the way']])->count();
+            $regionalallcount=Oders::WHERE('order_type','regional')->count();
+            $departure->with('regionalcreated',$regionalcreatedcount);
+            $departure->with('regionalcollected',$regionalcollectedcount);
+            $departure->with('regionalontheway',$regionalonthewaycount);
+            $departure->with('regionalall',$regionalallcount);
            //today
        
         });

@@ -36,7 +36,9 @@
                 <div class="collapsible-body">
                     <ul>
                         <li><a href="{{route('regionalnew')}}" class="waves-effect">Created Orders<i class="material-icons">subtitles</i></a></li>
-                        <li><a href="{{route('dptmanage')}}" class="waves-effect">Manage Orders<i class="material-icons">construction</i></a></li>
+                        <li><a href="{{route('regionalcollected')}}" class="waves-effect">Departure Orders<i class="material-icons">departure_board</i></a></li>
+                        <li><a href="{{route('regionalall')}}" class="waves-effect">All Orders<i class="material-icons">select_all</i></a></li>
+                        {{-- <li><a href="{{route('dptmanage')}}" class="waves-effect">Manage Orders<i class="material-icons">construction</i></a></li> --}}
                     </ul>
                 </div>
             </li>

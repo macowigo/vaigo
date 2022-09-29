@@ -80,7 +80,7 @@
                                         <td>
                                             <form>
                                                 @csrf
-                                                @if ($values->oder_status!='cancelled')
+                                                @if ($values->oder_status!='cancelled'&& $values->oder_status!='delivered' )
                                                 <button class="btn-floating blue btn-small" title="click to resendsms"
                                                 onclick="return confirm('Are you sure to resendsms?')"
                                                 formaction="{{route('agentresendsms',$values->oderid)}}" formmethod="POST">
@@ -92,6 +92,20 @@
                                                 onclick="return confirm('Are you sure to cancel this order?')"
                                                 formaction="{{route('agentcancelorder',$values->oderid)}}" formmethod="POST">
                                                 <i class="material-icons">cancel</i>
+                                                </button>  
+                                                @endif
+                                                @if ($values->oder_status=='on the way' && $values->desination==Auth::user()->centerid)
+                                                <button class="btn-floating blue btn-small" title="click to receive order"
+                                                onclick="return confirm('Are you sure to receive this order?')"
+                                                formaction="{{route('agentreceiverorder',$values->oderid)}}" formmethod="POST">
+                                                <i class="material-icons">call_received</i>
+                                                </button>  
+                                                @endif
+                                                @if ($values->oder_status=='at delivery center' && $values->desination==Auth::user()->centerid)
+                                                <button class="btn-floating blue btn-small" title="click to receive order"
+                                                onclick="return confirm('Are you sure to deliver this order?')"
+                                                formaction="{{route('agentdeliverorder',$values->oderid)}}" formmethod="POST">
+                                                <i class="material-icons">all_inbox</i>
                                                 </button>  
                                                 @endif
                                                

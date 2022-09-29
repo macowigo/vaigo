@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
-    <title>VAIGO-NewRegionalOrders</title>
+    <title>VAIGO-AllRegionalOrders</title>
     <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,7 +28,8 @@
                         <div class="card material-table">
                         <div class="receipt-main card-content">
                             <h6 class="blue-text centered-text">
-                                <i class="material-icons">open_in_new</i> Created Regional Orders: {{$regionalcreated}}
+                                <i class="material-icons">select_all</i> 
+                                All Regional Orders: {{$regionalall}}
                             </h6>
                             <x-auth-session-status class="red-text centered-text" :status="session('status')" />
                             @if(session('status'))
@@ -43,7 +44,7 @@
                             <h6 class="red-text centered-text">{{ $message }}</h6>
                             @endif
                                 @if ($regionalneworders->isEmpty())
-                                <span class="red-text">Sorry there is no any Order Found</span>
+                                <span class="red-text">Sorry there is no any regional Order Found</span>
                                 @else
                                 <div class="table-header">
                                     <div class="actions">
@@ -64,8 +65,6 @@
                                         <th>Center</th>
                                         <th>Created</th>
                                         <th>Status</th>
-                                        <th>Collete</th>
-                                        
                                         </tr>
                                     </thead>
                                     @foreach ($regionalneworders as $values )
@@ -80,15 +79,6 @@
                                         <td>{{$values->centername.' '.$values->centerlocation}}</td>
                                         <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
                                         <td>{{$values->oder_status}}</td>
-                                        <td>
-                                            <form action="{{route('regionalcollect',$values->oderid)}}" method="POST">
-                                                @csrf
-                                            <button class="btn-floating blue btn-small" title="click to collect order"
-                                            onclick="return confirm('Are you sure to collect this order?')">
-                                            <i class="material-icons">group_work</i>
-                                            </button> 
-                                            </form>
-                                        </td>
                                     </tr>
                                     @endforeach
                                 </table>
@@ -106,7 +96,8 @@
        <script type="text/javascript" src="../JS/Chart.js"></script>
        <script type="text/javascript" src="../JS/Chart.Financial.js"></script>
        <script src="../JS/fullcalendar.min.js"></script>
-       <script type="text/javascript" src="../JS/datatables.min.js"></script>
+       <script 
+       type="text/javascript" src="../JS/datatables.min.js"></script>
        <script src="../JS/imagesloaded.pkgd.min.js"></script>
        <script src="../JS/masonry.pkgd.min.js"></script>
 
@@ -117,5 +108,8 @@
        <script src='../datatable/jquery.js'></script>
        <script src='../datatable/datatable.js'></script>
        <script src="../datatable/script.js"></script>
+       <script src='../datatable/buttonhtml5.js'></script>
+       <script src='../datatable/buttonprint.js'></script>
+       <script src='../datatable/datatablebuttons.js'></script>
 </body>
 </html>

@@ -71,6 +71,48 @@
             </div>
          </div>
          </a>
+         <a href="{{route('regionalnew')}}">
+            <div class="col s12 m6 l4">
+            <div class="card">
+                   <div class="card-stacked">
+                       <div class=" card-metrics-static">
+                           <div class="card-content">
+                           <span><i class="material-icons">open_in_new</i> Regional New Created Orders:</span>
+                           <span >{{$regionalcreated}} </span>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+            </div>
+            </a>
+            <a href="{{route('regionalcollected')}}">
+                <div class="col s12 m6 l4">
+                <div class="card">
+                       <div class="card-stacked">
+                           <div class=" card-metrics-static">
+                               <div class="card-content">
+                               <span><i class="material-icons">group_work</i> Regional Collected Orders:</span>
+                               <span >{{$regionalcollected}} </span>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+                </a>
+                <a href="{{route('regionalall')}}">
+                    <div class="col s12 m6 l4">
+                    <div class="card">
+                           <div class="card-stacked">
+                               <div class=" card-metrics-static">
+                                   <div class="card-content">
+                                   <span><i class="material-icons">select_all</i> Regional All Orders:</span>
+                                   <span >{{number_format($regionalall)}} </span>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                    </div>
+                    </a>
         <div class="col s12 ">
          <div class="card">
           <div class="card-stacked">

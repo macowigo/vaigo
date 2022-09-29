@@ -19,4 +19,8 @@ Route::middleware('auth','role:depaturer')->group(function(){
     Route::post('/complete/{oderid}',[DeparturerOrderController::class,'completeorder'])->name('compdomestic');
     #regional
     Route::get('/depaturer/regionalneworders',[DeparturerRegionalOrders::class,'neworder'])->name('regionalnew');
+    Route::post('{id}/collectorde',[DeparturerRegionalOrders::class,'collectorder'])->name('regionalcollect');
+    Route::get('/depaturer/regionalorders',[DeparturerRegionalOrders::class,'collectedorder'])->name('regionalcollected');
+    Route::post('{id}/departure',[DeparturerRegionalOrders::class,'departureorder'])->name('regionaldept');
+    Route::get('depaturer/regionalallorders',[DeparturerRegionalOrders::class,'alldorder'])->name('regionalall');
 });

@@ -222,4 +222,33 @@ public function createregionalorder(Request $request)
             return redirect()->back()->with('fail','Sorry Order of Percel#: ' .$id.' not Cancelled please try again');
         } 
     }
+
+    public function receiveorder($id)
+    {
+        $receiveorder=Oders::WHERE('oderid',$id)->update(['oder_status'=>'at delivery center']);
+        if($receiveorder){
+            
+            $orderdetails=Oders::WHERE('oderid',$id)->first();
+            $sms="Dear $orderdetails->customernames"."\n".
+            "Your Percel of Number:$id From: $orderdetails->from_location To: $orderdetails->delv_location ($orderdetails->pick_up)"."\n".
+            "Has delivered at $orderdetails->delv_location ($orderdetails->pick_up)."."\n".
+            "Please remind percel receiver($orderdetails->delv_names) to take percel"."\n".
+           "Thank you for Choosing Vaigo"."\n"."TEL: 0715881342";
+            SmsController::sendsms($sms,substr_replace($orderdetails->customerphone, '255', 0, 1));
+           return redirect()->back()->with('success','Order of Percel#: ' .$id.' has Received Successfully');
+        }
+        else{
+            return redirect()->back()->with('fail','Sorry Order of Percel#: ' .$id.' not Received please try again');
+        } 
+    }
+    public function delivereorder($id)
+    {
+        $deliverorder=Oders::WHERE('oderid',$id)->update(['oder_status'=>'delivered']);
+        if($deliverorder){
+           return redirect()->back()->with('success','Order of Percel#: ' .$id.' has Delivered Successfully');
+        }
+        else{
+            return redirect()->back()->with('fail','Sorry Order of Percel#: ' .$id.' not Delivered please try again');
+        } 
+    }
 }
