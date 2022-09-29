@@ -80,14 +80,15 @@
                                         <td>
                                             <form>
                                                 @csrf
-                                                @if ($values->oder_status!='cancelled'&& $values->oder_status!='delivered' )
+                                                @if ($values->oder_status!='cancelled'&& $values->oder_status!='delivered'
+                                                && $values->center==Auth::user()->centerid )
                                                 <button class="btn-floating blue btn-small" title="click to resendsms"
                                                 onclick="return confirm('Are you sure to resendsms?')"
                                                 formaction="{{route('agentresendsms',$values->oderid)}}" formmethod="POST">
                                                 <i class="material-icons">sms</i>
                                                 </button> 
                                                 @endif
-                                                @if ($values->oder_status=='created')
+                                                @if ($values->oder_status=='created' && $values->center==Auth::user()->centerid)
                                                 <button class="btn-floating red btn-small" title="click to cancel"
                                                 onclick="return confirm('Are you sure to cancel this order?')"
                                                 formaction="{{route('agentcancelorder',$values->oderid)}}" formmethod="POST">
