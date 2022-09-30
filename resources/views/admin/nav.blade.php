@@ -62,6 +62,14 @@
                     </ul>
                 </div>
             </li>
+            <li class="bold waves-effect"><a class="collapsible-header">Regional Orders<i class="material-icons">apartment</i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{{route('admregionaltoday')}}" class="waves-effect">Today Orders<i class="material-icons">today</i></a></li>
+                        <li><a href="{{route('admregionalall')}}" class="waves-effect">All Orders<i class="material-icons">select_all</i></a></li>
+                    </ul>
+                </div>
+            </li>
          <li>
          <a href="{{route('changepass')}}" class="waves-effect">ChangePassword<i class="material-icons">lock</i></a>
          </li> 

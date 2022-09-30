@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Api\SmsController;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -74,6 +75,13 @@ class StaffsController extends Controller
         ->select('*')
         ->get();
         return view('admin.staff',$staffs);
+    }
+
+    public function vaigoagents(){
+        $agents['agentslist']=User::where('role','agent')
+        ->join('centers','users.centerid','=','centers.centerid')
+        ->get();
+        return view('admin.staffagent',$agents);
     }
     public function usersmanage(){
         $staffs['stafflist']=DB::table('users')

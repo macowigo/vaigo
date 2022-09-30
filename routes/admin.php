@@ -24,7 +24,7 @@ Route::middleware('auth','role:admin')->group(function(){
     Route::delete('/admin/vendors_manage/{id}',[VendorsController::class,'deletevendor'])->name('deletevendor');
     Route::get('/{id}/vendor_edit',[VendorsController::class,'getvendor'])->name('editvendorview');
     Route::post('/{id}/vendor_edit',[VendorsController::class,'updatevendor'])->name('editvendor');
-    #orders
+    #orders domestic
     Route::get('/admin/domestic_today',[OrdersController::class,'domestictoday'])->name('admdomestictoday');
     Route::get('/admin/domestic_pending',[OrdersController::class,'domesticpending'])->name('admdompending');
     Route::get('/admin/domestic_created',[OrdersController::class,'domesticcreated'])->name('admdomcreated');
@@ -33,9 +33,9 @@ Route::middleware('auth','role:admin')->group(function(){
     Route::get('/admin/domestic_incomplete',[OrdersController::class,'domesticinc'])->name('admdominc');
     Route::get('/admin/domestic_complete',[OrdersController::class,'domesticcomp'])->name('admdomcomp');
     Route::get('/admin/domestic_orders',[OrdersController::class,'domestic'])->name('admdomestic');
-    Route::get('/admin/regional_orders',[OrdersController::class,'regional'])->name('admregional');
-    Route::get('/admin/international_orders',[OrdersController::class,'international'])->name('adminternational');
-
+    #orders regional
+    Route::get('/admin/regional_today',[OrdersController::class,'regonaltoday'])->name('admregionaltoday');
+    Route::get('/admin/regional_orders',[OrdersController::class,'regonalall'])->name('admregionalall');
     #staff
     Route::get('/admin/add_user',[StaffsController::class,'addform'])->name('staffform');
     Route::post('/admin/add_user',[StaffsController::class,'addstaff'])->name('staffadd');
@@ -44,6 +44,7 @@ Route::middleware('auth','role:admin')->group(function(){
     Route::delete('{id}',[StaffsController::class,'deleteuser'])->name('deleteuser');
 
     #agent
+    Route::get('/vaigo/agents',[StaffsController::class,'vaigoagents'])->name('vaigoagents');
     Route::get('/add/agent_location',[AgentsController::class,'agentlocationform'])->name('locationform');
     Route::get('/admin/agentcenters',[AgentsController::class,'agentlocationlist'])->name('agentlocation');
     Route::post('/admin/addcenter',[AgentsController::class,'addagentlocation'])->name('addagentlocation');

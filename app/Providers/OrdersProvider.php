@@ -79,36 +79,7 @@ class OrdersProvider extends ServiceProvider
             // return $view->with('counts', $counts);
         });
         #admin
-        View::composer('admin.*', function ($admin) {
-            $today=date('Y-m-d');
-            $centercount=Centers::WHERE('type','center')->count();
-            $vendorcount=User::WHERE('role','vendor')->count();
-            $domestictodaycout=Oders::WHERE([['order_type','domestic'],['created_date',$today]])->count();
-            $domesticcout=Oders::WHERE([['order_type','domestic']])->count();
-            $reginalcount=Oders::WHERE([['order_type','regional']])->count();
-            $internationalcount=Oders::WHERE([['order_type','international']])->count();
-            $admin->with('centers', $centercount);
-            $admin->with('vendors', $vendorcount);
-            $admin->with('domestictoday', $domestictodaycout);
-            $admin->with('domestic', $domesticcout);
-            $admin->with('regional', $reginalcount);
-            $admin->with('international', $internationalcount);
-           #domestic category
-            $domesticpending=Oders::WHERE([['order_type','domestic'],['oder_status','pending']])->count();
-            $domesticcreated=Oders::WHERE([['order_type','domestic'],['oder_status','created']])->count();
-            $domesticcancelled=Oders::WHERE([['order_type','domestic'],['oder_status','cancelled']])->count();
-            $domesticdelivering=Oders::WHERE([['order_type','domestic'],['oder_status','delivering']])->count();
-            $domesticincomplete=Oders::WHERE([['order_type','domestic'],['oder_status','incomplete']])->count();
-            $domesticcomplete=Oders::WHERE([['order_type','domestic'],['oder_status','complete']])->count();
-            $admin->with('domesticpending', $domesticpending);
-            $admin->with('domesticcreated', $domesticcreated);
-            $admin->with('domesticancel', $domesticcancelled);
-            $admin->with('domesticdeliver', $domesticdelivering);
-            $admin->with('domesticinc', $domesticincomplete);
-            $admin->with('domesticcomp', $domesticcomplete);
-          
-       
-        });
+      
          #departure
         View::composer('departurer.*', function ($departure) {
             $today=date('Y-m-d');

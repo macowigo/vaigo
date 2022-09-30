@@ -166,6 +166,7 @@ return [
         #my providers
         App\Providers\OrdersProvider::class,
         App\Providers\AgentsProvider::class,
+        App\Providers\AdminProvider::class,
         
 
     ],

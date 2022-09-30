@@ -10,9 +10,26 @@ use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
+
+ public  function dashboardview(){
+    $vaigousers = User::WHERE([['role','!=','admin']])
+    ->select(DB::raw("role as role"),DB::raw("count(*) as numbers")) ->groupBy(DB::raw("role"))->get();
+      $userresult[] = ['Role','Members'];
+      foreach ($vaigousers as $key => $staffs) {
+      $userresult[++$key] = [$staffs->role, (int)$staffs->numbers];
+      }
+      $deliveryfee = Oders::WHERE([['order_type','domestic']])
+      ->select(DB::raw("oder_status as status"),DB::raw("SUM(value) as fee"))->groupBy(DB::raw("oder_status"))->get();
+    $orderresult[] = ['Status','DeliveryFee'];
+    foreach ($deliveryfee as $key => $orders) {
+    $orderresult[++$key] = [$orders->status, (int)$orders->fee];
+    }
+     return view('admin.dashboard')->with(['users'=>json_encode($userresult),'oders'=>json_encode($orderresult)]);
+       }
+    #domestic
     public function domestictoday(){
-        $today=date('Y-m-d');
-        $domestic['domesticorders']= Oders::WHERE([['order_type','domestic'],['created_date',$today]])->get();
+        $domestic['domesticorders']= Oders::WHERE('order_type','domestic')
+        ->whereDate('created_at',DB::raw('CURDATE()'))->get();
         return view('admin.domestictoday',$domestic);
        }
     public function domesticpending(){
@@ -43,28 +60,22 @@ class OrdersController extends Controller
         $domestic['domesticorders']= Oders::WHERE('order_type','domestic')->get();
         return view('admin.ordersdomestic',$domestic);
        }
-       public function regional(){
-        $regional['regionalorder']= Oders::WHERE('order_type','regional')->get();
-        return view('admin.ordersregional',$regional);
-       }
-       public function international(){
-        $international['internationaloders']= Oders::WHERE('order_type','international')->get();
-        return view('admin.ordersinternational',$international);
-       }
-       public  function dashboardview(){
-        $vaigousers = User::WHERE([['role','!=','admin']])
-        ->select(DB::raw("role as role"),DB::raw("count(*) as numbers")) ->groupBy(DB::raw("role"))->get();
-      $userresult[] = ['Role','Members'];
-      foreach ($vaigousers as $key => $staffs) {
-      $userresult[++$key] = [$staffs->role, (int)$staffs->numbers];
-      }
 
-      $deliveryfee = Oders::WHERE([['order_type','domestic']])
-      ->select(DB::raw("oder_status as status"),DB::raw("SUM(value) as fee"))->groupBy(DB::raw("oder_status"))->get();
-    $orderresult[] = ['Status','DeliveryFee'];
-    foreach ($deliveryfee as $key => $orders) {
-    $orderresult[++$key] = [$orders->status, (int)$orders->fee];
-    }
-     return view('admin.dashboard')->with(['users'=>json_encode($userresult),'oders'=>json_encode($orderresult)]);
+       #regional
+       public function regonaltoday(){
+        $regionaltoday['regionalorders']= Oders::WHERE('order_type','regional')
+        ->whereDate('oders.created_at',DB::raw('CURDATE()'))
+        ->join('centers','oders.center','=','centers.centerid')
+        ->select('centers.centername','centers.centerlocation','oders.*')->get();
+        return view('admin.regionaltoday',$regionaltoday);
        }
+
+       public function regonalall(){
+        $regionalall['regionalorders']= Oders::WHERE('order_type','regional')
+        ->join('centers','oders.center','=','centers.centerid')
+        ->select('centers.centername','centers.centerlocation','oders.*')->get();
+        return view('admin.regionalall',$regionalall);
+       }
+     
+      
 }

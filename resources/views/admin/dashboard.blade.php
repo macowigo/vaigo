@@ -59,6 +59,20 @@
             </div>
          </div>
          </a>
+         <a href="{{route('vaigoagents')}}">
+            <div class="col s12 m6 l4">
+            <div class="card">
+                   <div class="card-stacked">
+                       <div class=" card-metrics-static">
+                           <div class="card-content">
+                           <span><i class="material-icons">support_agent</i> Vaigo Agents:</span>
+                           <span >{{number_format($agents)}}</span>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+            </div>
+            </a>
          <a href="{{route('admdomestictoday')}}">
          <div class="col s12 m6 l4">
          <div class="card">
@@ -73,6 +87,20 @@
             </div>
          </div>
          </a>
+         <a href="{{route('admregionaltoday')}}">
+            <div class="col s12 m6 l4">
+            <div class="card">
+                   <div class="card-stacked">
+                       <div class=" card-metrics-static">
+                           <div class="card-content">
+                           <span><i class="material-icons">apartment</i> Today Regional Orders:</span>
+                           <span >{{number_format($regionaltoday)}}</span>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+            </div>
+            </a>
          <div class="col s12 ">
             <div class="card">
              <div class="card-stacked">
