@@ -145,7 +145,7 @@
                         <div class="card-content">
                             <h6 class=" centered-text blue-text">Regional Orders Source Commision Statistics</h6>
                             <script>
-                                   var orderdata =<?php echo $source; ?> ;
+                                  var orderdata =<?php echo $source; ?> ;
                                     console.log(orderdata);
                                     google.charts.load('current', {'packages':['corechart']});
                                     google.charts.setOnLoadCallback(drawChart);
@@ -156,7 +156,13 @@
                                     chart.draw(data, options);
                                     }
                             </script>
-                            <div id="linechart"></div>  
+                              @if ($sourceordercount>0)
+                              <div id="linechart"></div> 
+                              @else
+                              <div>
+                                <p class=" centered-text red-text">Sorry there is no any Source Commision Statistics Found</p>
+                                </div> 
+                              @endif
                         </div>
                     </div>
                 </div>
@@ -181,7 +187,13 @@
                                     chart.draw(data, options);
                                     }
                             </script>
-                            <div id="desination"></div>  
+                             @if ($desinationordercount>0)
+                             <div id="desination"></div> 
+                             @else
+                              <div>
+                                <p class=" centered-text red-text">Sorry there is no any Desination Commision Statistics Found</p>
+                                </div>
+                             @endif
                         </div>
                     </div>
                 </div>

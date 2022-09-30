@@ -194,7 +194,7 @@ public function createregionalorder(Request $request)
         $managedorders['orders']=Oders::WHERE([['order_type','regional']])
         ->WHERE(function($commision){
         $commision->where('center',Auth::user()->centerid)->orWhere('desination',Auth::user()->centerid);
-        })->whereMonth('created_at',date('m'))->get();
+        })->whereBetween('created_at',[now()->addDays(-20),now()])->get();
        return view('agents.ordersregionmanage',$managedorders);
     }
     public function resendsms($id)

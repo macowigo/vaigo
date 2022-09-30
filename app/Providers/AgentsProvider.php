@@ -39,8 +39,10 @@ class AgentsProvider extends ServiceProvider
             $agents->with('summonthmine', $ordermonthlysummine);
             $agents->with('summonth', $ordermonthlysum);
             #all orders
-            $ordercout=Oders::WHERE([['order_type','regional'],['center',$usercenter]])->count();
-            $agents->with('ordercount', $ordercout);
+            $sourceordercout=Oders::WHERE([['order_type','regional'],['center',$usercenter]])->count();
+            $desinationeordercout=Oders::WHERE([['order_type','regional'],['desination',$usercenter]])->count();
+            $agents->with('sourceordercount', $sourceordercout);
+            $agents->with('desinationordercount', $desinationeordercout);
         });
     }
 }
