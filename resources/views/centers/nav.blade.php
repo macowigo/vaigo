@@ -36,7 +36,7 @@
              <a href="{{route('changepass')}}" class="waves-effect">ChangePassword<i class="material-icons">lock</i></a>
             </li>
             <li>
-             <a href="{{route('ondoka') }}" class="waves-effect red-text" >Log Out
+             <a href="{{route('logout') }}" class="waves-effect red-text" >Log Out
                 <i class="material-icons red-text">logout</i>
             </a>
             </li>      
@@ -54,7 +54,7 @@
             </li>
             <li>
 
-                <a href="{{route('ondoka')}}" class="waves-effect red-text">logout
+                <a href="{{route('logout')}}" class="waves-effect red-text">logout
                     <i class="material-icons red-text">logout</i>
               </a>
             </li>

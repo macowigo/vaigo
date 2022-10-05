@@ -7,13 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
-    <title>VAIGO-Login</title>
+    <title>VAIGO-VerifyCode</title>
     <link rel="shortcut icon" href="../Images/vaigo.png">
     <link href="../CSS/vaigo.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  @include('nav')
+        <nav class="navbar nav-extended no-padding">
+            <div class="nav-wrapper">
+                <span class="brand-logo"> VAIGO </span>
+            </div>
+        </nav>
     <main>
     <div class="progress" id="loading">
       <div class="indeterminate"></div>
@@ -23,33 +27,24 @@
                 <div class=" col s12 ">
                 <div class="receipt-main card-content" >
 
-<h6 class="brand-logo blue-text centered-text"> VAIGO LOGIN </h6>
+<h6 class="brand-logo blue-text centered-text"> VAIGO PASSWORD RECOVERY</h6>
 @if ($message = Session::get('failed'))
 <h6 class="centered-text red-text">{{ $message }}</h6>
 @endif
-@if ($message = Session::get('logout'))
-<h6 class="centered-text red-text">{{ $message }}</h6>
+@if ($message = Session::get('success'))
+<h6 class="centered-text blue-text">{{ $message }}</h6>
 @endif
-    <h6 class=" centered-text card-title">Enter Your Credentials to LogIn</h6>
+    <h6 class=" centered-text card-title">Enter Your Code</h6>
     <x-auth-validation-errors class="centered-text" :errors="$errors" />
-    <form method="POST" action="{{ route('login') }}" >
+    <form method="POST" action="{{ route('tokenverify') }}" >
         @csrf
         <div class="input-field">
-        <i class="material-icons prefix">account_circle</i>
-            <input id="email" name="email" type="text" class="validate"  required>
-            <label for="email" >Username</label>
-            <span class="helper-text" data-error="Please enter Valid email Address" data-success="right"></span>
+        <i class="material-icons prefix">lock_reset</i>
+            <input id="code" name="code" type="number" class="validate"  required>
+            <label for="code" >Recovery Code</label>
+            <span class="helper-text" data-error="Please enter code" data-success="right"></span>
         </div>
-        <div class="input-field">
-        <i class="material-icons prefix">lock</i>
-            <input id="password"  name="password" type="password" class="validate" required>
-            <label for="password">Password</label>
-            <span toggle="#password" class="field-icon toggle-password"><span class="material-icons">visibility</span></span>
-
-            <span class="helper-text" data-error="please enter your password" data-success="right"></span>
-        </div>
-        <a href="{{route('passforgot')}}">Forgot Password?</a>
-            <input class="btn right blue" type="submit" value="Log In">
+            <input class="btn right blue" type="submit" value="VERIFY">
     </form>
 
                </div>

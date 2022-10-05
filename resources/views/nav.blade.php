@@ -1,16 +1,16 @@
 <header>
     <ul id="sidenav-left" class="sidenav">
             <li><a href="login" class="logo-container blue-text">V A I G O</a>
-        <img src="../Images/vaigo.png" class="logo-container "></li>
+        <img src="{{asset('Images/vaigo.png')}}" class="logo-container "></li>
             <li class="no-padding">
               <li>
-                <a href="login" class="waves-effect  ">Login
+                <a href="{{route('login')}}" class="waves-effect  ">Login
                     <i class="material-icons ">login</i>
                  </a>
                  </li>
                  <li>
-                <a href="Register" class="waves-effect  ">Register
-                    <i class="material-icons ">person_add</i>
+                <a href="{{route('passforgot')}}" class="waves-effect ">Forgot Password
+                    <i class="material-icons ">lock_reset</i>
                  </a>
                  </li>
             </li>

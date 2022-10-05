@@ -1,17 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ChangePassword;
-use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RedirectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\Orders\DomesticOrder;
 
-Route::get('/', function () {return view('welcome');});
 Route::get('/redirect',[RedirectController::class,'index']);
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 #center
 Route::middleware('auth','role:center')->group(function(){
     Route::get('/center/dashboard',[DomesticOrder::class,'dashboardview'])->name('centerdashboard');
@@ -39,8 +35,8 @@ Route::middleware('auth')->group(function(){
         return view('admin.changepassword');
     })->name('changepass');
     Route::post('auth/changepassword',[ChangePassword::class,'changepassword'])->name('changepassword');
-    Route::any('auth/logout',[LogoutController::class,'logout'])->name('ondoka');
-    Route::any('not/authenticated',[LogoutController::class,'notauthenticated'])->name('notauth');
+    Route::any('auth/logout',[AuthenticatedSessionController::class,'logout'])->name('logout');
+    Route::any('auth/notauthenticated',[AuthenticatedSessionController::class,'notauthenticated'])->name('notauth');
 });
 
 require __DIR__.'/auth.php';
