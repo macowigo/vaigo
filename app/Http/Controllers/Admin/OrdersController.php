@@ -24,7 +24,20 @@ class OrdersController extends Controller
     foreach ($deliveryfee as $key => $orders) {
     $orderresult[++$key] = [$orders->status, (int)$orders->fee];
     }
-     return view('admin.dashboard')->with(['users'=>json_encode($userresult),'oders'=>json_encode($orderresult)]);
+    #regional orders
+    $desinationcommision = Oders::WHERE('order_type','regional')
+    ->select(DB::raw("EXTRACT(MONTH FROM created_at) as months "),
+       DB::raw("SUM(item_value) as ordervalue"),DB::raw("SUM(value) as deliveryfee"))
+    ->groupBy(DB::raw("EXTRACT(MONTH FROM created_at)"))->get();
+    $desination[] = ['Months','Order Value','Delivery Fee'];
+    foreach ($desinationcommision as $key => $value) {
+      date("M", mktime(0, 0, 0, $value->months, 10));
+    $desination[++$key] = [date("F", mktime(0, 0, 0, $value->months, 10)),
+    (int)$value->ordervalue, (int)$value->deliveryfee];
+    }
+     return view('admin.dashboard')->with(['users'=>json_encode($userresult),
+     'oders'=>json_encode($orderresult),
+   'regionalorders'=>json_encode($desination)]);
        }
     #domestic
     public function domestictoday(){

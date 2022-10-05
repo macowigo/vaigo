@@ -190,7 +190,7 @@
                 <div class="card-stacked">
                     <div class="card-metrics-static">
                         <div class="card-content">
-                            <h6 class=" centered-text blue-text">Vaigo Delivery Fee Statistics</h6>
+                            <h6 class=" centered-text blue-text">Vaigo Domestic Delivery Fee Statistics</h6>
                             <script>
                                    var orderdata = <?php echo $oders; ?>;
                                     console.log(orderdata);
@@ -208,6 +208,36 @@
                                     }
                             </script>
                       <div id="orders"></div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="col s12">
+            <div class="card">
+                <div class="card-stacked">
+                    <div class="card-metrics-static">
+                        <div class="card-content">
+                            <h6 class=" centered-text blue-text">Regional Orders Statistics</h6>
+                            <script>
+                                   var desinationdata =<?php echo $regionalorders; ?> ;
+                                    console.log(desinationdata);
+                                    google.charts.load('current', {'packages':['corechart']});
+                                    google.charts.setOnLoadCallback(drawChart);
+                                    function drawChart() {
+                                    var data = google.visualization.arrayToDataTable(desinationdata);
+                                    var options = { colors:['#2F557F','#00b533']};
+                                    var chart = new google.visualization.ColumnChart(document.getElementById('desination'));
+                                    chart.draw(data, options);
+                                    }
+                            </script>
+                             @if ($regional>0)
+                             <div id="desination"></div> 
+                             @else
+                              <div>
+                                <p class=" centered-text red-text">Sorry there is no any Desination Commision Statistics Found</p>
+                                </div>
+                             @endif
                         </div>
                     </div>
                 </div>
