@@ -138,7 +138,8 @@ public function createregionalorder(Request $request)
             'delv_names'=>$request->receivernames,
             'delv_phone'=>$request->receiverphone,
             'desination'=>$request->desinationregion,
-            'parcel_size'=>$request->percelsize
+            'parcel_size'=>$request->percelsize,
+            'created_at'=>date('Y-m-d H:i:s')
            
         ]);
         if($saveorder){
@@ -161,7 +162,7 @@ public function createregionalorder(Request $request)
     {
         $usercenter=Auth::user()->centerid;
         $ordertoday['orders']=Oders::WHERE([['order_type','regional'],['center',$usercenter]])
-            ->whereDate('created_at',DB::raw('CURDATE()'))->get();
+            ->whereDate('created_at',DB::raw('CURDATE()'))->orderBy('created_at','desc')->get();
        return view('agents.ordersregionaltoday',$ordertoday);
     }
 
@@ -169,7 +170,7 @@ public function createregionalorder(Request $request)
     {
         $usercenter=Auth::user()->centerid;
         $ordertoday['orders']=Oders::WHERE([['order_type','regional'],['center',$usercenter]])
-            ->whereMonth('created_at',date('m'))->get();
+            ->whereMonth('created_at',date('m'))->orderBy('created_at','desc')->get();
        return view('agents.ordersregionalmonthly',$ordertoday);
     }
     
