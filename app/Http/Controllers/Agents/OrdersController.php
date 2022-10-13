@@ -147,7 +147,7 @@ public function createregionalorder(Request $request)
             $sms="Percel Tiket Details"."\n"."From: $getmycenter->centername"."\n".
             "To: $getcenterlocation->centername ($getcenterlocation->centerlocation)"."\n". 
             "Percel Number: $orderid "."\n"."Percel Value: $request->ordervalue"."\n".
-            "Type: $request->percelsize,$request->orderdetails "."\n".
+            "Amount Paid: $deliveryfee"."\n"."Type: $request->percelsize,$request->orderdetails "."\n".
             "Issued Date: $date"."\n"."Thank you for Choosing Vaigo"."\n". "TEL: 0715881342";
             SmsController::sendsms($sms,substr_replace($request->senderphone, '255', 0, 1));
             return redirect()->route('agenttodayorders')->with('success','Your Order Successfully Created');
@@ -204,7 +204,8 @@ public function createregionalorder(Request $request)
         $date=date('d F Y, H:i:s',strtotime($orderdetails->created_at));
         $sms="Percel Tiket Details"."\n"."From: $orderdetails->from_location"."\n".
         "To: $orderdetails->delv_location ($orderdetails->pick_up)"."\n". "Percel Number: $id "."\n".
-        "Percel Value: $orderdetails->item_value"."\n"."Type: $orderdetails->parcel_size,$orderdetails->ord_details "."\n".
+        "Percel Value: $orderdetails->item_value"."\n"." Amount Paid: $orderdetails->value"."\n".
+        "Type: $orderdetails->parcel_size,$orderdetails->ord_details "."\n".
         "Issued Date: $date"."\n"."Thank you for Choosing Vaigo"."\n"."TEL: 0715881342";
         SmsController::sendsms($sms,substr_replace($orderdetails->customerphone, '255', 0, 1));
        return redirect()->back()->with('success','Sms for Percel#: ' .$id.' Resent Successfully');

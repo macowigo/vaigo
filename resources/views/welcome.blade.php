@@ -76,5 +76,6 @@
 
     <!-- Initialization script -->
     <script src="../JS/admin-materialize.min.js"></script>
+    <script src="../JS/materialize.js"></script>
 </body>
 </html>
