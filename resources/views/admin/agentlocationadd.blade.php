@@ -51,6 +51,7 @@
                                             <option value="DODOMA" >DODOMA</option>
                                             <option value="KAHAMA">KAHAMA</option>
                                             <option value="ARUSHA">ARUSHA</option>
+                                            <option value="IRINGA">IRINGA</option>
                                         </select>
                                         <label for="centername">Region</label>
                                         <span class="helper-text" data-error="please enter valid center names" data-success="right"></span>
