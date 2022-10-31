@@ -1,31 +1,7 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1:3306
--- Generation Time: Oct 27, 2022 at 04:28 PM
--- Server version: 10.5.13-MariaDB-cll-lve
--- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `u121325740_vaigo`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `centers`
---
 
 CREATE TABLE `centers` (
   `centerid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -39,7 +15,6 @@ CREATE TABLE `centers` (
 --
 -- Dumping data for table `centers`
 --
-
 INSERT INTO `centers` (`centerid`, `centername`, `centerlocation`, `type`, `created_at`, `updated_at`) VALUES
 ('1233', 'City boys shop', 'Majengo, Nyerere Square, Dodoma, Tanzania', 'center', NULL, NULL),
 ('1491', 'CDT, Kahama', 'Kahama Mjini, Tanzania', 'center', NULL, NULL),
@@ -198,6 +173,7 @@ INSERT INTO `oders` (`oderid`, `center`, `customerid`, `customernames`, `custome
 --
 
 CREATE TABLE `password_resets` (
+  `id` int(30) NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
@@ -207,8 +183,8 @@ CREATE TABLE `password_resets` (
 -- Dumping data for table `password_resets`
 --
 
-INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('jakowigo1@gmail.com', '$2y$10$1ED6frcO/CeYN0KD2mtGF.nXOTh4db.b3sAYr7f7lIdzSrikQvdqe', '2022-09-02 11:13:33');
+INSERT INTO `password_resets` (`id`, `email`, `token`, `created_at`) VALUES
+(1, 'jakowigo1@gmail.com', '$2y$10$1ED6frcO/CeYN0KD2mtGF.nXOTh4db.b3sAYr7f7lIdzSrikQvdqe', '2022-09-02 11:13:33');
 
 -- --------------------------------------------------------
 
@@ -310,12 +286,14 @@ ALTER TABLE `migrations`
 -- Indexes for table `oders`
 --
 ALTER TABLE `oders`
+  ADD PRIMARY KEY (`oderid`),
   ADD UNIQUE KEY `oders_oderid_unique` (`oderid`);
 
 --
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `password_resets_email_index` (`email`);
 
 --
@@ -351,6 +329,12 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
@@ -363,6 +347,3 @@ ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9788357;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
