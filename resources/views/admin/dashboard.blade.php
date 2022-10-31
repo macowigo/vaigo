@@ -235,7 +235,7 @@
                              <div id="desination"></div> 
                              @else
                               <div>
-                                <p class=" centered-text red-text">Sorry there is no any Desination Commision Statistics Found</p>
+                                <h6 class=" centered-text red-text">Sorry there is no any Regional Orders Statistics Found</h6>
                                 </div>
                              @endif
                         </div>
