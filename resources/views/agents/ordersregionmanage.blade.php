@@ -73,9 +73,9 @@
                                         <td>{{'Percel Value:'.number_format($values->item_value).' Delivery Fee:'.number_format($values->value)}}</td>
                                         <td>{{$values->customernames.' '.$values->customerphone}}</td>
                                         <td>{{$values->delv_names.' '.$values->delv_phone}}</td>
-                                        <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->from_location)}}</td>
-                                        <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->delv_location)}}</td>
-                                        <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
+                                        <td>{{$values->from_location}}</td>
+                                        <td>{{$values->delv_location}}</td>
+                                        <td>{{date('M d, Y  H:i:s',strtotime($values->created_at))}}</td>
                                         <td>{{$values->oder_status}}</td>
                                         <td>
                                             <form>

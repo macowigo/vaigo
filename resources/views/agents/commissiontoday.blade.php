@@ -71,7 +71,7 @@
                                         <td>{{number_format($values->value)}}</td>
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->from_location)}}</td>
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->delv_location)}}</td>
-                                        <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
+                                        <td>{{date('M d, Y  H:i:s',strtotime($values->created_at))}}</td>
                                         @if ($values->oder_status=='cancelled')
                                         <td>0</td>
                                         @else
