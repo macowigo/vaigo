@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class VendorsController extends Controller
 {
     public function addvendorform(){
-    $centerlist['centerlist']=DB::table('centers')->select('*')->get();
+    $centerlist['centerlist']=DB::table('centers')->where('type','center')->select('*')->get();
     return view('admin.vendoradd',$centerlist);
         
     }
@@ -39,7 +39,7 @@ class VendorsController extends Controller
         'password'=>Hash::make($password),
     ]);
     if($insertvendordata){
-        // SmsController::sendsms($tosend,$user_contact);
+        SmsController::sendsms($tosend,$user_contact);
         return redirect()->route('vendors')->with('succes','Vendor Succesfully registered');
     }
     else{
@@ -71,7 +71,7 @@ public function deletevendor($userid)
 }
 public function getvendor($vendorid)
 {
-    $centerlist['centerlist']=DB::table('centers')->select('*')->get();
+    $centerlist['centerlist']=DB::table('centers')->where('type','center')->select('*')->get();
     $vendors['vendorlist']=DB::table('users')->where('id',$vendorid)->select('*')->get();
     return view('admin.vendoredit',$vendors,$centerlist);
 }

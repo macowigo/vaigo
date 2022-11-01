@@ -77,7 +77,7 @@
                                         <td>{{$values->from_location}}</td>
                                         <td>{{$values->delv_location}}</td>
                                         <td>{{$values->centername.' '.$values->centerlocation}}</td>
-                                        <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
+                                        <td>{{date('M d, Y  H:i:s',strtotime($values->created_at))}}</td>
                                         <td>{{$values->oder_status}}</td>
                                     </tr>
                                     @endforeach

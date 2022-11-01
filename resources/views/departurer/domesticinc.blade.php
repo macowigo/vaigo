@@ -69,7 +69,7 @@
                                         <td>{{$values->py_type}}</td>
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->from_location)}}</td>
                                         <td>{{str_ireplace(', Dar es Salaam, Tanzania','',$values->delv_location)}}</td>
-                                        <td>{{date('M d, Y  H:i:s',strtotime($values->created_time))}}</td>
+                                        <td>{{date('M d, Y  H:i:s',strtotime($values->created_at))}}</td>
                                         <td>{{$values->delivery_type}}</td>
                                         <td>{{$values->ridernames.' '.$values->riderphone}}</td>
                                     </tr>
