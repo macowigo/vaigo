@@ -26,7 +26,7 @@ class CustomersController extends Controller
         'phone'=>$user_contact,
     ]);
     if($savecustomerdata){
-        return redirect()->route('customerslist')->with('success','Customer Successfully added');
+        return redirect()->back()->with('success','Customer Successfully added');
     }
     else{
         return redirect()->back()->with('failed','Sorry customer Registration failed');
