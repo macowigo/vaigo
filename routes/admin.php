@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AgentsController;
 use App\Http\Controllers\Admin\CentersController;
+use App\Http\Controllers\Admin\CustomersController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\StaffsController;
 use App\Http\Controllers\Admin\VendorsController;
@@ -49,6 +50,16 @@ Route::middleware('auth','role:admin')->group(function(){
     Route::get('/admin/agentcenters',[AgentsController::class,'agentlocationlist'])->name('agentlocation');
     Route::post('/admin/addcenter',[AgentsController::class,'addagentlocation'])->name('addagentlocation');
     Route::get('/manage/agentcenter',[AgentsController::class,'centersmanage'])->name('manageagentlocation');
+
+    #customers
+    Route::get('/vaigo/addcustomers',[CustomersController::class,'addcustomerform'])->name('addcustomerform');
+    Route::post('/vaigo/addcustomers',[CustomersController::class,'addcustomer'])->name('addcustomer');
+    Route::get('/vaigo/customers',[CustomersController::class,'customerslist'])->name('customerslist');
+    #sms
+    Route::get('/sendsms/customers',[CustomersController::class,'customersmsform'])->name('groupsmsform');
+    Route::post('/sendsms/customers',[CustomersController::class,'customersendsms'])->name('customersendsms');
+    Route::get('/sendsms/individual',[CustomersController::class,'individualsmsform'])->name('individualsmsform');
+    Route::post('/sendsms/individual',[CustomersController::class,'individualsendsms'])->name('individualsendsms');
 
 });
 

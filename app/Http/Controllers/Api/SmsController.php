@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use AfricasTalking\SDK\AfricasTalking;
-
 class SmsController extends Controller
 {
     public static function sendsms($tosend,$user_contact){

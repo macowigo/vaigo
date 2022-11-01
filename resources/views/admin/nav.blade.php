@@ -70,6 +70,22 @@
                     </ul>
                 </div>
             </li>
+            <li class="bold waves-effect"><a class="collapsible-header">Vaigo Customers<i class="material-icons">group</i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{{route('addcustomerform')}}" class="waves-effect">Add New Customers<i class="material-icons">person_add</i></a></li>
+                        <li><a href="{{route('customerslist')}}" class="waves-effect">View Customers<i class="material-icons">visibility</i></a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="bold waves-effect"><a class="collapsible-header">SEND SMS<i class="material-icons">sms</i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{{route('groupsmsform')}}" class="waves-effect">All Customers SMS<i class="material-icons">select_all</i></a></li>
+                        <li><a href="{{route('individualsmsform')}}" class="waves-effect">Individual SMS<i class="material-icons">repeat_one</i></a></li>
+                    </ul>
+                </div>
+            </li>
          <li>
          <a href="{{route('changepass')}}" class="waves-effect">ChangePassword<i class="material-icons">lock</i></a>
          </li> 
